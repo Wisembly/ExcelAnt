@@ -1,0 +1,30 @@
+{
+    "name": "wisembly/excelant",
+    "description": "",
+    "keywords": ["Excel"],
+    "homepage": "https://github.com/wisembly/excelant",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wisembly",
+            "email": "guillaume@wisembly.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+
+        "phpoffice/phpexcel": "dev-develop"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "ExcelAnt": "lib/"
+        }
+    }
+}
