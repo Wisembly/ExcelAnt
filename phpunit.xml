@@ -9,12 +9,12 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="/test/bootstrap.php"
+         bootstrap="vendor/autoload.php"
 >
 
     <testsuites>
         <testsuite name="ExcelAnt Test Suite">
-            <directory suffix="Test.php">./test/ExcelAnt/</directory>
+            <directory>./test/ExcelAnt/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
