@@ -15,123 +15,149 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("PHPExcel", $worksheet->getRawClass());
     }
 
-    public function testCreateSheet()
-    {
-        $worksheet = $this->createWorksheet();
-        $sheet = $worksheet->createSheet();
+    // public function testCreateSheet()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $sheet = $worksheet->createSheet();
 
-        $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
-        $this->assertCount(1, $worksheet->getAllSheets());
-    }
+    //     $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
+    //     $this->assertCount(1, $worksheet->getAllSheets());
+    // }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetSheetWithInvalidArgument()
-    {
-        $worksheet = $this->createWorksheet();
-        $worksheet->getSheet("foo");
-    }
+    // /**
+    //  * @expectedException \InvalidArgumentException
+    //  */
+    // public function testGetSheetWithInvalidArgument()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $worksheet->getSheet("foo");
+    // }
+
+    // /**
+    //  * @expectedException \RuntimeException
+    //  */
+    // public function testGetSheetWithNonExistentIndex()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $worksheet->getSheet(count($worksheet->getAllSheets()) + 1);
+    // }
+
+    // public function testGetSheet()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $worksheet->createSheet();
+    //     $sheet = $worksheet->getSheet(0);
+
+    //     $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
+    // }
+
+    // public function testCountSheets()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $worksheet->createSheet();
+    //     $worksheet->createSheet();
+    //     $worksheet->createSheet();
+
+    //     $this->assertEquals(3, $worksheet->countSheets());
+    // }
+
+    // public function testAddSheetWithoutIndex()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $sheet = $this->getSheet('Foo');
+    //     $worksheet->addSheet($sheet);
+
+    //     $this->assertCount(1, $worksheet->getAllSheets());
+    //     $this->assertEquals('Foo', $worksheet->getSheet($worksheet->countSheets() - 1)->getTitle());
+    // }
+
+    // public function testAddSheetWithIndex()
+    // {
+    //     $worksheet = $this->createWorksheet();
+    //     $sheet = $this->getSheet('Foo');
+    //     $worksheet->addSheet($sheet);
+
+    //     $sheet = $this->getSheet('Bar');
+    //     $worksheet->addSheet($sheet, 0);
+
+    //     $this->assertEquals('Bar', $worksheet->getSheet(0)->getTitle());
+    //     $this->assertCount(1, $worksheet->getAllSheets());
+    // }
+
+    // /**
+    //  * @dataProvider getDataToInsert
+    //  */
+    // public function testInsertSheet($sheetCollection, $sheetToInsert, $index)
+    // {
+    //     $worksheet = $this->createWorksheet();
+
+    //     // Add sheets
+    //     foreach ($sheetCollection as $sheet) {
+    //         $worksheet->addSheet($sheet);
+    //     }
+
+    //     // Insert
+    //     $worksheet->addSheet($sheetToInsert, $index, true);
+
+    //     // Get new data
+    //     $newSheetCollection = $worksheet->getAllSheets();
+    //     $countNewSheetCollection = $worksheet->countSheets();
+
+    //     // Asserts
+    //     $this->assertCount(count($sheetCollection) + 1, $newSheetCollection);
+
+    //     for ($i=0; $i < $countNewSheetCollection; $i++) {
+    //         if ($i < $index) {
+    //             $this->assertEquals($sheetCollection[$i]->getTitle(), $newSheetCollection[$i]->getTitle());
+
+    //             continue;
+    //         }
+
+    //         if ($i === $index) {
+    //             $this->assertEquals($sheetToInsert->getTitle(), $newSheetCollection[$i]->getTitle());
+
+    //             continue;
+    //         }
+
+    //         $this->assertEquals($sheetCollection[$i - 1]->getTitle(), $newSheetCollection[$i]->getTitle());
+    //     }
+    // }
+
+    // public function getDataToInsert()
+    // {
+    //     $worksheet = $this->createWorksheet();
+
+    //     return [
+    //         [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 0],
+    //         [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 1],
+    //         [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 2],
+    //     ];
+    // }
 
     /**
      * @expectedException \RuntimeException
      */
-    public function testGetSheetWithNonExistentIndex()
-    {
-        $worksheet = $this->createWorksheet();
-        $worksheet->getSheet(count($worksheet->getAllSheets()) + 1);
-    }
-
-    public function testGetSheet()
-    {
-        $worksheet = $this->createWorksheet();
-        $worksheet->createSheet();
-        $sheet = $worksheet->getSheet(0);
-
-        $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
-    }
-
-    public function testCountSheets()
+    public function testRemoveSheetWithNonExistentIndex()
     {
         $worksheet = $this->createWorksheet();
         $worksheet->createSheet();
         $worksheet->createSheet();
-        $worksheet->createSheet();
 
-        $this->assertEquals(3, $worksheet->countSheets());
+        $worksheet->removeSheet(2);
     }
 
-    public function testAddSheetWithoutIndex()
+    public function testRemoveSheet()
     {
         $worksheet = $this->createWorksheet();
-        $sheet = $this->getSheet('Foo');
-        $worksheet->addSheet($sheet);
+        $worksheet->addSheet($this->getSheet('Foo'));
+        $worksheet->addSheet($this->getSheet('Bar'));
 
-        $this->assertCount(1, $worksheet->getAllSheets());
-        $this->assertEquals('Foo', $worksheet->getSheet($worksheet->countSheets() - 1)->getTitle());
-    }
+        $worksheet->removeSheet(0);
+        $sheeCollection = $worksheet->getAllSheets();
 
-    public function testAddSheetWithIndex()
-    {
-        $worksheet = $this->createWorksheet();
-        $sheet = $this->getSheet('Foo');
-        $worksheet->addSheet($sheet);
-
-        $sheet = $this->getSheet('Bar');
-        $worksheet->addSheet($sheet, 0);
-
-        $this->assertEquals('Bar', $worksheet->getSheet(0)->getTitle());
-        $this->assertCount(1, $worksheet->getAllSheets());
-    }
-
-    /**
-     * @dataProvider getDataToInsert
-     */
-    public function testInsertSheet($sheetCollection, $sheetToInsert, $index)
-    {
-        $worksheet = $this->createWorksheet();
-
-        // Add sheets
-        foreach ($sheetCollection as $sheet) {
-            $worksheet->addSheet($sheet);
-        }
-
-        // Insert
-        $worksheet->addSheet($sheetToInsert, $index, true);
-
-        // Get new data
-        $newSheetCollection = $worksheet->getAllSheets();
-        $countNewSheetCollection = $worksheet->countSheets();
-
-        // Asserts
-        $this->assertCount(count($sheetCollection) + 1, $newSheetCollection);
-
-        for ($i=0; $i < $countNewSheetCollection; $i++) {
-            if ($i < $index) {
-                $this->assertEquals($sheetCollection[$i]->getTitle(), $newSheetCollection[$i]->getTitle());
-
-                continue;
-            }
-
-            if ($i === $index) {
-                $this->assertEquals($sheetToInsert->getTitle(), $newSheetCollection[$i]->getTitle());
-
-                continue;
-            }
-
-            $this->assertEquals($sheetCollection[$i - 1]->getTitle(), $newSheetCollection[$i]->getTitle());
-        }
-    }
-
-    public function getDataToInsert()
-    {
-        $worksheet = $this->createWorksheet();
-
-        return [
-            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 0],
-            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 1],
-            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 2],
-        ];
+        $this->assertCount(1, $sheeCollection);
+        $this->assertTrue(array_key_exists(0, $sheeCollection));
+        $this->assertEquals('Bar', $sheeCollection[0]->getTitle());
     }
 
     /**

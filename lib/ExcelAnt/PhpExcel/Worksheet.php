@@ -79,9 +79,16 @@ class Worksheet implements WorksheetInterface
         return $this;
     }
 
-    public function removeSheet()
+    public function removeSheet($index)
     {
+        if (!array_key_exists($index, $this->sheetCollection)) {
+            throw new \RuntimeException("The index of this sheet doesn't exist");
+        }
 
+        unset($this->sheetCollection[$index]);
+        $this->sheetCollection = array_values($this->sheetCollection);
+
+        return $this;
     }
 
     public function setProperties()

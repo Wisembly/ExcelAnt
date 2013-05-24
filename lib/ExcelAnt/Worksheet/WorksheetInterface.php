@@ -18,7 +18,7 @@ interface WorksheetInterface
 
     public function addSheet(SheetInterface $sheet, $index = null, $insert = false);
 
-    public function removeSheet();
+    public function removeSheet($index);
 
     public function setProperties();
 
