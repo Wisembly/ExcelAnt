@@ -198,6 +198,23 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $worksheet->setTitle('Foo');
     }
 
+    public function testGetTitle()
+    {
+        $phpExcelDocument = $this->getMockBuilder('PHPExcel_DocumentProperties')->disableOriginalConstructor()->getMock();
+        $phpExcelDocument->expects($this->any())
+            ->method('getTitle')
+            ->will($this->returnValue('Foo'));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->any())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+
+        $this->assertEquals('Foo', $worksheet->getTitle());
+    }
+
     /**
      * Create a Worksheet
      * @param  MockPhpExcel $phpExcel

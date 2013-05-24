@@ -144,16 +144,26 @@ class Worksheet implements WorksheetInterface
         return $this;
     }
 
+    /**
+     * Set the tile of the Worksheet
+     *
+     * @param mixed $title The title
+     */
     public function setTitle($title)
     {
-        $a = $this->phpExcel->getProperties()->setTitle($title);
+        $this->phpExcel->getProperties()->setTitle($title);
 
         return $this;
     }
 
+    /**
+     * Return the title of the worksheet
+     *
+     * @return mixed
+     */
     public function getTitle()
     {
-
+        return $this->phpExcel->getProperties()->getTitle();
     }
 
     public function setCreator()
