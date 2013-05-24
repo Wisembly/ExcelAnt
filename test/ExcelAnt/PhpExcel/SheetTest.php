@@ -2,28 +2,65 @@
 
 namespace ExcelAnt\PhpExcel;
 
+use PHPExcel_Worksheet;
+
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
 
 class SheetTest extends \PHPUnit_Framework_TestCase
 {
-    private $sheet;
-
-    public function setUp()
-    {
-        $this->sheet = new Sheet(new Worksheet());
-    }
-
     public function testRawClass()
     {
-        $this->assertInstanceOf("PHPExcel_Worksheet", $this->sheet->getRawClass());
-        $this->assertInstanceOf("PHPExcel", $this->sheet->getRawClass()->getParent());
+        $sheet = $this->createSheet();
+
+        $this->assertInstanceOf("PHPExcel_Worksheet", $sheet->getRawClass());
     }
 
     public function testSetAndGetTitle()
     {
-        $this->sheet->setTitle('Foo');
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->any())
+             ->method('setTitle')
+             ->will($this->returnValue($phpExcelWorksheet));
+        $phpExcelWorksheet->expects($this->any())
+             ->method('getTitle')
+             ->will($this->returnValue('Foo'));
 
-        $this->assertEquals('Foo', $this->sheet->getTitle());
+        $sheet = $this->createSheet(null, $phpExcelWorksheet);
+        $sheet->setTitle('Foo');
+
+        $this->assertEquals('Foo', $sheet->getTitle());
+    }
+
+    /**
+     * Create a Sheet
+     * @param  Mock_Worksheet
+     * @param  Mock_PHPExcel_Worksheet $phpExcelWorksheet
+     * @return Sheet
+     */
+    public function createSheet($worksheet = null, $phpExcelWorksheet = null)
+    {
+        $worksheet = $worksheet ?: $this->getWorksheetMock();
+        $phpExcelWorksheet = $phpExcelWorksheet ?: $this->getPhpExcelWorksheetMock();
+
+        return new Sheet($worksheet, $phpExcelWorksheet);
+    }
+
+    /**
+     * Mock PHPExcel_Worksheet
+     * @return Mock
+     */
+    private function getPhpExcelWorksheetMock()
+    {
+        return $this->getMockBuilder('PHPExcel_Worksheet')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock ExcelAnt\PhpExcel\Worksheet
+     * @return Mock
+     */
+    private function getWorksheetMock()
+    {
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Worksheet')->disableOriginalConstructor()->getMock();
     }
 }

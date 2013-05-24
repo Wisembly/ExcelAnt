@@ -10,9 +10,9 @@ class Sheet implements SheetInterface
 {
     private $phpExcelWorksheet;
 
-    public function __construct(Worksheet $worksheet)
+    public function __construct(Worksheet $worksheet, PHPExcel_Worksheet $phpExcelWorksheet = null)
     {
-        $this->phpExcelWorksheet = new PHPExcel_Worksheet($worksheet->getRawClass());
+        $this->phpExcelWorksheet = $phpExcelWorksheet ?: new PHPExcel_Worksheet($worksheet->getRawClass());
     }
 
     public function getRawClass()

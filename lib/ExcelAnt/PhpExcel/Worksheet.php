@@ -13,9 +13,10 @@ class Worksheet implements WorksheetInterface
     private $phpExcel;
     private $sheetCollection;
 
-    public function __construct()
+    public function __construct(PHPExcel $phpExcel = null)
     {
-        $this->phpExcel = new PHPExcel;
+        $this->phpExcel = $phpExcel ?: new PHPExcel();
+
         $this->phpExcel->removeSheetByIndex(0);
         $this->sheetCollection = [];
     }

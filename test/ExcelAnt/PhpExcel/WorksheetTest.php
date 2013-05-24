@@ -2,30 +2,26 @@
 
 namespace ExcelAnt\PhpExcel;
 
+use PHPExcel;
+
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
 
 class WorksheetTest extends \PHPUnit_Framework_TestCase
 {
-    private $worksheet;
-
-    public function setUp()
-    {
-        $this->worksheet = new Worksheet();
-    }
-
     public function testRawClass()
     {
-        $this->assertInstanceOf("PHPExcel", $this->worksheet->getRawClass());
-        $this->assertCount(0, $this->worksheet->getRawClass()->getAllSheets());
+        $worksheet = $this->createWorksheet();
+        $this->assertInstanceOf("PHPExcel", $worksheet->getRawClass());
     }
 
     public function testCreateSheet()
     {
-        $sheet = $this->worksheet->createSheet();
+        $worksheet = $this->createWorksheet();
+        $sheet = $worksheet->createSheet();
 
         $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
-        $this->assertCount(1, $this->worksheet->getAllSheets());
+        $this->assertCount(1, $worksheet->getAllSheets());
     }
 
     /**
@@ -33,7 +29,8 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSheetWithInvalidArgument()
     {
-        $this->worksheet->getSheet("foo");
+        $worksheet = $this->createWorksheet();
+        $worksheet->getSheet("foo");
     }
 
     /**
@@ -41,63 +38,70 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSheetWithNonExistentIndex()
     {
-        $this->worksheet->getSheet(count($this->worksheet->getAllSheets()) + 1);
+        $worksheet = $this->createWorksheet();
+        $worksheet->getSheet(count($worksheet->getAllSheets()) + 1);
     }
 
     public function testGetSheet()
     {
-        $this->worksheet->createSheet();
-        $sheet = $this->worksheet->getSheet(0);
+        $worksheet = $this->createWorksheet();
+        $worksheet->createSheet();
+        $sheet = $worksheet->getSheet(0);
 
         $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
     }
 
     public function testCountSheets()
     {
-        $this->worksheet->createSheet();
-        $this->worksheet->createSheet();
-        $this->worksheet->createSheet();
+        $worksheet = $this->createWorksheet();
+        $worksheet->createSheet();
+        $worksheet->createSheet();
+        $worksheet->createSheet();
 
-        $this->assertEquals(3, $this->worksheet->countSheets());
+        $this->assertEquals(3, $worksheet->countSheets());
     }
 
     public function testAddSheetWithoutIndex()
     {
-        $sheet = $this->createSheet($this->worksheet, 'Foo');
-        $this->worksheet->addSheet($sheet);
+        $worksheet = $this->createWorksheet();
+        $sheet = $this->getSheet('Foo');
+        $worksheet->addSheet($sheet);
 
-        $this->assertCount(1, $this->worksheet->getAllSheets());
-        $this->assertEquals('Foo', $this->worksheet->getSheet($this->worksheet->countSheets() - 1)->getTitle());
+        $this->assertCount(1, $worksheet->getAllSheets());
+        $this->assertEquals('Foo', $worksheet->getSheet($worksheet->countSheets() - 1)->getTitle());
     }
 
     public function testAddSheetWithIndex()
     {
-        $sheet = $this->createSheet($this->worksheet, 'Foo');
-        $this->worksheet->addSheet($sheet);
+        $worksheet = $this->createWorksheet();
+        $sheet = $this->getSheet('Foo');
+        $worksheet->addSheet($sheet);
 
-        $sheet = $this->createSheet($this->worksheet, 'Bar');
-        $this->worksheet->addSheet($sheet, 0);
+        $sheet = $this->getSheet('Bar');
+        $worksheet->addSheet($sheet, 0);
 
-        $this->assertEquals('Bar', $this->worksheet->getSheet(0)->getTitle());
-        $this->assertCount(1, $this->worksheet->getAllSheets());
+        $this->assertEquals('Bar', $worksheet->getSheet(0)->getTitle());
+        $this->assertCount(1, $worksheet->getAllSheets());
     }
 
     /**
      * @dataProvider getDataToInsert
      */
-    public function testInsertSheet($worksheet, $sheetCollection, $sheetToInsert, $index)
+    public function testInsertSheet($sheetCollection, $sheetToInsert, $index)
     {
+        $worksheet = $this->createWorksheet();
+
         // Add sheets
         foreach ($sheetCollection as $sheet) {
-            $this->worksheet->addSheet($sheet);
+            $worksheet->addSheet($sheet);
         }
 
         // Insert
-        $this->worksheet->addSheet($sheetToInsert, $index, true);
+        $worksheet->addSheet($sheetToInsert, $index, true);
 
         // Get new data
-        $newSheetCollection = $this->worksheet->getAllSheets();
-        $countNewSheetCollection = $this->worksheet->countSheets();
+        $newSheetCollection = $worksheet->getAllSheets();
+        $countNewSheetCollection = $worksheet->countSheets();
 
         // Asserts
         $this->assertCount(count($sheetCollection) + 1, $newSheetCollection);
@@ -121,17 +125,50 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
 
     public function getDataToInsert()
     {
-        $worksheet = new Worksheet();
+        $worksheet = $this->createWorksheet();
 
         return [
-            [$worksheet, [$this->createSheet($worksheet, 'Foo'), $this->createSheet($worksheet, 'Bar'), $this->createSheet($worksheet, 'Baz')], $this->createSheet($worksheet, 'Insert'), 0],
-            [$worksheet, [$this->createSheet($worksheet, 'Foo'), $this->createSheet($worksheet, 'Bar'), $this->createSheet($worksheet, 'Baz')], $this->createSheet($worksheet, 'Insert'), 1],
-            [$worksheet, [$this->createSheet($worksheet, 'Foo'), $this->createSheet($worksheet, 'Bar'), $this->createSheet($worksheet, 'Baz')], $this->createSheet($worksheet, 'Insert'), 2],
+            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 0],
+            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 1],
+            [[$this->getSheet('Foo'), $this->getSheet('Bar'), $this->getSheet('Baz')], $this->getSheet('Insert'), 2],
         ];
     }
 
-    private function createSheet($worksheet, $title = 'Foo')
+    /**
+     * Create a Worksheet
+     * @param  MockPhpExcel $phpExcel
+     * @return Worksheet
+     */
+    public function createWorksheet($phpExcel = null)
     {
-        return (new Sheet($worksheet))->setTitle($title);
+        $phpExcel = $phpExcel ?: $this->getPhpExcel();
+
+        return new Worksheet($phpExcel);
+    }
+
+    /**
+     * Mock PHPExcel
+     * @return Mock
+     */
+    private function getPhpExcel()
+    {
+        return $this->getMockBuilder('PHPExcel')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock ExcelAnt\PhpExcel\Sheet
+     * @return Mock
+     */
+    private function getSheet($title = null)
+    {
+        $sheet = $this->getMockBuilder('ExcelAnt\PhpExcel\Sheet')->disableOriginalConstructor()->getMock();
+
+        if (null !== $title) {
+            $sheet->expects($this->any())
+             ->method('getTitle')
+             ->will($this->returnValue($title));
+        }
+
+        return $sheet;
     }
 }
