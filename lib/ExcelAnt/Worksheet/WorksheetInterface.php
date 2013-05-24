@@ -20,9 +20,25 @@ interface WorksheetInterface
 
     public function removeSheet($index);
 
-    public function setProperties();
+    public function setTitle($title);
 
-    public function getProperties();
+    public function getTitle();
+
+    public function setCreator();
+
+    public function getCreator();
+
+    public function setDescription();
+
+    public function getDescription();
+
+    public function setCompany();
+
+    public function getCompany();
+
+    public function setSubject();
+
+    public function getSubject();
 
     public function setSecurity();
 

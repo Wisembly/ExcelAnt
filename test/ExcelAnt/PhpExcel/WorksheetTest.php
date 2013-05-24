@@ -3,6 +3,7 @@
 namespace ExcelAnt\PhpExcel;
 
 use PHPExcel;
+use PHPExcel_DocumentProperties;
 
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
@@ -85,6 +86,16 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testAddSheetWithAWrongParameter()
+    {
+        $worksheet = $this->createWorksheet();
+        $sheet = $this->getSheetMock('Foo');
+        $worksheet->addSheet($sheet, 'foo');
+    }
+
+    /**
      * @dataProvider getDataToInsert
      */
     public function testInsertSheet($sheetCollection, $sheetToInsert, $index)
@@ -146,6 +157,17 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $worksheet->removeSheet(2);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testRemoveSheetWithAWrongParameter()
+    {
+        $worksheet = $this->createWorksheet();
+        $worksheet->createSheet();
+
+        $worksheet->removeSheet('foo');
+    }
+
     public function testRemoveSheet()
     {
         $worksheet = $this->createWorksheet();
@@ -158,6 +180,22 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $sheeCollection);
         $this->assertTrue(array_key_exists(0, $sheeCollection));
         $this->assertEquals('Bar', $sheeCollection[0]->getTitle());
+    }
+
+    public function testSetTitle()
+    {
+        $phpExcelDocument = $this->getMockBuilder('PHPExcel_DocumentProperties')->disableOriginalConstructor()->getMock();
+        $phpExcelDocument->expects($this->any())
+            ->method('setTitle')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->any())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+        $worksheet->setTitle('Foo');
     }
 
     /**
