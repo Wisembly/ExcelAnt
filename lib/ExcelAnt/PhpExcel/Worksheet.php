@@ -65,7 +65,7 @@ class Worksheet implements WorksheetInterface
         }
 
         if (isset($index) && true === $insert) {
-            $array1 = array_slice($this->sheetCollection, 0, $index - 1);
+            $array1 = array_slice($this->sheetCollection, 0, $index);
             $array1[] = $sheet;
             $array2 = array_slice($this->sheetCollection, $index);
             $this->sheetCollection = array_merge($array1, $array2);
