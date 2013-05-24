@@ -184,13 +184,13 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
 
     public function testSetTitle()
     {
-        $phpExcelDocument = $this->getMockBuilder('PHPExcel_DocumentProperties')->disableOriginalConstructor()->getMock();
-        $phpExcelDocument->expects($this->any())
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
             ->method('setTitle')
             ->will($this->returnValue($phpExcelDocument));
 
         $phpExcel = $this->getPhpExcelMock();
-        $phpExcel->expects($this->any())
+        $phpExcel->expects($this->once())
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
@@ -200,13 +200,13 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTitle()
     {
-        $phpExcelDocument = $this->getMockBuilder('PHPExcel_DocumentProperties')->disableOriginalConstructor()->getMock();
-        $phpExcelDocument->expects($this->any())
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
             ->method('getTitle')
             ->will($this->returnValue('Foo'));
 
         $phpExcel = $this->getPhpExcelMock();
-        $phpExcel->expects($this->any())
+        $phpExcel->expects($this->once())
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
@@ -215,9 +215,27 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $worksheet->getTitle());
     }
 
+    public function testSetCreator()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('setCreator')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+        $worksheet->setCreator('Foo');
+    }
+
     /**
      * Create a Worksheet
+     *
      * @param  MockPhpExcel $phpExcel
+     *
      * @return Worksheet
      */
     public function createWorksheet($phpExcel = null)
@@ -229,7 +247,8 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Mock PHPExcel
-     * @return Mock
+     *
+     * @return Mock_PHPExcel
      */
     private function getPhpExcelMock()
     {
@@ -238,7 +257,8 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Mock ExcelAnt\PhpExcel\Sheet
-     * @return Mock
+     *
+     * @return Mock_Sheet
      */
     private function getSheetMock($title = null)
     {
@@ -251,5 +271,15 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         }
 
         return $sheet;
+    }
+
+    /**
+     * Mock PHPExcel_DocumentProperties
+     *
+     * @return Mock_PHPExcel_DocumentProperties
+     */
+    private function getPhpExcelDocumentPropertiesMock()
+    {
+        return $this->getMockBuilder('PHPExcel_DocumentProperties')->disableOriginalConstructor()->getMock();
     }
 }

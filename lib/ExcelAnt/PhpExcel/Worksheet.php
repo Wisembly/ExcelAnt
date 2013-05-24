@@ -166,9 +166,18 @@ class Worksheet implements WorksheetInterface
         return $this->phpExcel->getProperties()->getTitle();
     }
 
-    public function setCreator()
+    /**
+     * Set the creator of the worksheet
+     *
+     * @param mixed $creator
+     *
+     * @return Worksheet
+     */
+    public function setCreator($creator)
     {
+        $this->phpExcel->getProperties()->setCreator($creator);
 
+        return $this;
     }
 
     public function getCreator()

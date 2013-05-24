@@ -24,7 +24,7 @@ interface WorksheetInterface
 
     public function getTitle();
 
-    public function setCreator();
+    public function setCreator($creator);
 
     public function getCreator();
 
