@@ -40,9 +40,5 @@ interface WorksheetInterface
 
     public function getSubject();
 
-    public function setSecurity();
-
-    public function getSecurity();
-
     public function setStyle();
 }

@@ -262,16 +262,6 @@ class Worksheet implements WorksheetInterface
         return $this->phpExcel->getProperties()->getSubject();
     }
 
-    public function setSecurity()
-    {
-
-    }
-
-    public function getSecurity()
-    {
-
-    }
-
     public function setStyle()
     {
 
