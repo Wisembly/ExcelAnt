@@ -180,39 +180,86 @@ class Worksheet implements WorksheetInterface
         return $this;
     }
 
+    /**
+     * Get the creator of the Worksheet
+     *
+     * @return mixed
+     */
     public function getCreator()
     {
-
+        return $this->phpExcel->getProperties()->getCreator();
     }
 
-    public function setDescription()
+    /**
+     * Set the description of the worksheet
+     *
+     * @param mixed $description
+     *
+     * @return Worksheet
+     */
+    public function setDescription($description)
     {
+        $this->phpExcel->getProperties()->setDescription($description);
 
+        return $this;
     }
 
+    /**
+     * Get the description of the Worksheet
+     *
+     * @return mixed
+     */
     public function getDescription()
     {
-
+        return $this->phpExcel->getProperties()->getDescription();
     }
 
-    public function setCompany()
+    /**
+     * Set the company of the worksheet
+     *
+     * @param mixed $company
+     *
+     * @return Worksheet
+     */
+    public function setCompany($company)
     {
+        $this->phpExcel->getProperties()->setCompany($company);
 
+        return $this;
     }
 
+    /**
+     * Get the company of the Worksheet
+     *
+     * @return mixed
+     */
     public function getCompany()
     {
-
+        return $this->phpExcel->getProperties()->getCompany();
     }
 
-    public function setSubject()
+    /**
+     * Set the subject of the worksheet
+     *
+     * @param mixed $subject
+     *
+     * @return Worksheet
+     */
+    public function setSubject($subject)
     {
+        $this->phpExcel->getProperties()->setSubject($subject);
 
+        return $this;
     }
 
+    /**
+     * Get the subject of the Worksheet
+     *
+     * @return mixed
+     */
     public function getSubject()
     {
-
+        return $this->phpExcel->getProperties()->getSubject();
     }
 
     public function setSecurity()

@@ -28,15 +28,15 @@ interface WorksheetInterface
 
     public function getCreator();
 
-    public function setDescription();
+    public function setDescription($description);
 
     public function getDescription();
 
-    public function setCompany();
+    public function setCompany($company);
 
     public function getCompany();
 
-    public function setSubject();
+    public function setSubject($subject);
 
     public function getSubject();
 

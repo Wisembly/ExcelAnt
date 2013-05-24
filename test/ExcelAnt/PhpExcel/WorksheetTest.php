@@ -231,6 +231,122 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         $worksheet->setCreator('Foo');
     }
 
+    public function testGetCreator()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('getCreator')
+            ->will($this->returnValue('Foo'));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+
+        $this->assertEquals('Foo', $worksheet->getCreator());
+    }
+
+    public function testSetDescription()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('setDescription')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+        $worksheet->setDescription('Foo');
+    }
+
+    public function testGetDescription()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('getDescription')
+            ->will($this->returnValue('Foo'));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+
+        $this->assertEquals('Foo', $worksheet->getDescription());
+    }
+
+    public function testSetCompany()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('setCompany')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+        $worksheet->setCompany('Foo');
+    }
+
+    public function testGetCompany()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('getCompany')
+            ->will($this->returnValue('Foo'));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+
+        $this->assertEquals('Foo', $worksheet->getCompany());
+    }
+
+    public function testSetSubject()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('setSubject')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+        $worksheet->setSubject('Foo');
+    }
+
+    public function testGetSubject()
+    {
+        $phpExcelDocument = $this->getPhpExcelDocumentPropertiesMock();
+        $phpExcelDocument->expects($this->once())
+            ->method('getSubject')
+            ->will($this->returnValue('Foo'));
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getProperties')
+            ->will($this->returnValue($phpExcelDocument));
+
+        $worksheet = $this->createWorksheet($phpExcel);
+
+        $this->assertEquals('Foo', $worksheet->getSubject());
+    }
+
     /**
      * Create a Worksheet
      *
