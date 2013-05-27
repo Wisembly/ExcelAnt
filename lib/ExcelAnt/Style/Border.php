@@ -41,6 +41,15 @@ class Border implements StyleInterface
         $this->color = '000000';
     }
 
+    /**
+     * Set side
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
+     *
+     * @param string $side
+     *
+     * @return Border
+     */
     public function setSide($side)
     {
         $this->checkSideParameter($side);
@@ -49,11 +58,25 @@ class Border implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get side
+     *
+     * @return string
+     */
     public function getSide()
     {
         return $this->side;
     }
 
+    /**
+     * Set type
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the type parameter list
+     *
+     * @param string $type
+     *
+     * @return Border
+     */
     public function setType($type)
     {
         if (!in_array($type, $this->getTypes())) {
@@ -65,11 +88,23 @@ class Border implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get type
+     *
+     * @return Border
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return Border
+     */
     public function setColor($color)
     {
         $this->color = $color;
@@ -77,11 +112,21 @@ class Border implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get color
+     *
+     * @return string
+     */
     public function getColor()
     {
         return $this->color;
     }
 
+    /**
+     * Return the side list parameters
+     *
+     * @return array
+     */
     public function getSides()
     {
         return [
@@ -92,6 +137,11 @@ class Border implements StyleInterface
         ];
     }
 
+    /**
+     * Return the type list parameters
+     *
+     * @return array
+     */
     public function getTypes()
     {
         return [
@@ -112,6 +162,13 @@ class Border implements StyleInterface
         ];
     }
 
+    /**
+     * Check if the side parameter belong the side parameter list
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
+     *
+     * @param  string $side
+     */
     private function checkSideParameter($side)
     {
         if (!in_array($side, $this->getSides())) {
