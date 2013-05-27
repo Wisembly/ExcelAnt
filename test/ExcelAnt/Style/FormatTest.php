@@ -2,7 +2,10 @@
 
 namespace ExcelAnt\Style;
 
-class FormatTest extends \PHPUnit_Framework_TestCase
+use ExcelAnt\Style\StyleTestCase;
+use ExcelAnt\Style\Format;
+
+class FormatTest extends StyleTestCase
 {
     /**
      * @dataProvider getWrongParameters
@@ -20,15 +23,5 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         $format->setFormat(Format::TYPE_NUMERIC);
 
         $this->assertEquals(Format::TYPE_NUMERIC, $format->getFormat());
-    }
-
-    public function getWrongParameters()
-    {
-        return [
-            ['foo'],
-            [''],
-            [null],
-            ['@&'],
-        ];
     }
 }

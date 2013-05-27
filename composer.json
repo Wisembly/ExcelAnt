@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-0": {
-            "ExcelAnt": "lib/"
+            "ExcelAnt": ["lib/", "test/"]
         }
     }
 }

@@ -2,9 +2,10 @@
 
 namespace ExcelAnt\Style;
 
+use ExcelAnt\Style\StyleTestCase;
 use ExcelAnt\Style\Border;
 
-class BorderTest extends \PHPUnit_Framework_TestCase
+class BorderTest extends StyleTestCase
 {
     /**
      * @dataProvider getWrongParameters
@@ -57,15 +58,5 @@ class BorderTest extends \PHPUnit_Framework_TestCase
         $border->setColor('ff0000');
 
         $this->assertEquals('ff0000', $border->getColor());
-    }
-
-    public function getWrongParameters()
-    {
-        return [
-            ['foo'],
-            [''],
-            [null],
-            ['@&'],
-        ];
     }
 }

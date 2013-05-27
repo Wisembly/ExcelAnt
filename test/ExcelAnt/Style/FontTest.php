@@ -2,7 +2,10 @@
 
 namespace ExcelAnt\Style;
 
-class FontTest extends \PHPUnit_Framework_TestCase
+use ExcelAnt\Style\StyleTestCase;
+use ExcelAnt\Style\Font;
+
+class FontTest extends StyleTestCase
 {
     public function testSetAndGetName()
     {
@@ -95,15 +98,5 @@ class FontTest extends \PHPUnit_Framework_TestCase
         $font->setUnderline(Font::UNDERLINE_DOUBLE);
 
         $this->assertEquals(Font::UNDERLINE_DOUBLE, $font->getUnderline());
-    }
-
-    public function getWrongParameters()
-    {
-        return [
-            ['foo'],
-            [''],
-            [null],
-            ['@&'],
-        ];
     }
 }

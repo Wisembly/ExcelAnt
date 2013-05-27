@@ -2,9 +2,10 @@
 
 namespace ExcelAnt\Style;
 
+use ExcelAnt\Style\StyleTestCase;
 use ExcelAnt\Style\Alignment;
 
-class AlignmentTest extends \PHPUnit_Framework_TestCase
+class AlignmentTest extends StyleTestCase
 {
     /**
      * @dataProvider getWrongParameters
@@ -40,15 +41,5 @@ class AlignmentTest extends \PHPUnit_Framework_TestCase
         $alignment->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $this->assertEquals(Alignment::HORIZONTAL_LEFT, $alignment->getHorizontal());
-    }
-
-    public function getWrongParameters()
-    {
-        return [
-            ['foo'],
-            [''],
-            [null],
-            ['@&'],
-        ];
     }
 }
