@@ -42,7 +42,7 @@ class Sheet implements SheetInterface
 
     }
 
-    public function setRowHieght()
+    public function setRowHeight()
     {
 
     }

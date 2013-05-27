@@ -14,7 +14,7 @@ interface SheetInterface
 
     public function addTable();
 
-    public function setRowHieght();
+    public function setRowHeight();
 
     public function setColumnWidth();
 
