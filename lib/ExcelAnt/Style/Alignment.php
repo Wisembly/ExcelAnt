@@ -23,21 +23,47 @@ class Alignment implements StyleInterface
     private $horizontal;
     private $vertical;
 
+    public function __construct()
+    {
+        $this->horizontal = self::HORIZONTAL_GENERAL;
+        $this->vertical = self::VERTICAL_BOTTOM;
+    }
+
+    /**
+     * Set vertical alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the vertical parameter list
+     *
+     * @param string $alignment
+     *
+     * @return Alignment
+     */
     public function setVertical($alignment)
     {
         $this->checkVerticalParameter($alignment);
         $this->vertical = $alignment;
-        $this->horizontal = self::HORIZONTAL_GENERAL;
-        $this->vertical = self::VERTICAL_BOTTOM;
 
         return $this;
     }
 
+    /**
+     * Get vertical alignment
+     * @return string
+     */
     public function getVertical()
     {
         return $this->vertical;
     }
 
+    /**
+     * Set horizontal alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the horizontal parameter list
+     *
+     * @param string $alignment
+     *
+     * @return Alignment
+     */
     public function setHorizontal($alignment)
     {
         $this->checkHorizontalParameter($alignment);
@@ -46,11 +72,19 @@ class Alignment implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get horizontal alignment
+     * @return string
+     */
     public function getHorizontal()
     {
         return $this->horizontal;
     }
 
+    /**
+     * Return the horizontal list parameters
+     * @return array
+     */
     public function getHorizontals()
     {
         return [
@@ -63,6 +97,10 @@ class Alignment implements StyleInterface
         ];
     }
 
+    /**
+     * Return the vertical list parameters
+     * @return array
+     */
     public function getVerticals()
     {
         return [
@@ -73,17 +111,31 @@ class Alignment implements StyleInterface
         ];
     }
 
+    /**
+     * Check if the alignment parameter belong the horizontal parameter list
+     *
+     * @param  string $alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the horizontal parameter list
+     */
     private function checkHorizontalParameter($alignment)
     {
         if (!in_array($alignment, $this->getHorizontals())) {
-            throw new \InvalidArgumentException("The parameter must belong to the Horizontal parameter list");
+            throw new \InvalidArgumentException("The parameter must belong to the horizontal parameter list");
         }
     }
 
+    /**
+     * Check if the alignment parameter belong the vertical parameter list
+     *
+     * @param  string $alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the vertical parameter list
+     */
     private function checkVerticalParameter($alignment)
     {
         if (!in_array($alignment, $this->getVerticals())) {
-            throw new \InvalidArgumentException("The parameter must belong to the Vertical parameter list");
+            throw new \InvalidArgumentException("The parameter must belong to the vertical parameter list");
         }
     }
 }
