@@ -23,6 +23,15 @@ class Format implements StyleInterface
         $this->format = self::TYPE_STRING;
     }
 
+    /**
+     * Set format
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the format parameter list
+     *
+     * @param string $format
+     *
+     * @return Format
+     */
     public function setFormat($format)
     {
         if (!in_array($format, $this->getFormats())) {
@@ -34,11 +43,21 @@ class Format implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get format
+     *
+     * @return string
+     */
     public function getFormat()
     {
         return $this->format;
     }
 
+    /**
+     * Return the formats parameter list
+     *
+     * @return array
+     */
     public function getFormats()
     {
         return [

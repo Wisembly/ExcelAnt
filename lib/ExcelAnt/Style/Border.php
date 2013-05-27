@@ -123,7 +123,7 @@ class Border implements StyleInterface
     }
 
     /**
-     * Return the side list parameters
+     * Return the side parameter list
      *
      * @return array
      */
@@ -138,7 +138,7 @@ class Border implements StyleInterface
     }
 
     /**
-     * Return the type list parameters
+     * Return the type parameter list
      *
      * @return array
      */

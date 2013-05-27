@@ -13,6 +13,13 @@ class Fill implements StyleInterface
         $this->color = $color ?: 'ff0000';
     }
 
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return Fill
+     */
     public function setColor($color)
     {
         $this->color = $color;
@@ -20,6 +27,11 @@ class Fill implements StyleInterface
         return $this;
     }
 
+    /**
+     * Get color
+     *
+     * @return string
+     */
     public function getColor()
     {
         return $this->color;

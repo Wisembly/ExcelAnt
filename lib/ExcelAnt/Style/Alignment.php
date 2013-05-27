@@ -82,7 +82,7 @@ class Alignment implements StyleInterface
     }
 
     /**
-     * Return the horizontal list parameters
+     * Return the horizontal parameter list
      * @return array
      */
     public function getHorizontals()
@@ -98,7 +98,7 @@ class Alignment implements StyleInterface
     }
 
     /**
-     * Return the vertical list parameters
+     * Return the vertical parameter list
      * @return array
      */
     public function getVerticals()

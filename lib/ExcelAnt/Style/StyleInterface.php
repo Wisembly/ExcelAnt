@@ -4,5 +4,4 @@ namespace ExcelAnt\Style;
 
 interface StyleInterface
 {
-
 }
