@@ -74,14 +74,14 @@ class Alignment implements StyleInterface
     private function checkHorizontalParameter($alignment)
     {
         if (!in_array($alignment, $this->getHorizontals())) {
-            throw new \InvalidArgumentException("The parameter must belong to the Horizontal parameters list");
+            throw new \InvalidArgumentException("The parameter must belong to the Horizontal parameter list");
         }
     }
 
     private function checkVerticalParameter($alignment)
     {
         if (!in_array($alignment, $this->getVerticals())) {
-            throw new \InvalidArgumentException("The parameter must belong to the Vertical parameters list");
+            throw new \InvalidArgumentException("The parameter must belong to the Vertical parameter list");
         }
     }
 }

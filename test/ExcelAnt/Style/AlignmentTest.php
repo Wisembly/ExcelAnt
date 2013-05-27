@@ -2,6 +2,8 @@
 
 namespace ExcelAnt\Style;
 
+use ExcelAnt\Style\Alignment;
+
 class AlignmentTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -17,9 +19,9 @@ class AlignmentTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetVertical()
     {
         $alignment = new Alignment();
-        $alignment->setVertical('bottom');
+        $alignment->setVertical(Alignment::VERTICAL_BOTTOM);
 
-        $this->assertEquals('bottom', $alignment->getVertical());
+        $this->assertEquals(Alignment::VERTICAL_BOTTOM, $alignment->getVertical());
     }
 
     /**
@@ -35,9 +37,9 @@ class AlignmentTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetHorizontal()
     {
         $alignment = new Alignment();
-        $alignment->setHorizontal('left');
+        $alignment->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $this->assertEquals('left', $alignment->getHorizontal());
+        $this->assertEquals(Alignment::HORIZONTAL_LEFT, $alignment->getHorizontal());
     }
 
     public function getWrongParameters()
