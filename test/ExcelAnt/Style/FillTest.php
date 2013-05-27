@@ -4,5 +4,8 @@ namespace ExcelAnt\Style;
 
 class FillTest extends \PHPUnit_Framework_TestCase
 {
-
+    public function testTmp()
+    {
+        $this->markTestIncomplete();
+    }
 }
