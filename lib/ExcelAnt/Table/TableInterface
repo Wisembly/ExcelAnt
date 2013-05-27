@@ -1,0 +1,24 @@
+<?php
+
+namespace ExcelAnt\Table;
+
+interface TableInterface
+{
+    public function setLabelRow();
+
+    public function getLabel();
+
+    public function setRow();
+
+    public function getRow();
+
+    public function setCell();
+
+    public function setColumn();
+
+    public function getColumn();
+
+    public function getWidth();
+
+    public function getHeight();
+}

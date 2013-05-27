@@ -1,0 +1,10 @@
+<?php
+
+namespace ExcelAnt\Table;
+
+use ExcelAnt\Table\TableInterface;
+
+class Table implements TableInterface
+{
+
+}
