@@ -37,6 +37,8 @@ class Border implements StyleInterface
     {
         $this->checkSideParameter($side);
         $this->side = $side;
+        $this->type = self::BORDER_NONE;
+        $this->color = '000000';
     }
 
     public function setSide($side)

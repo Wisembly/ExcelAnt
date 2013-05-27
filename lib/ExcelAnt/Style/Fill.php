@@ -10,7 +10,7 @@ class Fill implements StyleInterface
 
     public function __construct($color = null)
     {
-        $this->color = $color;
+        $this->color = $color ?: 'ff0000';
     }
 
     public function setColor($color)

@@ -27,6 +27,8 @@ class Alignment implements StyleInterface
     {
         $this->checkVerticalParameter($alignment);
         $this->vertical = $alignment;
+        $this->horizontal = self::HORIZONTAL_GENERAL;
+        $this->vertical = self::VERTICAL_BOTTOM;
 
         return $this;
     }
