@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\Style\Fill;
+namespace ExcelAnt\Style;
 
 use ExcelAnt\Style\StyleInterface;
 

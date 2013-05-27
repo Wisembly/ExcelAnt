@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\Style\Border;
+namespace ExcelAnt\Style;
 
 use ExcelAnt\Style\StyleInterface;
 
