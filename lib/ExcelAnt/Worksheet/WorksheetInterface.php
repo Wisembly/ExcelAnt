@@ -3,6 +3,7 @@
 namespace ExcelAnt\Worksheet;
 
 use ExcelAnt\Sheet\SheetInterface;
+use ExcelAnt\Style\StyleInterface;
 
 interface WorksheetInterface
 {
@@ -148,5 +149,15 @@ interface WorksheetInterface
      */
     public function getSubject();
 
-    public function setStyle();
+    /**
+     * Add style
+     */
+    public function addStyle(StyleInterface $style);
+
+    /**
+     * Get styleCollection
+     *
+     * @return array
+     */
+    public function getStyles();
 }
