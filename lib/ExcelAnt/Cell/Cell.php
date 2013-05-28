@@ -7,6 +7,9 @@ use ExcelAnt\Style\StyleInterface;
 
 class Cell implements CellInterface
 {
+    /**
+     * @param string $value
+     */
     public function __construct($value = null)
     {
         if (isset($value)) {
@@ -14,6 +17,9 @@ class Cell implements CellInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($value)
     {
         $this->value = $value;
@@ -21,11 +27,17 @@ class Cell implements CellInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setStyle(StyleInterface $style)
     {
         $this->style = $style;
@@ -33,6 +45,9 @@ class Cell implements CellInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStyle()
     {
         return $this->style;
