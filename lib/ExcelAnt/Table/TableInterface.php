@@ -4,7 +4,7 @@ namespace ExcelAnt\Table;
 
 interface TableInterface
 {
-    public function setLabelRow();
+    public function setLabel();
 
     public function getLabel();
 
@@ -13,6 +13,8 @@ interface TableInterface
     public function getRow();
 
     public function setCell();
+
+    public function getCells();
 
     public function setColumn();
 
