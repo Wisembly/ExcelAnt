@@ -99,18 +99,4 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * @return array
      */
     public function toArray();
-
-    /**
-     * Sets the internal iterator to the first style in the collection and returns this style.
-     *
-     * @return mixed
-     */
-    public function first();
-
-    /**
-     * Sets the internal iterator to the last style in the collection and returns this style.
-     *
-     * @return mixed
-     */
-    public function last();
 }

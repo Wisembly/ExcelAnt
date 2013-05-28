@@ -148,22 +148,6 @@ class StyleCollection implements Collection
         return $this->_styles;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function first()
-    {
-        return reset($this->_styles);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function last()
-    {
-        return end($this->_styles);
-    }
-
     /*
      * Required by interface ArrayAccess.
      *

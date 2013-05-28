@@ -136,16 +136,6 @@ class StyleCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ExcelAnt\Style\Font', $styles[1]);
     }
 
-    public function testFirst()
-    {
-        $this->assertInstanceOf('ExcelAnt\Style\Fill', $this->styleCollection->first());
-    }
-
-    public function testLast()
-    {
-        $this->assertInstanceOf('ExcelAnt\Style\Font', $this->styleCollection->last());
-    }
-
     public function testCount()
     {
         $this->assertEquals(2, $this->styleCollection->count());
