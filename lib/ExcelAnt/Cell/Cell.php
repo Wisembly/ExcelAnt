@@ -7,9 +7,11 @@ use ExcelAnt\Style\StyleInterface;
 
 class Cell implements CellInterface
 {
-    public function __construct()
+    public function __construct($value = null)
     {
-
+        if (isset($value)) {
+            $this->value = $value;
+        }
     }
 
     public function setValue($value)

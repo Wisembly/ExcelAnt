@@ -7,6 +7,13 @@ use ExcelAnt\Style\StyleInterface;
 
 class CellTest extends \PHPUnit_Framework_TestCase
 {
+    public function testInstanciateWithValue()
+    {
+        $cell = new Cell('foo');
+
+        $this->assertEquals('foo', $cell->getValue());
+    }
+
     public function testSetAndGetValue()
     {
         $cell = new Cell();
