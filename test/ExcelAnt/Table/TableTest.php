@@ -4,7 +4,9 @@ namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\Table;
 use ExcelAnt\Cell\Cell;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Style\Fill;
+use ExcelAnt\Style\Font;
+use ExcelAnt\Collections\StyleCollection;
 
 class TableTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,6 +25,21 @@ class TableTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testSetLabelWithStyles()
+    {
+        $labelsInput = ['Foo', 'Bar', 'Baz'];
+        $styleCollection = new StyleCollection([new Fill(), new Font()]);
+
+        $table = new Table();
+        $table->setLabels($labelsInput, null, $styleCollection);
+
+        $labels = $table->getLabels();
+
+        foreach ($labels as $cell) {
+            $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
+        }
+    }
+
     public function testSetAndGetCell()
     {
         $table = new Table();
@@ -31,10 +48,5 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $cellCollection);
         $this->assertEquals('Foo', $cellCollection[0]->getValue());
-    }
-
-    private function getStyleInterfaceMock()
-    {
-        return $this->getMockBuilder('ExcelAnt\Style\StyleInterface')->disableOriginalConstructor()->getMock();
     }
 }

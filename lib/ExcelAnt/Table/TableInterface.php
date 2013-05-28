@@ -3,10 +3,11 @@
 namespace ExcelAnt\Table;
 
 use ExcelAnt\Cell\CellInterface;
+use ExcelAnt\Collections\StyleCollection;
 
 interface TableInterface
 {
-    public function setLabels($labels, $type = self::LABEL_TOP, $styles = null);
+    public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null);
 
     public function getLabels();
 

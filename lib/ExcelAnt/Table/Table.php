@@ -5,7 +5,7 @@ namespace ExcelAnt\Table;
 use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Cell\Cell;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Collections\StyleCollection;
 
 class Table implements TableInterface
 {
@@ -19,10 +19,10 @@ class Table implements TableInterface
 
     }
 
-    public function setLabels($labels, $type = self::LABEL_TOP, $styles = null)
+    public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null)
     {
         foreach ($labels as $value) {
-            $this->labels[] = new Cell($value);
+            $this->labels[] = (new Cell($value))->setStyles($styles);
         }
     }
 
