@@ -32,9 +32,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Create a Sheet
-     *
-     * @return Sheet
+     * {@inheritdoc}
      */
     public function createSheet()
     {
@@ -45,14 +43,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get a Sheet
-     *
-     * @param  integer $index The index of the sheet we want to get
-     *
-     * @throws InvalidArgumentException If the index isn't a numeric value
-     * @throws RuntimeException If the index doesn't exist
-     *
-     * @return Sheet
+     * {@inheritdoc}
      */
     public function getSheet($index = 0)
     {
@@ -62,9 +53,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get all the Sheet object of the sheetCollection
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllSheets()
     {
@@ -72,9 +61,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Return the sheets number
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function countSheets()
     {
@@ -82,19 +69,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Add a new sheet in the sheetCollection
-     *
-     * You can give an index if you want insert the sheet somewhere. In which case the previous data at this index will be erased.
-     *
-     * If you give an index and set true the insert parameter, you will insert the Sheet in the array.
-     *
-     * @param SheetInterface $sheet  The sheet will be added
-     * @param integer        $index  Numeric index of the sheetCollection
-     * @param boolean        $insert If you want insert the sheet or not
-     *
-     * @throws InvalidArgumentException If the index isn't numeric
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function addSheet(SheetInterface $sheet, $index = null, $insert = false)
     {
@@ -125,14 +100,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Remove a sheet
-     *
-     * @param  integer $index Numeric index of the sheetCollection
-     *
-     * @throws InvalidArgumentException If the index isn't a numeric value
-     * @throws RuntimeException If the index doesn't exist
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function removeSheet($index)
     {
@@ -145,9 +113,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Set the tile of the Worksheet
-     *
-     * @param mixed $title The title
+     * {@inheritdoc}
      */
     public function setTitle($title)
     {
@@ -157,9 +123,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Return the title of the worksheet
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getTitle()
     {
@@ -167,11 +131,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Set the creator of the worksheet
-     *
-     * @param mixed $creator
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function setCreator($creator)
     {
@@ -181,9 +141,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get the creator of the Worksheet
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getCreator()
     {
@@ -191,11 +149,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Set the description of the worksheet
-     *
-     * @param mixed $description
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -205,9 +159,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get the description of the Worksheet
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -215,11 +167,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Set the company of the worksheet
-     *
-     * @param mixed $company
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function setCompany($company)
     {
@@ -229,9 +177,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get the company of the Worksheet
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getCompany()
     {
@@ -239,11 +185,7 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Set the subject of the worksheet
-     *
-     * @param mixed $subject
-     *
-     * @return Worksheet
+     * {@inheritdoc}
      */
     public function setSubject($subject)
     {
@@ -253,15 +195,16 @@ class Worksheet implements WorksheetInterface
     }
 
     /**
-     * Get the subject of the Worksheet
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getSubject()
     {
         return $this->phpExcel->getProperties()->getSubject();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setStyle()
     {
 
@@ -272,8 +215,8 @@ class Worksheet implements WorksheetInterface
      *
      * @param integer $index Numeric index of the sheetCollection
      *
-     * @throws InvalidArgumentException If the index isn't a numeric value
-     * @throws RuntimeException If the index doesn't exist
+     * @throws InvalidArgumentException If the index isn't numeric
+     * @throws RuntimeException         If the index doesn't exist
      */
     private function checkIndexParameter($index)
     {
