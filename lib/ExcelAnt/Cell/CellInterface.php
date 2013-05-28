@@ -2,7 +2,7 @@
 
 namespace ExcelAnt\Cell;
 
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Collections\StyleCollection;
 
 interface CellInterface
 {
@@ -23,18 +23,18 @@ interface CellInterface
     public function getValue();
 
     /**
-     * Set style
+     * Set styles
      *
-     * @param StyleInterface $style
+     * @param StyleCollection $styles
      *
      * @return CellInterface
      */
-    public function setStyle($styles = null);
+    public function setStyles(StyleCollection $styles = null);
 
     /**
-     * Get style
+     * Get styles
      *
-     * @return StyleInterface
+     * @return StyleCollection
      */
-    public function getStyle();
+    public function getStyles();
 }

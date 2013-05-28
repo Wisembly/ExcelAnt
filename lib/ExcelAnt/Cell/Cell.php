@@ -3,10 +3,13 @@
 namespace ExcelAnt\Cell;
 
 use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Collections\StyleCollection;
 
 class Cell implements CellInterface
 {
+    private $value;
+    private $styleCollection;
+
     /**
      * @param string $value
      */
@@ -38,9 +41,9 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function setStyle($styles = null)
+    public function setStyles(StyleCollection $styles = null)
     {
-        $this->styleCollection = $style;
+        $this->styleCollection = $styles;
 
         return $this;
     }
@@ -48,8 +51,8 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function getStyle()
+    public function getStyles()
     {
-        return $this->style;
+        return $this->styleCollection;
     }
 }

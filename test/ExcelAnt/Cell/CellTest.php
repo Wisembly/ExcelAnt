@@ -4,6 +4,9 @@ namespace ExcelAnt\Cell;
 
 use ExcelAnt\Cell\Cell;
 use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Style\Fill;
+use ExcelAnt\Style\Font;
+use ExcelAnt\Collections\StyleCollection;
 
 class CellTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,12 +25,12 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $cell->getValue());
     }
 
-    // public function testAddAndStyle()
-    // {
-    //     $style = $this->getMockBuilder('ExcelAnt\Style\StyleInterface')->disableOriginalConstructor()->getMock();
-    //     $cell = new Cell();
-    //     $cell->setStyle($style);
+    public function testAddAndStyle()
+    {
+        $styleCollection = new StyleCollection([new Fill(), new Font()]);
+        $cell = new Cell();
+        $cell->setStyles($styleCollection);
 
-    //     $this->assertInstanceOf('ExcelAnt\Style\StyleInterface', $cell->getStyle());
-    // }
+        $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
+    }
 }
