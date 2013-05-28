@@ -2,6 +2,8 @@
 
 namespace ExcelAnt\Table;
 
+use ExcelAnt\Cell\CellInterface;
+
 interface TableInterface
 {
     public function setLabel();
@@ -12,7 +14,7 @@ interface TableInterface
 
     public function getRow();
 
-    public function setCell();
+    public function setCell(CellInterface $cell);
 
     public function getCells();
 

@@ -3,6 +3,7 @@
 namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Cell\CellInterface;
 
 class Table implements TableInterface
 {
