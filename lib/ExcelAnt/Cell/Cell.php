@@ -7,8 +7,6 @@ use ExcelAnt\Style\StyleInterface;
 
 class Cell implements CellInterface
 {
-    use StyleCollectionRequirements;
-
     /**
      * @param string $value
      */
