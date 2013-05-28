@@ -6,9 +6,9 @@ use ExcelAnt\Cell\CellInterface;
 
 interface TableInterface
 {
-    public function setLabel();
+    public function setLabels($labels, $type = self::LABEL_TOP, $styles = null);
 
-    public function getLabel();
+    public function getLabels();
 
     public function setRow();
 

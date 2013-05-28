@@ -29,7 +29,7 @@ interface CellInterface
      *
      * @return CellInterface
      */
-    public function setStyle(StyleInterface $style);
+    public function setStyle($styles = null);
 
     /**
      * Get style

@@ -22,12 +22,12 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $cell->getValue());
     }
 
-    public function testAddAndStyle()
-    {
-        $style = $this->getMockBuilder('ExcelAnt\Style\StyleInterface')->disableOriginalConstructor()->getMock();
-        $cell = new Cell();
-        $cell->setStyle($style);
+    // public function testAddAndStyle()
+    // {
+    //     $style = $this->getMockBuilder('ExcelAnt\Style\StyleInterface')->disableOriginalConstructor()->getMock();
+    //     $cell = new Cell();
+    //     $cell->setStyle($style);
 
-        $this->assertInstanceOf('ExcelAnt\Style\StyleInterface', $cell->getStyle());
-    }
+    //     $this->assertInstanceOf('ExcelAnt\Style\StyleInterface', $cell->getStyle());
+    // }
 }

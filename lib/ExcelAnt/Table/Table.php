@@ -4,9 +4,14 @@ namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Cell\CellInterface;
+use ExcelAnt\Cell\Cell;
+use ExcelAnt\Style\StyleInterface;
 
 class Table implements TableInterface
 {
+    const LABEL_TOP = 'top';
+
+    private $labels;
     private $cellCollection;
 
     public function __construct()
@@ -14,14 +19,16 @@ class Table implements TableInterface
 
     }
 
-    public function setLabel()
+    public function setLabels($labels, $type = self::LABEL_TOP, $styles = null)
     {
-
+        foreach ($labels as $value) {
+            $this->labels[] = new Cell($value);
+        }
     }
 
-    public function getLabel()
+    public function getLabels()
     {
-
+        return $this->labels;
     }
 
     public function setRow()

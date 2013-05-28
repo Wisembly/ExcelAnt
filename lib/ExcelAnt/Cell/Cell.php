@@ -7,6 +7,8 @@ use ExcelAnt\Style\StyleInterface;
 
 class Cell implements CellInterface
 {
+    use StyleCollectionRequirements;
+
     /**
      * @param string $value
      */
@@ -38,9 +40,9 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function setStyle(StyleInterface $style)
+    public function setStyle($styles = null)
     {
-        $this->style = $style;
+        $this->styleCollection = $style;
 
         return $this;
     }
