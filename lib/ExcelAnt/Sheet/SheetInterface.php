@@ -6,8 +6,20 @@ interface SheetInterface
 {
     public function getRawClass();
 
+    /**
+     * Set title
+     *
+     * @param string $name The title
+     *
+     * @return SheetInterface
+     */
     public function setTitle($name);
 
+    /**
+     * Get title
+     *
+     * @return string
+     */
     public function getTitle();
 
     public function writeCell();

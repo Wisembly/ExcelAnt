@@ -13,6 +13,9 @@ class Worksheet implements WorksheetInterface
     private $phpExcel;
     private $sheetCollection;
 
+    /**
+     * @param PHPExcel $phpExcel
+     */
     public function __construct(PHPExcel $phpExcel = null)
     {
         $this->phpExcel = $phpExcel ?: new PHPExcel();
