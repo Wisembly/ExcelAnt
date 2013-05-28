@@ -99,7 +99,7 @@ class StyleCollection implements Collection
     /**
      * {@inheritDoc}
      */
-    public function removeElement($style)
+    public function removeElement(StyleInterface $style)
     {
         $key = $this->contains($style);
 

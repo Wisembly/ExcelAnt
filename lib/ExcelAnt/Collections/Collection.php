@@ -64,7 +64,7 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      *
      * @return boolean TRUE if this collection contained the specified style, FALSE otherwise.
      */
-    public function removeElement($style);
+    public function removeElement(StyleInterface $style);
 
     /**
      * Checks whether the collection contains a style with the specified key/index.
