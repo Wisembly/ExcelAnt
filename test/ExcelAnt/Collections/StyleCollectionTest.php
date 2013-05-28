@@ -16,23 +16,6 @@ class StyleCollectionTest extends \PHPUnit_Framework_TestCase
         $this->styleCollection = new StyleCollection([new Fill(), new Font()]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @dataProvider      getWrongElements
-     */
-    public function testInstanciateWithWrongParameter($styles)
-    {
-        $a = new StyleCollection($styles);
-    }
-
-    public function getWrongElements()
-    {
-        return [
-            ['foo'],
-            [[new Fill(), 'foo']],
-        ];
-    }
-
     public function testAdd()
     {
         $style = new Alignment();
@@ -53,19 +36,21 @@ class StyleCollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @dataProvider      getIndex
      */
-    public function testSetWithExistingStyle($index)
+    public function testSetWithExistingStyleAndDifferentIndex()
     {
-        $this->styleCollection->set($index, new Fill());
+        $this->styleCollection->set(1, new Fill());
     }
 
-    public function getIndex()
+    public function testSetWithExistingStyleWithSameIndex()
     {
-        return [
-            [0],
-            [1],
-        ];
+        $fill = new Fill();
+        $fill->setColor('000000');
+
+        $this->assertEquals('ffffff', $this->styleCollection[0]->getColor());
+        $this->styleCollection->set(0, $fill);
+        $this->assertEquals('000000', $this->styleCollection[0]->getColor());
+        $this->assertCount(2, $this->styleCollection);
     }
 
     public function testSet()
@@ -73,6 +58,7 @@ class StyleCollectionTest extends \PHPUnit_Framework_TestCase
         $this->styleCollection->set(0, new Alignment());
 
         $this->assertInstanceOf('ExcelAnt\Style\Alignment', $this->styleCollection[0]);
+        $this->assertCount(2, $this->styleCollection);
     }
 
     public function testContains()

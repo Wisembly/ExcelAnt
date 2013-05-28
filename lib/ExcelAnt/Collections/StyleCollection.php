@@ -9,20 +9,13 @@ class StyleCollection implements Collection
 {
     private $_styles;
 
-    public function __construct($styles)
+    public function __construct(array $styles)
     {
-        if (isset($styles)) {
-           if (!is_array($styles)) {
-               throw new \InvalidArgumentException("styles must be an array of StyleInterface");
-           }
-           foreach ($styles as $style) {
-               if (!($style instanceof StyleInterface)) {
-                   throw new \InvalidArgumentException("style must be an instance of StyleInterface");
-               }
-           }
-       }
+        $this->_styles = [];
 
-        $this->_styles = $styles;
+        foreach ($styles as $style) {
+            $this->add($style);
+        }
     }
 
     /**
@@ -31,7 +24,7 @@ class StyleCollection implements Collection
     public function add(StyleInterface $style)
     {
         if (false !== $key = $this->contains($style)) {
-            $this->hardSet($key, $style);
+            $this->set($key, $style);
 
             return;
         }
@@ -44,7 +37,9 @@ class StyleCollection implements Collection
      */
     public function set($key, StyleInterface $style)
     {
-        if (false !== $key = $this->contains($style)) {
+        $keyExist = $this->contains($style);
+
+        if (false !== $keyExist && ($keyExist !== $key)) {
             throw new \InvalidArgumentException("This style already exist in the styleCollection");
         }
 
@@ -175,11 +170,7 @@ class StyleCollection implements Collection
      */
     public function offsetSet($offset, $value)
     {
-        if (!isset($offset)) {
-            return $this->add($value);
-        }
-
-        return $this->set($offset, $value);
+        return $this->add($value);
     }
 
     /*
@@ -210,16 +201,5 @@ class StyleCollection implements Collection
     public function count()
     {
         return count($this->_styles);
-    }
-
-    /**
-     * Used to replace a style in styleCollection
-     *
-     * @param  int            $key   The index
-     * @param  StyleInterface $style The style
-     */
-    private function hardSet($key, StyleInterface $style)
-    {
-        $this->_styles[$key] = $style;
     }
 }
