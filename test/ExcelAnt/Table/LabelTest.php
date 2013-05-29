@@ -17,6 +17,13 @@ class LabelTest extends \PHPUnit_Framework_TestCase
         $this->label = new Label();
     }
 
+    public function testInstanciateWithType()
+    {
+        $label = new Label(Label::LEFT);
+
+        $this->assertEquals(Label::LEFT, $label->getType());
+    }
+
     /**
      * @expectedException \OutOfBoundsException
      */

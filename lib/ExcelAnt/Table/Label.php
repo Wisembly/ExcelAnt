@@ -11,9 +11,11 @@ class Label implements LabelInterface
     private $type;
     private $values;
 
-    public function __construct()
+    public function __construct($type = null)
     {
-
+        if (isset($type)) {
+            $this->setType($type);
+        }
     }
 
     public function setType($type)
