@@ -78,11 +78,18 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bobby', $row[1]->getValue());
     }
 
-    public function testLastRow()
+    public function testGetLastRow()
     {
         $this->table->setRow(['foo', 'bar', 'baz']);
         $this->table->setRow(['bob', 'bobby']);
         $this->assertEquals(1, $this->table->getLastRow());
+    }
+
+    public function testGetLastRowWithColumn()
+    {
+        $this->table->setColumn(['foo', 'bar', 'baz']);
+        $this->table->setColumn(['bob', 'bobby']);
+        $this->assertEquals(2, $this->table->getLastRow());
     }
 
     /**
@@ -187,6 +194,91 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $row = $this->table->getRow(0);
         $this->assertEquals('bob', $row[0]->getValue());
         $this->assertEquals('bobby', $row[1]->getValue());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetColumnWithInvalidIndex()
+    {
+        $this->table->getColumn('foo');
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testGetColumnWithOutOfBoundsIndex()
+    {
+        $this->table->getColumn(999999);
+    }
+
+    public function testSetAndGetColumnWithDefaultConfiguration()
+    {
+        $data = ['foo', 'bar', 'baz'];
+
+        $this->table->setColumn($data);
+        $column = $this->table->getColumn(0);
+
+        foreach ($column as $key => $cell) {
+            $this->assertEquals($data[$key], $cell->getValue());
+        }
+    }
+
+    public function testSetColumnWithSingleValue()
+    {
+        $this->table->setColumn('foo');
+        $column = $this->table->getColumn(0);
+
+        foreach ($column as $key => $cell) {
+            $this->assertEquals('foo', $cell->getValue());
+        }
+    }
+
+    public function testSetColumnWhenThereAreAlreadyRows()
+    {
+        $data = ['col1', 'col2', 'col3'];
+
+        $this->table->setRow(['foo', 'bar', 'baz']);
+        $this->table->setRow(['bob', 'bobby']);
+
+        $this->table->setColumn($data);
+        $column = $this->table->getColumn(3);
+
+        foreach ($column as $key => $cell) {
+            $this->assertEquals($data[$key], $cell->getValue());
+        }
+    }
+
+    public function testGetLastColumn()
+    {
+        $this->table->setColumn(['foo', 'bar', 'baz']);
+        $this->table->setColumn(['foo', 'bar', 'baz']);
+
+        $this->assertEquals(1, $this->table->getLastColumn());
+    }
+
+    public function testGetLastColumnWithRows()
+    {
+        $this->table->setRow(['foo', 'bar', 'baz']);
+        $this->table->setRow(['bob', 'bobby']);
+
+        $this->assertEquals(2, $this->table->getLastColumn());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testCleanColumnWithInvalidIndex()
+    {
+        $this->table->cleanColumn('foo');
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testCleanColumnWithOutOfBoundsIndex()
+    {
+        $this->table->cleanColumn(999999);
     }
 
 }

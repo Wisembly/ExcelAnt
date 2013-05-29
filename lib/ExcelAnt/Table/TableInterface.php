@@ -95,9 +95,15 @@ interface TableInterface
      */
     public function getCells();
 
-    public function setColumn();
+    public function setColumn($data, $index = null, StyleCollection $styles = null);
 
-    public function getColumn();
+    public function getColumn($index);
+
+    public function getLastColumn();
+
+    public function cleanColumn($index);
+
+    public function removeColumn();
 
     public function getWidth();
 

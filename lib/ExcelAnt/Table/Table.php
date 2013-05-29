@@ -163,12 +163,77 @@ class Table implements TableInterface
         return $this->cellCollection;
     }
 
-    public function setColumn()
+    public function setColumn($data, $index = null, StyleCollection $styles = null)
     {
+        if (!is_array($data)) {
+            $data = [$data];
+        }
 
+        if (null !== $index) {
+
+        } else {
+            $index = $this->getLastColumn();
+            $index = null === $index ? 0 : ++$index;
+        }
+
+        $dataSize = count($data);
+
+        for ($i = 0; $i < $dataSize; $i++) {
+            $cell = new Cell($data[$i]);
+            $this->table[$i][$index] = $cell;
+        }
+
+        return $this;
     }
 
-    public function getColumn()
+    public function getColumn($index)
+    {
+        if (!is_numeric($index)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $column = [];
+
+        foreach ($this->table as $row) {
+            $column[] = $row[$index];
+        }
+
+        if (empty($column)) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
+        return $column;
+    }
+
+    public function getLastColumn()
+    {
+        if (empty($this->table)) {
+            return null;
+        }
+
+        $max = 0;
+
+        foreach ($this->table as $row) {
+            $size = count($row);
+
+            if ($size > $max) {
+                $max = $size;
+            }
+        }
+
+        return $max - 1;
+    }
+
+    public function cleanColumn($index)
+    {
+        foreach ($this->table as $key => $row) {
+            if (array_key_exists($index, $row)) {
+                $row[$index] = null;
+            }
+        }
+    }
+
+    public function removeColumn()
     {
 
     }
