@@ -9,8 +9,6 @@ use ExcelAnt\Collections\StyleCollection;
 
 class Table implements TableInterface
 {
-    const LABEL_TOP = 'top';
-
     private $table = [];
     private $labels = [];
     private $cellCollection = [];
@@ -63,7 +61,7 @@ class Table implements TableInterface
             $this->cleanRow($index);
         } else {
             $index = $this->getLastRow();
-            $index = is_null($index) ? 0 : ++$index;
+            $index = null === $index ? 0 : ++$index;
         }
 
         foreach ($data as $value) {
@@ -88,6 +86,10 @@ class Table implements TableInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
         return $this->table[$index];
     }
 
@@ -96,9 +98,10 @@ class Table implements TableInterface
      */
     public function getLastRow()
     {
-        end($this->table);
+        $keys = array_keys($this->table);
+        end($keys);
 
-        return key($this->table);
+        return key($keys);
     }
 
     /**
@@ -110,6 +113,10 @@ class Table implements TableInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
         $this->table[$index] = [];
 
         return $this;
@@ -118,14 +125,21 @@ class Table implements TableInterface
     /**
      * {@inheritdoc}
      */
-    public function removeRow($index)
+    public function removeRow($index, $reindex = false)
     {
         if (!is_numeric($index)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
         unset($this->table[$index]);
-        $this->table = array_values($this->table);
+
+        if (true === $reindex) {
+            $this->table = array_values($this->table);
+        }
 
         return $this;
     }

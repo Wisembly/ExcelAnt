@@ -60,6 +60,14 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->table->getRow('foo');
     }
 
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testGetRowWithOutOfBoundsIndex()
+    {
+        $this->table->getRow(999999);
+    }
+
     public function testSetRowWithDefaultConfigurationAndIndirectlyGetRow()
     {
         $this->table->setRow(['foo', 'bar', 'baz']);
@@ -103,6 +111,14 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->table->cleanRow('foo');
     }
 
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testCleanRowWithOutOfBoundsIndex()
+    {
+        $this->table->cleanRow(999999);
+    }
+
     public function testCleanRow()
     {
         $this->table->setRow(['foo', 'bar', 'baz']);
@@ -117,6 +133,14 @@ class TableTest extends \PHPUnit_Framework_TestCase
     public function testSetRowWithInvalidIndex()
     {
         $this->table->setRow(['foo', 'bar', 'baz'], 'foo');
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testSetRowWithOutOfBoundsIndex()
+    {
+        $this->table->setRow(['foo', 'bar', 'baz'], 999999);
     }
 
     public function testSetRowWithIndex()
@@ -149,11 +173,32 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->table->removeRow('foo');
     }
 
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testRemoveRowWithOutOfBoundsIndex()
+    {
+        $this->table->removeRow(999999);
+    }
+
     public function testRemoveRow()
     {
         $this->table->setRow(['foo', 'bar', 'baz']);
         $this->table->setRow(['bob', 'bobby']);
         $this->table->removeRow(0);
+
+        $this->assertCount(1, $this->table->getTable());
+
+        $row = $this->table->getRow(1);
+        $this->assertEquals('bob', $row[0]->getValue());
+        $this->assertEquals('bobby', $row[1]->getValue());
+    }
+
+    public function testRemoveRowWithReIndex()
+    {
+        $this->table->setRow(['foo', 'bar', 'baz']);
+        $this->table->setRow(['bob', 'bobby']);
+        $this->table->removeRow(0, true);
 
         $this->assertCount(1, $this->table->getTable());
 

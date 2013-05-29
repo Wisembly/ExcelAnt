@@ -7,6 +7,8 @@ use ExcelAnt\Collections\StyleCollection;
 
 interface TableInterface
 {
+    const LABEL_TOP = 'top';
+
     /**
      * Set labels
      *
@@ -33,6 +35,7 @@ interface TableInterface
      * @param StyleCollection $styles
      *
      * @throws InvalidException If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
      *
      * @return TableInterface
      */
@@ -43,7 +46,8 @@ interface TableInterface
      *
      * @param  int $index
      *
-     * @throws InvalidException If index isn't numeric
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
      *
      * @return array
      */
@@ -62,6 +66,7 @@ interface TableInterface
      * @param  int $index
      *
      * @throws InvalidException If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
      *
      * @return TableInterface
      */
@@ -73,6 +78,7 @@ interface TableInterface
      * @param  int $index
      *
      * @throws InvalidException If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
      *
      * @return TableInterface
      */
