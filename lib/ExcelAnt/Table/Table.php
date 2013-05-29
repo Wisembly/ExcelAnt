@@ -19,6 +19,9 @@ class Table implements TableInterface
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null)
     {
         foreach ($labels as $value) {
@@ -26,6 +29,9 @@ class Table implements TableInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLabels()
     {
         return $this->labels;
@@ -41,6 +47,9 @@ class Table implements TableInterface
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCell(CellInterface $cell)
     {
         $this->cellCollection[] = $cell;
@@ -48,6 +57,9 @@ class Table implements TableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCells()
     {
         return $this->cellCollection;
