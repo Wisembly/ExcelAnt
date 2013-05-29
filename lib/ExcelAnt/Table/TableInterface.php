@@ -25,9 +25,58 @@ interface TableInterface
      */
     public function getLabels();
 
-    public function setRow();
+    /**
+     * Set a row
+     *
+     * @param array           $data   The row data
+     * @param int             $index  The index if you want insert at a specific row
+     * @param StyleCollection $styles
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return TableInterface
+     */
+    public function setRow($data, $index = null, StyleCollection $styles = null);
 
-    public function getRow();
+    /**
+     * Get Row
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return array
+     */
+    public function getRow($index);
+
+    /**
+     * Get the last row
+     *
+     * @return int
+     */
+    public function getLastRow();
+
+    /**
+     * Clean a single row. The index already exist
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return TableInterface
+     */
+    public function cleanRow($index);
+
+    /**
+     * Remove a row. The indexes are re-indexes.
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return TableInterface
+     */
+    public function removeRow($index);
 
     /**
      * Set cell
