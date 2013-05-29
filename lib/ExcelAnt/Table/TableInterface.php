@@ -2,30 +2,27 @@
 
 namespace ExcelAnt\Table;
 
+use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
 
 interface TableInterface
 {
-    const LABEL_TOP = 'top';
-
     /**
-     * Set labels
+     * Set label
      *
-     * @param array           $labels The data of labels
-     * @param string          $type   Use const to define the type of the labels.
-     * @param StyleCollection $styles
+     * @param LabelInterface $label
      *
      * @return TableInterface
      */
-    public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null);
+    public function setLabel(LabelInterface $label);
 
     /**
-     * Get labels
+     * Get label
      *
-     * @return array Containing Cell classes
+     * @return Label
      */
-    public function getLabels();
+    public function getLabel();
 
     /**
      * Set a row
@@ -82,7 +79,7 @@ interface TableInterface
      *
      * @return TableInterface
      */
-    public function removeRow($index);
+    public function removeRow($index, $reindex = false);
 
     /**
      * Set cell

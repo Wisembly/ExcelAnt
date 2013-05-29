@@ -3,6 +3,7 @@
 namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Cell\Cell;
 use ExcelAnt\Collections\StyleCollection;
@@ -10,7 +11,7 @@ use ExcelAnt\Collections\StyleCollection;
 class Table implements TableInterface
 {
     private $table = [];
-    private $labels = [];
+    private $label;
     private $cellCollection = [];
 
     public function __construct()
@@ -21,19 +22,19 @@ class Table implements TableInterface
     /**
      * {@inheritdoc}
      */
-    public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null)
+    public function setLabel(LabelInterface $label)
     {
-        foreach ($labels as $value) {
-            $this->labels[] = (new Cell($value))->setStyles($styles);
-        }
+        $this->label = $label;
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLabels()
+    public function getLabel()
     {
-        return $this->labels;
+        return $this->label;
     }
 
     /**
