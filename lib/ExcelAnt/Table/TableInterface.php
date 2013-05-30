@@ -145,7 +145,17 @@ interface TableInterface
      */
     public function removeColumn($index);
 
+    /**
+     * Return the width of the table
+     *
+     * @return int Readable and human value
+     */
     public function getWidth();
 
+    /**
+     * Return the height of the table
+     *
+     * @return int Readable and human value
+     */
     public function getHeight();
 }

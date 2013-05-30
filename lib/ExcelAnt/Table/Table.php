@@ -328,7 +328,7 @@ class Table implements TableInterface
 
     public function getHeight()
     {
-
+        return $this->getLastRow() + 1; // Here we add 1 to send a readable and human value.
     }
 
     /**

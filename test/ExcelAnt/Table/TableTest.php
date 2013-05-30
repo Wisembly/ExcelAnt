@@ -407,6 +407,18 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5, $this->table->getWidth());
     }
 
+    public function testGetHeight()
+    {
+        $this->table->setColumn(['foo', 'bar', 'baz']);
+        $this->assertEquals(3, $this->table->getHeight());
+    }
+
+    public function testGetHeightWithEmptyCell()
+    {
+        $this->table->setColumn(['foo', null, 'bar', 'baz', null]);
+        $this->assertEquals(5, $this->table->getHeight());
+    }
+
     public function testBigArray()
     {
         $this->table->setRow(['foo', null, null, 'bar', 'baz', null]);

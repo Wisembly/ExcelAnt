@@ -6,6 +6,7 @@ use PHPExcel_Worksheet;
 
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
+use ExcelAnt\Table\Table;
 
 class SheetTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,6 +31,14 @@ class SheetTest extends \PHPUnit_Framework_TestCase
         $sheet->setTitle('Foo');
 
         $this->assertEquals('Foo', $sheet->getTitle());
+    }
+
+    public function testAddAndGetTable()
+    {
+        $table = new Table();
+
+        $sheet = $this->createSheet();
+        $sheet->addTable($table);
     }
 
     /**
