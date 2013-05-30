@@ -6,7 +6,7 @@ use Closure, Countable, IteratorAggregate, ArrayAccess;
 
 use ExcelAnt\Style\StyleInterface;
 
-interface Collection extends Countable, IteratorAggregate, ArrayAccess
+interface StyleCollectionInterface extends Countable, IteratorAggregate, ArrayAccess
 {
     /**
      * Adds a style at the end of the collection.
@@ -30,7 +30,7 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Checks whether a style is contained in the collection.
      *
-     * @param mixed $style The style to search for.
+     * @param StyleInterface $style The style to search for.
      *
      * @return mixed Key if the collection contains the style, FALSE otherwise.
      */
@@ -60,7 +60,7 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Removes the specified style from the collection, if it is found.
      *
-     * @param mixed $style The style to remove.
+     * @param StyleInterface $style The style to remove.
      *
      * @return boolean TRUE if this collection contained the specified style, FALSE otherwise.
      */
@@ -80,6 +80,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Gets the style at the specified key/index.
      *
      * @param string|integer $key The key/index of the style to retrieve.
+     *
+     * @throws OutOfBoundsException If there is no index with key value
      *
      * @return mixed
      */

@@ -30,15 +30,20 @@ class Border implements StyleInterface
     const BORDER_THIN             = 'thin';
 
     private $side;
-    private $color;
-    private $type;
+    private $color = '000000';
+    private $type = self::BORDER_NONE;
 
+    /**
+     * @param string $side
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
+     *
+     * @return Border
+     */
     public function __construct($side)
     {
         $this->checkSideParameter($side);
         $this->side = $side;
-        $this->type = self::BORDER_NONE;
-        $this->color = '000000';
     }
 
     /**

@@ -3,16 +3,19 @@
 namespace ExcelAnt\Collections;
 
 use ArrayIterator;
+
+use ExcelAnt\Collections\StyleCollectionInterface;
 use ExcelAnt\Style\StyleInterface;
 
-class StyleCollection implements Collection
+class StyleCollection implements StyleCollectionInterface
 {
-    private $_styles;
+    private $_styles = [];
 
+    /**
+     * @param array $styles Array of StyleInterface
+     */
     public function __construct(array $styles)
     {
-        $this->_styles = [];
-
         foreach ($styles as $style) {
             $this->add($style);
         }
@@ -120,11 +123,11 @@ class StyleCollection implements Collection
      */
     public function get($key)
     {
-        if (isset($this->_styles[$key])) {
-            return $this->_styles[$key];
+        if (!isset($this->_styles[$key])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
         }
 
-        return null;
+        return $this->_styles[$key];
     }
 
     /**

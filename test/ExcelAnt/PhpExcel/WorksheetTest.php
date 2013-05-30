@@ -7,7 +7,9 @@ use PHPExcel_DocumentProperties;
 
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Style\Fill;
+use ExcelAnt\Style\Font;
 
 class WorksheetTest extends \PHPUnit_Framework_TestCase
 {
@@ -351,9 +353,10 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
     public function testAddStyleAndGetStyleCollection()
     {
         $worksheet = $this->createWorksheet();
-        $worksheet->addStyle($this->getStyleMock());
+        $worksheet->addStyles(new StyleCollection([new Fill(), new Font()]));
 
-        $this->assertCount(1, $worksheet->getStyles());
+        $this->assertCount(2, $worksheet->getStyles());
+        $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $worksheet->getStyles());
     }
 
     /**
@@ -396,16 +399,6 @@ class WorksheetTest extends \PHPUnit_Framework_TestCase
         }
 
         return $sheet;
-    }
-
-    /**
-     * Mock ExcelAnt\Style\StyleInterface
-     *
-     * @return Mock_StyleInterface
-     */
-    private function getStyleMock()
-    {
-        return $this->getMockBuilder('ExcelAnt\Style\StyleInterface')->disableOriginalConstructor()->getMock();
     }
 
     /**

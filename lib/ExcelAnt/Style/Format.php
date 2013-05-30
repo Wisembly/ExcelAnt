@@ -16,19 +16,19 @@ class Format implements StyleInterface
     const TYPE_INLINE   = 'inlineStr';
     const TYPE_ERROR    = 'e';
 
-    private $format;
+    private $format = self::TYPE_STRING;
 
     public function __construct()
     {
-        $this->format = self::TYPE_STRING;
+
     }
 
     /**
      * Set format
      *
-     * @throws InvalidArgumentException If the parameter doesn't belong the format parameter list
-     *
      * @param string $format
+     *
+     * @throws InvalidArgumentException If format doesn't belong the format parameter list
      *
      * @return Format
      */
