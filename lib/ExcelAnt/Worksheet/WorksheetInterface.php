@@ -3,7 +3,7 @@
 namespace ExcelAnt\Worksheet;
 
 use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Style\StyleCollection;
 
 interface WorksheetInterface
 {
@@ -151,13 +151,15 @@ interface WorksheetInterface
 
     /**
      * Add style
+     *
+     * @param StyleCollection $styles
      */
-    public function addStyle(StyleInterface $style);
+    public function addStyles(StyleCollection $styles);
 
     /**
      * Get styleCollection
      *
-     * @return array
+     * @return StyleCollection
      */
     public function getStyles();
 }

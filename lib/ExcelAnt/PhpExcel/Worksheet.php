@@ -7,7 +7,7 @@ use PHPExcel;
 use ExcelAnt\Worksheet\WorksheetInterface;
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\PhpExcel\Sheet;
-use ExcelAnt\Style\StyleInterface;
+use ExcelAnt\Style\StyleCollection;
 
 class Worksheet implements WorksheetInterface
 {
@@ -210,9 +210,9 @@ class Worksheet implements WorksheetInterface
     /**
      * {@inheritdoc}
      */
-    public function addStyle(StyleInterface $style)
+    public function addStyles(StyleCollection $styles)
     {
-        $this->styleCollection[] = $style;
+        $this->styleCollection = $style;
 
         return $this;
     }

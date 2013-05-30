@@ -43,7 +43,7 @@ class Label implements LabelInterface
         ];
     }
 
-    public function setValues($values, StyleCollection $styles = null)
+    public function setValues(array $values, StyleCollection $styles = null)
     {
         foreach ($values as $value) {
             $cell = new Cell($value);
