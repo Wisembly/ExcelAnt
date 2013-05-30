@@ -289,10 +289,6 @@ class Table implements TableInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        if (!isset($this->table[$index])) {
-            throw new \OutOfBoundsException("Index doesn't exist");
-        }
-
         $removed = false;
 
         foreach ($this->table as $key => $row) {
