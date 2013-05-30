@@ -2,6 +2,9 @@
 
 namespace ExcelAnt\Sheet;
 
+use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Coordinate\Coordinate;
+
 interface SheetInterface
 {
     public function getRawClass();
@@ -24,7 +27,22 @@ interface SheetInterface
 
     public function writeCell();
 
-    public function addTable();
+    /**
+     * Add a Table
+     *
+     * @param TableInterface $table
+     * @param Coordinate     $coordinate
+     *
+     * @return SheetInterface
+     */
+    public function addTable(TableInterface $table, Coordinate $coordinate);
+
+    /**
+     * Get tables
+     *
+     * @return array
+     */
+    public function getTables();
 
     public function setRowHeight();
 

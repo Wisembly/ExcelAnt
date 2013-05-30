@@ -7,6 +7,7 @@ use PHPExcel_Worksheet;
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
 use ExcelAnt\Table\Table;
+use ExcelAnt\Coordinate\Coordinate;
 
 class SheetTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,9 +37,12 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     public function testAddAndGetTable()
     {
         $table = new Table();
+        $coordinate = new Coordinate(1, 1);
 
         $sheet = $this->createSheet();
-        $sheet->addTable($table);
+        $sheet->addTable($table, $coordinate);
+
+        $this->assertCount(1, $sheet->getTables());
     }
 
     /**

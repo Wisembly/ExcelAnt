@@ -5,6 +5,8 @@ namespace ExcelAnt\PhpExcel;
 use PHPExcel_Worksheet;
 
 use ExcelAnt\Sheet\SheetInterface;
+use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Coordinate\Coordinate;
 
 class Sheet implements SheetInterface
 {
@@ -52,9 +54,22 @@ class Sheet implements SheetInterface
 
     }
 
-    public function addTable()
+    /**
+     * {@inheritdoc}
+     */
+    public function addTable(TableInterface $table, Coordinate $coordinate)
     {
+        $this->tables[] = $table;
 
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTables()
+    {
+        return $this->tables;
     }
 
     public function setRowHeight()
