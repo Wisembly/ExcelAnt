@@ -3,6 +3,7 @@
 namespace ExcelAnt\Sheet;
 
 use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Coordinate\Coordinate;
 
 interface SheetInterface
@@ -25,7 +26,17 @@ interface SheetInterface
      */
     public function getTitle();
 
-    public function writeCell();
+    /**
+     * Add a single Cell. Hight priority, override the Tables
+     *
+     * @param CellInterface $cell
+     * @param Coordinate    $coordinate
+     *
+     * @return SheetInterface
+     */
+    public function addCell(CellInterface $cell, Coordinate $coordinate);
+
+    public function getCells();
 
     /**
      * Add a Table
@@ -44,11 +55,31 @@ interface SheetInterface
      */
     public function getTables();
 
-    public function setRowHeight();
+    /**
+     * Set the height of a row
+     *
+     * @param int $height
+     * @param int $index
+     *
+     * @throws InvalidException If height isn't numeric
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setRowHeight($height, $index);
+
+    /**
+     * Get Row height
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return int
+     */
+    public function getRowHeight($index);
 
     public function setColumnWidth();
 
     public function importImage();
-
-    public function write();
 }
