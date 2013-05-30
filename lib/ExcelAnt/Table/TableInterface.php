@@ -103,7 +103,7 @@ interface TableInterface
 
     public function cleanColumn($index);
 
-    public function removeColumn();
+    public function removeColumn($index);
 
     public function getWidth();
 

@@ -2,6 +2,7 @@
 
 namespace ExcelAnt\Cell;
 
+use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
 use ExcelAnt\Collections\StyleCollection;

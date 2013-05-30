@@ -6,6 +6,7 @@ use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Cell\Cell;
+use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Collections\StyleCollection;
 
 class Table implements TableInterface
@@ -60,13 +61,36 @@ class Table implements TableInterface
             }
 
             $this->cleanRow($index);
-        } else {
-            $index = $this->getLastRow();
-            $index = null === $index ? 0 : ++$index;
+            $dataLength = count($data);
+
+            for ($i = 0; $i < $dataLength; $i++) {
+
+                if (null === $data[$i]) {
+                    $cell = new EmptyCell();
+                } else {
+                    $cell = new Cell($data[$i]);
+                }
+
+                if (null !== $styles) {
+                    $cell->setStyles($styles);
+                }
+
+                $this->table[$index][$i] = $cell;
+            }
+
+            return $this;
         }
 
+        $index = $this->getLastRow();
+        $index = null === $index ? 0 : ++$index;
+
         foreach ($data as $value) {
-            $cell = new Cell($value);
+
+            if (null === $value) {
+                $cell = new EmptyCell();
+            } else {
+                $cell = new Cell($value);
+            }
 
             if (null !== $styles) {
                 $cell->setStyles($styles);
@@ -118,7 +142,9 @@ class Table implements TableInterface
             throw new \OutOfBoundsException("Index doesn't exist");
         }
 
-        $this->table[$index] = [];
+        foreach ($this->table[$index] as $key => $value) {
+            $this->table[$index][$key] = new EmptyCell();
+        }
 
         return $this;
     }
@@ -179,7 +205,13 @@ class Table implements TableInterface
         $dataSize = count($data);
 
         for ($i = 0; $i < $dataSize; $i++) {
-            $cell = new Cell($data[$i]);
+
+            if (null === $data[$i]) {
+                $cell = new EmptyCell();
+            } else {
+                $cell = new Cell($data[$i]);
+            }
+
             $this->table[$i][$index] = $cell;
         }
 
@@ -226,16 +258,47 @@ class Table implements TableInterface
 
     public function cleanColumn($index)
     {
+        if (!is_numeric($index)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
         foreach ($this->table as $key => $row) {
             if (array_key_exists($index, $row)) {
-                $row[$index] = null;
+                $this->table[$key][$index] = new EmptyCell();
             }
         }
+
+        return $this;
     }
 
-    public function removeColumn()
+    public function removeColumn($index)
     {
+        if (!is_numeric($index)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
 
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
+        $removed = false;
+
+        foreach ($this->table as $key => $row) {
+            if (array_key_exists($index, $row)) {
+                unset($this->table[$key][$index]);
+                $removed = true;
+            }
+        }
+
+        if (false === $removed) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
+        return $this;
     }
 
     public function getWidth()
