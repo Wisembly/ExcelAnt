@@ -3,7 +3,7 @@
 namespace ExcelAnt\Worksheet;
 
 use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\Style\StyleCollection;
+use ExcelAnt\Collections\StyleCollection;
 
 interface WorksheetInterface
 {

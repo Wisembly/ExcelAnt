@@ -7,7 +7,7 @@ use PHPExcel;
 use ExcelAnt\Worksheet\WorksheetInterface;
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\PhpExcel\Sheet;
-use ExcelAnt\Style\StyleCollection;
+use ExcelAnt\Collections\StyleCollection;
 
 class Worksheet implements WorksheetInterface
 {
@@ -79,7 +79,7 @@ class Worksheet implements WorksheetInterface
     public function addSheet(SheetInterface $sheet, $index = null, $insert = false)
     {
         if (isset($index)) {
-            if (!is_numeric($index)) {
+            if (false === filter_var($index, FILTER_VALIDATE_INT)) {
                 throw new \InvalidArgumentException("The index must be numeric");
             }
 
@@ -212,7 +212,7 @@ class Worksheet implements WorksheetInterface
      */
     public function addStyles(StyleCollection $styles)
     {
-        $this->styleCollection = $style;
+        $this->styleCollection = $styles;
 
         return $this;
     }
@@ -235,7 +235,7 @@ class Worksheet implements WorksheetInterface
      */
     private function checkIndexParameter($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("The index must be numeric");
         }
 

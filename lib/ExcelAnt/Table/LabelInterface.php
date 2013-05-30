@@ -16,7 +16,7 @@ interface LabelInterface
 
     public function getTypes();
 
-    public function setValues($values, StyleCollection $styles = null);
+    public function setValues(array $values, StyleCollection $styles = null);
 
     public function getValues();
 }

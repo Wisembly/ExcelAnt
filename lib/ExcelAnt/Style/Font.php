@@ -65,7 +65,7 @@ class Font implements StyleInterface
      */
     public function setSize($size)
     {
-        if (!is_numeric($size)) {
+        if (false === filter_var($size, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("The parameter must be a numeric value");
         }
 

@@ -56,7 +56,7 @@ class Table implements TableInterface
         }
 
         if (null !== $index) {
-            if (!is_numeric($index)) {
+            if (false === filter_var($index, FILTER_VALIDATE_INT)) {
                 throw new \InvalidArgumentException("Index must be numeric");
             }
 
@@ -107,7 +107,7 @@ class Table implements TableInterface
      */
     public function getRow($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
@@ -134,7 +134,7 @@ class Table implements TableInterface
      */
     public function cleanRow($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
@@ -154,7 +154,7 @@ class Table implements TableInterface
      */
     public function removeRow($index, $reindex = false)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
@@ -220,7 +220,7 @@ class Table implements TableInterface
 
     public function getColumn($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
@@ -258,7 +258,7 @@ class Table implements TableInterface
 
     public function cleanColumn($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
@@ -277,7 +277,7 @@ class Table implements TableInterface
 
     public function removeColumn($index)
     {
-        if (!is_numeric($index)) {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
