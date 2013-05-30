@@ -52,6 +52,9 @@ class Sheet implements SheetInterface
         return $this->phpExcelWorksheet->getTitle();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addCell(CellInterface $cell, Coordinate $coordinate)
     {
         $this->cells[] = $cell;
@@ -59,6 +62,9 @@ class Sheet implements SheetInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCells()
     {
         return $this->cells;
@@ -144,6 +150,6 @@ class Sheet implements SheetInterface
 
     public function importImage()
     {
-
+        // TODO
     }
 }

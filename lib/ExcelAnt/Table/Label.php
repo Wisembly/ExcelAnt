@@ -18,6 +18,9 @@ class Label implements LabelInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setType($type)
     {
         if (!in_array($type, $this->getTypes())) {
@@ -29,11 +32,17 @@ class Label implements LabelInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTypes()
     {
         return [
@@ -43,6 +52,9 @@ class Label implements LabelInterface
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValues(array $values, StyleCollection $styles = null)
     {
         foreach ($values as $value) {
@@ -56,6 +68,9 @@ class Label implements LabelInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValues()
     {
         return $this->values;

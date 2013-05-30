@@ -21,6 +21,15 @@ class Coordinate
         $this->yAxis = $yAxis;
     }
 
+    /**
+     * Set X Axis
+     *
+     * @param int $xAxis
+     *
+     * @throws InvalidException If xAxis isn't numeric
+     *
+     * @return Coordinate
+     */
     public function setXAxis($xAxis)
     {
         if (false === filter_var($xAxis, FILTER_VALIDATE_INT)) {
@@ -32,11 +41,25 @@ class Coordinate
         return $this;
     }
 
+    /**
+     * Get xAxis
+     *
+     * @return int
+     */
     public function getXAxis()
     {
         return $this->xAxis;
     }
 
+    /**
+     * Set Y Axis
+     *
+     * @param int $yAxis
+     *
+     * @throws InvalidException If yAxis isn't numeric
+     *
+     * @return Coordinate
+     */
     public function setYAxis($yAxis)
     {
         if (false === filter_var($yAxis, FILTER_VALIDATE_INT)) {
@@ -46,6 +69,11 @@ class Coordinate
         $this->yAxis = $yAxis;
     }
 
+    /**
+     * Get yAxis
+     *
+     * @return int
+     */
     public function getYAxis()
     {
         return $this->yAxis;

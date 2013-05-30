@@ -12,7 +12,7 @@ use ExcelAnt\Collections\StyleCollection;
 class Worksheet implements WorksheetInterface
 {
     private $phpExcel;
-    private $sheetCollection;
+    private $sheetCollection = [];
     private $styleCollection;
 
     /**
@@ -23,7 +23,6 @@ class Worksheet implements WorksheetInterface
         $this->phpExcel = $phpExcel ?: new PHPExcel();
 
         $this->phpExcel->removeSheetByIndex(0);
-        $this->sheetCollection = [];
     }
 
     /**

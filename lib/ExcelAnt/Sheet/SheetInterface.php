@@ -36,6 +36,11 @@ interface SheetInterface
      */
     public function addCell(CellInterface $cell, Coordinate $coordinate);
 
+    /**
+     * Get cells
+     *
+     * @return array
+     */
     public function getCells();
 
     /**

@@ -305,6 +305,9 @@ class Table implements TableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getWidth()
     {
         $max = 0;
@@ -322,6 +325,9 @@ class Table implements TableInterface
         return $max + 1; // Here we add 1 to send a readable and human value.
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getHeight()
     {
         return $this->getLastRow() + 1; // Here we add 1 to send a readable and human value.
