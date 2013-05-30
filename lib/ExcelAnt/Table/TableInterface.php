@@ -27,7 +27,7 @@ interface TableInterface
     /**
      * Set a row
      *
-     * @param array           $data   The row data
+     * @param mixed           $data   The row data
      * @param int             $index  The index if you want insert at a specific row
      * @param StyleCollection $styles
      *
@@ -62,7 +62,7 @@ interface TableInterface
      *
      * @param  int $index
      *
-     * @throws InvalidException If index isn't numeric
+     * @throws InvalidException     If index isn't numeric
      * @throws OutOfBoundsException If index does't exist
      *
      * @return TableInterface
@@ -70,11 +70,12 @@ interface TableInterface
     public function cleanRow($index);
 
     /**
-     * Remove a row. The indexes are re-indexes.
+     * Remove a row.
      *
-     * @param  int $index
+     * @param  int     $index
+     * @param  boolean $reindex If you want reindex the table
      *
-     * @throws InvalidException If index isn't numeric
+     * @throws InvalidException     If index isn't numeric
      * @throws OutOfBoundsException If index does't exist
      *
      * @return TableInterface
@@ -95,14 +96,53 @@ interface TableInterface
      */
     public function getCells();
 
+    /**
+     * Set column
+     *
+     * @param mixed           $data   The column data
+     * @param int             $index  The index if you want insert at a specific row
+     * @param StyleCollection $styles
+     */
     public function setColumn($data, $index = null, StyleCollection $styles = null);
 
+    /**
+     * Get column
+     *
+     * @param  int $index The index
+     *
+     * @return array
+     */
     public function getColumn($index);
 
+    /**
+     * Get last column
+     *
+     * @return int
+     */
     public function getLastColumn();
 
+    /**
+     * Clean a single column. The index already exist
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
     public function cleanColumn($index);
 
+    /**
+     * Remove a column.
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
     public function removeColumn($index);
 
     public function getWidth();

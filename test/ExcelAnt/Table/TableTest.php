@@ -395,6 +395,18 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(array_key_exists(1, $row));
     }
 
+    public function testGetWith()
+    {
+        $this->table->setRow(['foo', 'bar', 'baz']);
+        $this->assertEquals(3, $this->table->getWidth());
+    }
+
+    public function testGetWidthWithEmptyCell()
+    {
+        $this->table->setRow(['foo', null, 'bar', 'baz', null]);
+        $this->assertEquals(5, $this->table->getWidth());
+    }
+
     public function testBigArray()
     {
         $this->table->setRow(['foo', null, null, 'bar', 'baz', null]);

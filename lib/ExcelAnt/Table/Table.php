@@ -182,6 +182,9 @@ class Table implements TableInterface
         return $this->cellCollection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setColumn($data, $index = null, StyleCollection $styles = null)
     {
         if (!is_array($data)) {
@@ -211,6 +214,9 @@ class Table implements TableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getColumn($index)
     {
         if (false === filter_var($index, FILTER_VALIDATE_INT)) {
@@ -230,6 +236,9 @@ class Table implements TableInterface
         return $column;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLastColumn()
     {
         if (empty($this->table)) {
@@ -249,6 +258,9 @@ class Table implements TableInterface
         return $max - 1;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function cleanColumn($index)
     {
         if (false === filter_var($index, FILTER_VALIDATE_INT)) {
@@ -268,6 +280,9 @@ class Table implements TableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeColumn($index)
     {
         if (false === filter_var($index, FILTER_VALIDATE_INT)) {
@@ -296,7 +311,19 @@ class Table implements TableInterface
 
     public function getWidth()
     {
+        $max = 0;
 
+        foreach ($this->table as $row) {
+            $keys = array_keys($row);
+            end($keys);
+            $lastKey = current($keys);
+
+            if ($lastKey > $max) {
+                $max = $lastKey;
+            }
+        }
+
+        return $max + 1; // Here we add 1 to send a readable and human value.
     }
 
     public function getHeight()
@@ -304,7 +331,14 @@ class Table implements TableInterface
 
     }
 
-    private function createNewRow($data, $index, $styles = null)
+    /**
+     * Create a new row from data, index and styles
+     *
+     * @param  array $data
+     * @param  int   $index
+     * @param  StyleCollection $styles
+     */
+    private function createNewRow(array $data, $index, StyleCollection $styles = null)
     {
         foreach ($data as $value) {
 
