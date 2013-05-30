@@ -13,21 +13,16 @@ class Font implements StyleInterface
     const UNDERLINE_SINGLE           = 'single';
     const UNDERLINE_SINGLEACCOUNTING = 'singleAccounting';
 
-    private $name;
-    private $size;
-    private $bold;
-    private $italic;
-    private $color;
-    private $underline;
+    private $name = 'Calibri';
+    private $size = 11;
+    private $bold = false;
+    private $italic = false;
+    private $color = '000000';
+    private $underline = self::UNDERLINE_NONE;
 
     public function __construct()
     {
-        $this->name = 'Calibri';
-        $this->size = 11;
-        $this->bold = false;
-        $this->italic = false;
-        $this->color = '000000';
-        $this->underline = self::UNDERLINE_NONE;
+
     }
 
     /**
@@ -57,15 +52,15 @@ class Font implements StyleInterface
     /**
      * Set size
      *
-     * @throws InvalidArgumentException If the parameter isn't numeric value
-     *
      * @param string $size
+     *
+     * @throws InvalidArgumentException If size isn't numeric value
      *
      * @return Font
      */
     public function setSize($size)
     {
-        if (!is_numeric($size)) {
+        if (false === filter_var($size, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException("The parameter must be a numeric value");
         }
 
@@ -87,9 +82,9 @@ class Font implements StyleInterface
     /**
      * Set bold
      *
-     * @throws InvalidArgumentException If the parameter isn't boolean
-     *
      * @param string $bold
+     *
+     * @throws InvalidArgumentException If bold isn't boolean
      *
      * @return Font
      */
@@ -117,9 +112,9 @@ class Font implements StyleInterface
     /**
      * Set italic
      *
-     * @throws InvalidArgumentException If the parameter isn't boolean
-     *
      * @param string $italic
+     *
+     * @throws InvalidArgumentException If italic isn't boolean
      *
      * @return Font
      */
@@ -169,9 +164,9 @@ class Font implements StyleInterface
     /**
      * Set underline
      *
-     * @throws InvalidArgumentException If the parameter doesn't belong the underline parameter list
-     *
      * @param string $underline
+     *
+     * @throws InvalidArgumentException If underline doesn't belong the underline parameter list
      *
      * @return Font
      */

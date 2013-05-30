@@ -20,21 +20,20 @@ class Alignment implements StyleInterface
     const VERTICAL_CENTER                   = 'center';
     const VERTICAL_JUSTIFY                  = 'justify';
 
-    private $horizontal;
-    private $vertical;
+    private $horizontal = self::HORIZONTAL_GENERAL;
+    private $vertical = self::VERTICAL_BOTTOM;
 
     public function __construct()
     {
-        $this->horizontal = self::HORIZONTAL_GENERAL;
-        $this->vertical = self::VERTICAL_BOTTOM;
+
     }
 
     /**
      * Set vertical alignment
      *
-     * @throws InvalidArgumentException If the parameter doesn't belong the vertical parameter list
-     *
      * @param string $alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the vertical parameter list
      *
      * @return Alignment
      */
@@ -48,6 +47,7 @@ class Alignment implements StyleInterface
 
     /**
      * Get vertical alignment
+     *
      * @return string
      */
     public function getVertical()
@@ -58,9 +58,9 @@ class Alignment implements StyleInterface
     /**
      * Set horizontal alignment
      *
-     * @throws InvalidArgumentException If the parameter doesn't belong the horizontal parameter list
-     *
      * @param string $alignment
+     *
+     * @throws InvalidArgumentException If the parameter doesn't belong the horizontal parameter list
      *
      * @return Alignment
      */
@@ -74,6 +74,7 @@ class Alignment implements StyleInterface
 
     /**
      * Get horizontal alignment
+     *
      * @return string
      */
     public function getHorizontal()
@@ -83,6 +84,7 @@ class Alignment implements StyleInterface
 
     /**
      * Return the horizontal parameter list
+     *
      * @return array
      */
     public function getHorizontals()
@@ -99,6 +101,7 @@ class Alignment implements StyleInterface
 
     /**
      * Return the vertical parameter list
+     *
      * @return array
      */
     public function getVerticals()

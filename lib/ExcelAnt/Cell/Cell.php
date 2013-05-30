@@ -41,7 +41,7 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function setStyles(StyleCollection $styles = null)
+    public function setStyles(StyleCollection $styles)
     {
         $this->styleCollection = $styles;
 

@@ -2,6 +2,10 @@
 
 namespace ExcelAnt\Sheet;
 
+use ExcelAnt\Table\TableInterface;
+use ExcelAnt\Cell\CellInterface;
+use ExcelAnt\Coordinate\Coordinate;
+
 interface SheetInterface
 {
     public function getRawClass();
@@ -22,15 +26,87 @@ interface SheetInterface
      */
     public function getTitle();
 
-    public function writeCell();
+    /**
+     * Add a single Cell. Hight priority, override the Tables
+     *
+     * @param CellInterface $cell
+     * @param Coordinate    $coordinate
+     *
+     * @return SheetInterface
+     */
+    public function addCell(CellInterface $cell, Coordinate $coordinate);
 
-    public function addTable();
+    /**
+     * Get cells
+     *
+     * @return array
+     */
+    public function getCells();
 
-    public function setRowHeight();
+    /**
+     * Add a Table
+     *
+     * @param TableInterface $table
+     * @param Coordinate     $coordinate
+     *
+     * @return SheetInterface
+     */
+    public function addTable(TableInterface $table, Coordinate $coordinate);
 
-    public function setColumnWidth();
+    /**
+     * Get tables
+     *
+     * @return array
+     */
+    public function getTables();
+
+    /**
+     * Set the height of a row
+     *
+     * @param int $height
+     * @param int $index
+     *
+     * @throws InvalidException If height isn't numeric
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setRowHeight($height, $index);
+
+    /**
+     * Get Row height
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return int
+     */
+    public function getRowHeight($index);
+
+    /**
+     * Set the width of a column
+     *
+     * @param int $width
+     * @param int $index
+     *
+     * @throws InvalidException If width isn't numeric
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setColumnWidth($width, $index);
+
+    /**
+     * Get Row width
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return int
+     */
+    public function getColumnWidth($index);
 
     public function importImage();
-
-    public function write();
 }

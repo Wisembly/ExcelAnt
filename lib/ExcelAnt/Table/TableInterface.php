@@ -2,32 +2,85 @@
 
 namespace ExcelAnt\Table;
 
+use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
 
 interface TableInterface
 {
     /**
-     * Set labels
+     * Set label
      *
-     * @param array           $labels The data of labels
-     * @param string          $type   Use const to define the type of the labels.
-     * @param StyleCollection $styles
+     * @param LabelInterface $label
      *
      * @return TableInterface
      */
-    public function setLabels($labels, $type = self::LABEL_TOP, StyleCollection $styles = null);
+    public function setLabel(LabelInterface $label);
 
     /**
-     * Get labels
+     * Get label
      *
-     * @return array Containing Cell classes
+     * @return Label
      */
-    public function getLabels();
+    public function getLabel();
 
-    public function setRow();
+    /**
+     * Set a row
+     *
+     * @param mixed           $data   The row data
+     * @param int             $index  The index if you want insert at a specific row
+     * @param StyleCollection $styles
+     *
+     * @throws InvalidException If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
+    public function setRow($data, $index = null, StyleCollection $styles = null);
 
-    public function getRow();
+    /**
+     * Get Row
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return array
+     */
+    public function getRow($index);
+
+    /**
+     * Get the last row
+     *
+     * @return int
+     */
+    public function getLastRow();
+
+    /**
+     * Clean a single row. The index already exist
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
+    public function cleanRow($index);
+
+    /**
+     * Remove a row.
+     *
+     * @param  int     $index
+     * @param  boolean $reindex If you want reindex the table
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
+    public function removeRow($index, $reindex = false);
 
     /**
      * Set cell
@@ -43,11 +96,66 @@ interface TableInterface
      */
     public function getCells();
 
-    public function setColumn();
+    /**
+     * Set column
+     *
+     * @param mixed           $data   The column data
+     * @param int             $index  The index if you want insert at a specific row
+     * @param StyleCollection $styles
+     */
+    public function setColumn($data, $index = null, StyleCollection $styles = null);
 
-    public function getColumn();
+    /**
+     * Get column
+     *
+     * @param  int $index The index
+     *
+     * @return array
+     */
+    public function getColumn($index);
 
+    /**
+     * Get last column
+     *
+     * @return int
+     */
+    public function getLastColumn();
+
+    /**
+     * Clean a single column. The index already exist
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
+    public function cleanColumn($index);
+
+    /**
+     * Remove a column.
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException     If index isn't numeric
+     * @throws OutOfBoundsException If index does't exist
+     *
+     * @return TableInterface
+     */
+    public function removeColumn($index);
+
+    /**
+     * Return the width of the table
+     *
+     * @return int Readable and human value
+     */
     public function getWidth();
 
+    /**
+     * Return the height of the table
+     *
+     * @return int Readable and human value
+     */
     public function getHeight();
 }
