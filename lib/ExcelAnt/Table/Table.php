@@ -60,23 +60,29 @@ class Table implements TableInterface
                 throw new \InvalidArgumentException("Index must be numeric");
             }
 
-            $this->cleanRow($index);
-            $dataLength = count($data);
+            if (array_key_exists($index, $this->table)) {
+                $this->cleanRow($index);
+                $dataLength = count($data);
 
-            for ($i = 0; $i < $dataLength; $i++) {
+                for ($i = 0; $i < $dataLength; $i++) {
 
-                if (null === $data[$i]) {
-                    $cell = new EmptyCell();
-                } else {
-                    $cell = new Cell($data[$i]);
+                    if (null === $data[$i]) {
+                        $cell = new EmptyCell();
+                    } else {
+                        $cell = new Cell($data[$i]);
+                    }
+
+                    if (null !== $styles) {
+                        $cell->setStyles($styles);
+                    }
+
+                    $this->table[$index][$i] = $cell;
                 }
 
-                if (null !== $styles) {
-                    $cell->setStyles($styles);
-                }
-
-                $this->table[$index][$i] = $cell;
+                return $this;
             }
+
+            $this->createNewRow($data, $index, $styles);
 
             return $this;
         }
@@ -84,20 +90,7 @@ class Table implements TableInterface
         $index = $this->getLastRow();
         $index = null === $index ? 0 : ++$index;
 
-        foreach ($data as $value) {
-
-            if (null === $value) {
-                $cell = new EmptyCell();
-            } else {
-                $cell = new Cell($value);
-            }
-
-            if (null !== $styles) {
-                $cell->setStyles($styles);
-            }
-
-            $this->table[$index][] = $cell;
-        }
+        $this->createNewRow($data, $index, $styles);
 
         return $this;
     }
@@ -126,7 +119,7 @@ class Table implements TableInterface
         $keys = array_keys($this->table);
         end($keys);
 
-        return key($keys);
+        return current($keys);
     }
 
     /**
@@ -309,5 +302,23 @@ class Table implements TableInterface
     public function getHeight()
     {
 
+    }
+
+    private function createNewRow($data, $index, $styles = null)
+    {
+        foreach ($data as $value) {
+
+            if (null === $value) {
+                $cell = new EmptyCell();
+            } else {
+                $cell = new Cell($value);
+            }
+
+            if (null !== $styles) {
+                $cell->setStyles($styles);
+            }
+
+            $this->table[$index][] = $cell;
+        }
     }
 }

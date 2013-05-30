@@ -100,6 +100,12 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->table->getLastRow());
     }
 
+    public function testGetLastRowWithIndexesNonContinue()
+    {
+        $this->table->setRow(['foo', 'bar', 'baz'], 2);
+        $this->assertEquals(2, $this->table->getLastRow());
+    }
+
     public function testGetLastRowWithColumn()
     {
         $this->table->setColumn(['foo', 'bar', 'baz']);
@@ -144,12 +150,16 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->table->setRow(['foo', 'bar', 'baz'], 'foo');
     }
 
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testSetRowWithOutOfBoundsIndex()
+    public function testSetRowWithAnNonExistingIndex()
     {
-        $this->table->setRow(['foo', 'bar', 'baz'], 999999);
+        $this->table->setRow(['foo', 'bar', 'baz'], 2);
+        $row = $this->table->getRow(2);
+
+        $this->assertEquals('foo', $row[0]->getValue());
+        $this->assertEquals('bar', $row[1]->getValue());
+        $this->assertEquals('baz', $row[2]->getValue());
+
+        $this->assertCount(1, $this->table->getTable());
     }
 
     public function testSetRowWithAnExistingIndex()
