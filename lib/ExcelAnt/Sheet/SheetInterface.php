@@ -79,7 +79,29 @@ interface SheetInterface
      */
     public function getRowHeight($index);
 
-    public function setColumnWidth();
+    /**
+     * Set the width of a column
+     *
+     * @param int $width
+     * @param int $index
+     *
+     * @throws InvalidException If width isn't numeric
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setColumnWidth($width, $index);
+
+    /**
+     * Get Row width
+     *
+     * @param  int $index
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return int
+     */
+    public function getColumnWidth($index);
 
     public function importImage();
 }

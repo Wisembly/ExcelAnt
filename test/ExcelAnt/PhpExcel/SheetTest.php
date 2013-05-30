@@ -4,6 +4,7 @@ namespace ExcelAnt\PhpExcel;
 
 use PHPExcel_Worksheet;
 use PHPExcel_Worksheet_RowDimension;
+use PHPExcel_Worksheet_ColumnDimension;
 
 use ExcelAnt\PhpExcel\Worksheet;
 use ExcelAnt\PhpExcel\Sheet;
@@ -105,6 +106,55 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetColumnWidthWithWrongWidthParameter()
+    {
+        $sheet = $this->createSheet();
+        $sheet->setColumnWidth('foo', 1);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetColumnWidthWithWrongIdParameter()
+    {
+        $sheet = $this->createSheet();
+        $sheet->setColumnWidth(1, 'foo');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetColumnWidthWithWrongParameter()
+    {
+        $sheet = $this->createSheet();
+        $sheet->getColumnWidth('foo');
+    }
+
+    public function testSetAndGetColumnWidth()
+    {
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelRowDimension = $this->getPhpExcelColumnDimensionMock();
+
+        $phpExcelRowDimension->expects($this->any())
+            ->method('setWidth')
+            ->will($this->returnValue($phpExcelRowDimension));
+        $phpExcelRowDimension->expects($this->any())
+            ->method('getWidth')
+            ->will($this->returnValue(3));
+
+        $phpExcelWorksheet->expects($this->any())
+            ->method('getColumnDimension')
+            ->will($this->returnValue($phpExcelRowDimension));
+
+        $sheet = $this->createSheet(null, $phpExcelWorksheet);
+        $sheet->setColumnWidth(3, 1);
+
+        $this->assertEquals(3, $sheet->getColumnWidth(1));
+    }
+
+    /**
      * Create a Sheet
      * @param  Mock_Worksheet
      * @param  Mock_PHPExcel_Worksheet $phpExcelWorksheet
@@ -134,6 +184,15 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     private function getPhpExcelRowDimensionMock()
     {
         return $this->getMockBuilder('PHPExcel_Worksheet_RowDimension')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock PHPExcel_Worksheet_ColumnDimension
+     * @return Mock
+     */
+    private function getPhpExcelColumnDimensionMock()
+    {
+        return $this->getMockBuilder('PHPExcel_Worksheet_ColumnDimension')->disableOriginalConstructor()->getMock();
     }
 
     /**

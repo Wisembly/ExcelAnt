@@ -112,9 +112,34 @@ class Sheet implements SheetInterface
         return $this->phpExcelWorksheet->getRowDimension($index)->getRowHeight();
     }
 
-    public function setColumnWidth()
+    /**
+     * {@inheritdoc}
+     */
+    public function setColumnWidth($width, $index)
     {
+        if (false === filter_var($width, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
 
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $this->phpExcelWorksheet->getColumnDimension($index)->setWidth($width);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getColumnWidth($index)
+    {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        return $this->phpExcelWorksheet->getColumnDimension($index)->getWidth();
     }
 
     public function importImage()
