@@ -9,6 +9,7 @@ use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Coordinate\Coordinate;
 
 class TableTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +17,16 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->table = new Table();
+        $this->table = new Table(new Coordinate(1, 1));
+    }
+
+    public function testSetAndGetCoordinate()
+    {
+        $this->table->setCoordinate(new Coordinate(2, 3));
+        $coordinate = $this->table->getCoordinate();
+
+        $this->assertEquals(2, $coordinate->getXAxis());
+        $this->assertEquals(3, $coordinate->getYAxis());
     }
 
     public function testSetAndGetLabel()
