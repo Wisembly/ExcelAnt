@@ -31,8 +31,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->method('getTitle')
             ->will($this->returnValue('Foo'));
 
-        $sheet = $this->createSheet(null, $phpExcelWorksheet);
-        $sheet->setTitle('Foo');
+        $sheet = $this->createSheet(null, $phpExcelWorksheet)->setTitle('Foo');
 
         $this->assertEquals('Foo', $sheet->getTitle());
     }
@@ -41,16 +40,14 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     {
         $table = new Table();
 
-        $sheet = $this->createSheet();
-        $sheet->addTable($table, new Coordinate(1, 1));
+        $sheet = $this->createSheet()->addTable($table, new Coordinate(1, 1));
 
         $this->assertCount(1, $sheet->getTables());
     }
 
     public function testAddAndGetCell()
     {
-        $sheet = $this->createSheet();
-        $sheet->addCell(new Cell(), new Coordinate(1, 1));
+        $sheet = $this->createSheet()->addCell(new Cell(), new Coordinate(1, 1));
 
         $this->assertCount(1, $sheet->getCells());
     }
@@ -60,8 +57,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetRowHeightWithWrongHeightParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->setRowHeight('foo', 1);
+        $sheet = $this->createSheet()->setRowHeight('foo', 1);
     }
 
     /**
@@ -69,8 +65,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetRowHeightWithWrongIdParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->setRowHeight(1, 'foo');
+        $sheet = $this->createSheet()->setRowHeight(1, 'foo');
     }
 
     /**
@@ -78,8 +73,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRowHeightWithWrongParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->getRowHeight('foo');
+        $sheet = $this->createSheet()->getRowHeight('foo');
     }
 
     public function testSetAndGetRowHeight()
@@ -98,8 +92,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->method('getRowDimension')
             ->will($this->returnValue($phpExcelRowDimension));
 
-        $sheet = $this->createSheet(null, $phpExcelWorksheet);
-        $sheet->setRowHeight(3, 1);
+        $sheet = $this->createSheet(null, $phpExcelWorksheet)->setRowHeight(3, 1);
 
         $this->assertEquals(3, $sheet->getRowHeight(1));
     }
@@ -109,8 +102,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetColumnWidthWithWrongWidthParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->setColumnWidth('foo', 1);
+        $sheet = $this->createSheet()->setColumnWidth('foo', 1);
     }
 
     /**
@@ -118,8 +110,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetColumnWidthWithWrongIdParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->setColumnWidth(1, 'foo');
+        $sheet = $this->createSheet()->setColumnWidth(1, 'foo');
     }
 
     /**
@@ -127,8 +118,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetColumnWidthWithWrongParameter()
     {
-        $sheet = $this->createSheet();
-        $sheet->getColumnWidth('foo');
+        $sheet = $this->createSheet()->getColumnWidth('foo');
     }
 
     public function testSetAndGetColumnWidth()
@@ -147,8 +137,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->method('getColumnDimension')
             ->will($this->returnValue($phpExcelRowDimension));
 
-        $sheet = $this->createSheet(null, $phpExcelWorksheet);
-        $sheet->setColumnWidth(3, 1);
+        $sheet = $this->createSheet(null, $phpExcelWorksheet)->setColumnWidth(3, 1);
 
         $this->assertEquals(3, $sheet->getColumnWidth(1));
     }
