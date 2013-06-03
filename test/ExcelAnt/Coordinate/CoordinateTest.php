@@ -28,6 +28,34 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $coordinate->getYAxis());
     }
 
+    public function testGetOriginalAxis()
+    {
+        $coordinate = new Coordinate(1, 2);
+
+        $this->assertEquals(1, $coordinate->getOriginalXAxis());
+        $this->assertEquals(2, $coordinate->getOriginalYAxis());
+    }
+
+    public function testResetXAxis()
+    {
+        $coordinate = new Coordinate(1, 2);
+        $coordinate->setXAxis(5);
+
+        $this->assertEquals(5, $coordinate->getXAxis());
+        $coordinate->resetXAxis();
+        $this->assertEquals(1, $coordinate->getXAxis());
+    }
+
+    public function testResetYAxis()
+    {
+        $coordinate = new Coordinate(1, 2);
+        $coordinate->setYAxis(5);
+
+        $this->assertEquals(5, $coordinate->getYAxis());
+        $coordinate->resetYAxis();
+        $this->assertEquals(2, $coordinate->getYAxis());
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
