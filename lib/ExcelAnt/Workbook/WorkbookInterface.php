@@ -1,11 +1,11 @@
 <?php
 
-namespace ExcelAnt\Worksheet;
+namespace ExcelAnt\Workbook;
 
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\Collections\StyleCollection;
 
-interface WorksheetInterface
+interface WorkbookInterface
 {
     public function getRawClass();
 
@@ -55,7 +55,7 @@ interface WorksheetInterface
      *
      * @throws InvalidArgumentException If the index isn't numeric
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function addSheet(SheetInterface $sheet, $index = null, $insert = false);
 
@@ -67,83 +67,83 @@ interface WorksheetInterface
      * @throws InvalidArgumentException If the index isn't numeric
      * @throws RuntimeException         If the index doesn't exist
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function removeSheet($index);
 
     /**
-     * Set the title of the Worksheet
+     * Set the title of the Workbook
      *
      * @param mixed $title The title
      */
     public function setTitle($title);
 
     /**
-     * Return the title of the worksheet
+     * Return the title of the workbook
      *
      * @return mixed
      */
     public function getTitle();
 
     /**
-     * Set the creator of the worksheet
+     * Set the creator of the workbook
      *
      * @param mixed $creator
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function setCreator($creator);
 
     /**
-     * Get the creator of the Worksheet
+     * Get the creator of the Workbook
      *
      * @return mixed
      */
     public function getCreator();
 
     /**
-     * Set the description of the worksheet
+     * Set the description of the workbook
      *
      * @param mixed $description
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function setDescription($description);
 
     /**
-     * Get the description of the Worksheet
+     * Get the description of the Workbook
      *
      * @return mixed
      */
     public function getDescription();
 
     /**
-     * Set the company of the worksheet
+     * Set the company of the workbook
      *
      * @param mixed $company
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function setCompany($company);
 
     /**
-     * Get the company of the Worksheet
+     * Get the company of the Workbook
      *
      * @return mixed
      */
     public function getCompany();
 
     /**
-     * Set the subject of the worksheet
+     * Set the subject of the workbook
      *
      * @param mixed $subject
      *
-     * @return WorksheetInterface
+     * @return WorkbookInterface
      */
     public function setSubject($subject);
 
     /**
-     * Get the subject of the Worksheet
+     * Get the subject of the Workbook
      *
      * @return mixed
      */

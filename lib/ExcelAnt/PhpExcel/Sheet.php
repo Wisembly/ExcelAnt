@@ -4,6 +4,7 @@ namespace ExcelAnt\PhpExcel;
 
 use PHPExcel_Worksheet;
 
+use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Coordinate\Coordinate;
@@ -16,12 +17,12 @@ class Sheet implements SheetInterface
     private $cells = [];
 
     /**
-     * @param WorksheetInterface $worksheet         The parent Worksheet where the Sheet will live
+     * @param WorkbookInterface $workbook         The parent Workbook where the Sheet will live
      * @param PHPExcel_Worksheet $phpExcelWorksheet
      */
-    public function __construct(Worksheet $worksheet, PHPExcel_Worksheet $phpExcelWorksheet = null)
+    public function __construct(Workbook $workbook, PHPExcel_Worksheet $phpExcelWorksheet = null)
     {
-        $this->phpExcelWorksheet = $phpExcelWorksheet ?: new PHPExcel_Worksheet($worksheet->getRawClass());
+        $this->phpExcelWorksheet = $phpExcelWorksheet ?: new PHPExcel_Worksheet($workbook->getRawClass());
     }
 
     /**

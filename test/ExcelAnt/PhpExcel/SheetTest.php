@@ -6,7 +6,7 @@ use PHPExcel_Worksheet;
 use PHPExcel_Worksheet_RowDimension;
 use PHPExcel_Worksheet_ColumnDimension;
 
-use ExcelAnt\PhpExcel\Worksheet;
+use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\PhpExcel\Sheet;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Coordinate\Coordinate;
@@ -156,16 +156,18 @@ class SheetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Create a Sheet
-     * @param  Mock_Worksheet
+     *
+     * @param  Mock_Workbook
      * @param  Mock_PHPExcel_Worksheet $phpExcelWorksheet
+     *
      * @return Sheet
      */
-    public function createSheet($worksheet = null, $phpExcelWorksheet = null)
+    public function createSheet($workbook = null, $phpExcelWorksheet = null)
     {
-        $worksheet = $worksheet ?: $this->getWorksheetMock();
+        $workbook = $workbook ?: $this->getWorkbookMock();
         $phpExcelWorksheet = $phpExcelWorksheet ?: $this->getPhpExcelWorksheetMock();
 
-        return new Sheet($worksheet, $phpExcelWorksheet);
+        return new Sheet($workbook, $phpExcelWorksheet);
     }
 
     /**
@@ -196,11 +198,11 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Mock ExcelAnt\PhpExcel\Worksheet
+     * Mock ExcelAnt\PhpExcel\Workbook
      * @return Mock
      */
-    private function getWorksheetMock()
+    private function getWorkbookMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Worksheet')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Workbook')->disableOriginalConstructor()->getMock();
     }
 }

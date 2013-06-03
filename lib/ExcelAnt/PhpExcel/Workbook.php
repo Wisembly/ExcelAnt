@@ -4,12 +4,12 @@ namespace ExcelAnt\PhpExcel;
 
 use PHPExcel;
 
-use ExcelAnt\Worksheet\WorksheetInterface;
+use ExcelAnt\Workbook\WorkbookInterface;
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\PhpExcel\Sheet;
 use ExcelAnt\Collections\StyleCollection;
 
-class Worksheet implements WorksheetInterface
+class Workbook implements WorkbookInterface
 {
     private $phpExcel;
     private $sheetCollection = [];
