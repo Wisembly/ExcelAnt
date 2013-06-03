@@ -17,7 +17,6 @@ class Table implements TableInterface
     private $coordinate;
     private $table = [];
     private $label;
-    private $cellCollection = [];
 
     public function __construct()
     {
@@ -166,24 +165,6 @@ class Table implements TableInterface
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCell(CellInterface $cell)
-    {
-        $this->cellCollection[] = $cell;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCells()
-    {
-        return $this->cellCollection;
     }
 
     /**

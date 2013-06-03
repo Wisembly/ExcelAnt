@@ -27,15 +27,6 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ExcelAnt\Table\Label', $this->table->getLabel());
     }
 
-    public function testSetAndGetCell()
-    {
-        $this->table->setCell(new Cell('Foo'));
-        $cellCollection = $this->table->getCells();
-
-        $this->assertCount(1, $cellCollection);
-        $this->assertEquals('Foo', $cellCollection[0]->getValue());
-    }
-
     /**
      * @expectedException \InvalidArgumentException
      */

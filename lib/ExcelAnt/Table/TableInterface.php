@@ -100,20 +100,6 @@ interface TableInterface
     public function removeRow($index, $reindex = false);
 
     /**
-     * Set cell
-     *
-     * @param CellInterface $cell The cell to add
-     */
-    public function setCell(CellInterface $cell);
-
-    /**
-     * Return the cells
-     *
-     * @return array Containing Cell classes
-     */
-    public function getCells();
-
-    /**
      * Set column
      *
      * @param mixed           $data   The column data
