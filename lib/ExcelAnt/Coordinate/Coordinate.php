@@ -52,6 +52,27 @@ class Coordinate
     }
 
     /**
+     * Move the X axis by one or more if you give an index
+     *
+     * @param  integer $index Numeric index of the move
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return Coordinate
+     */
+    public function nextXAxis($index = null)
+    {
+        if (isset($index) && false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $index = null === $index ? 1 : $index;
+        $this->xAxis = $this->xAxis + $index;
+
+        return $this;
+    }
+
+    /**
      * Set Y Axis
      *
      * @param int $yAxis
@@ -77,5 +98,26 @@ class Coordinate
     public function getYAxis()
     {
         return $this->yAxis;
+    }
+
+    /**
+     * Move the Y axis by one or more if you give an index
+     *
+     * @param  integer $index Numeric index of the move
+     *
+     * @throws InvalidException If index isn't numeric
+     *
+     * @return Coordinate
+     */
+    public function nextYAxis($index = null)
+    {
+        if (isset($index) && false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $index = null === $index ? 1 : $index;
+        $this->yAxis = $this->yAxis + $index;
+
+        return $this;
     }
 }

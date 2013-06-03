@@ -61,4 +61,54 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, $coordinate->getYAxis());
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNexXAxisWithWrongParameter()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextXAxis('foo');
+    }
+
+    public function testNextXAxisWithoutIndex()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextXAxis();
+
+        $this->assertEquals(2, $coordinate->getXAxis());
+    }
+
+    public function testNextXAxisWithIndex()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextXAxis(3);
+
+        $this->assertEquals(4, $coordinate->getXAxis());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNexYAxisWithWrongParameter()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextYAxis('foo');
+    }
+
+    public function testNextYAxisWithoutIndex()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextYAxis();
+
+        $this->assertEquals(2, $coordinate->getYAxis());
+    }
+
+    public function testNextYAxisWithIndex()
+    {
+        $coordinate = new Coordinate(1, 1);
+        $coordinate->nextYAxis(3);
+
+        $this->assertEquals(4, $coordinate->getYAxis());
+    }
 }
