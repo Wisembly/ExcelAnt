@@ -9,13 +9,22 @@ use ExcelAnt\Cell\EmptyCell;
 
 class TableWorker
 {
+    /**
+     * Convert Table to PHPExcel_Worksheet data
+     *
+     * @param  PHPExcel_Worksheet $phpExcelWorksheet The current worksheet of the workbook
+     * @param  Table              $table             The Table to convert
+     *
+     * @return PHPExcel_Worksheet
+     */
     public function writeTable(PHPExcel_Worksheet $phpExcelWorksheet, Table $table)
     {
         $coordinate = $table->getCoordinate();
         $tableValues = $table->getTable();
 
-        // Ecrire les labels
+        // Labels here
 
+        // Table handling
         foreach ($tableValues as $row) {
             foreach ($row as $index => $cell) {
 
@@ -27,13 +36,14 @@ class TableWorker
 
                 $phpExcelWorksheet->setCellValueByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue());
 
-                // Style here
+                if ($cell->hasStyles()) {
+                    // Styles here
+                }
 
                 $coordinate->nextXAxis();
             }
 
-            $coordinate->resetXAxis();
-            $coordinate->nextYAxis();
+            $coordinate->resetXAxis()->nextYAxis();
         }
 
         return $phpExcelWorksheet;

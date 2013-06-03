@@ -3,6 +3,7 @@
 namespace ExcelAnt\PhpExcel\Writer;
 
 use PHPExcel_Worksheet;
+use PHPExcel_Style;
 
 use ExcelAnt\PhpExcel\Writer\TableWorker;
 use ExcelAnt\Table\Table;
@@ -45,6 +46,24 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $localCellStorage);
     }
 
+    public function testWriteTableWithStyles()
+    {
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelStyle = $this->getPhpExcelStyleMock();
+
+        $phpExcelStyle->expects($this->any())
+            ->method('applyFromArray')
+            ->will($this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localCellStorage) {
+                $localCellStorage[$pRow][$pColumn] = $pValue;
+            }));
+
+        $phpExcelWorksheet->expects($this->any())
+            ->method('getStyleByColumnAndRow')
+            ->will($this->returnValue($phpExcelStyle));
+
+        $response = $this->tableWorker->writeTable($phpExcelWorksheet, $this->getTable());
+    }
+
     /**
      * Mock PHPExcel_Worksheet
      * @return Mock
@@ -52,6 +71,15 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
     private function getPhpExcelWorksheetMock()
     {
         return $this->getMockBuilder('PHPExcel_Worksheet')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock PHPExcel_Style
+     * @return Mock
+     */
+    private function getPhpExcelStyleMock()
+    {
+        return $this->getMockBuilder('PHPExcel_Style')->disableOriginalConstructor()->getMock();
     }
 
     /**

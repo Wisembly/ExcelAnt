@@ -21,9 +21,11 @@ class Writer implements WriterInterface
     }
 
     /**
-     * Set workbook
+     * Replace workbook
      *
-     * @param WorkbookInterface $workbook [description]
+     * @param WorkbookInterface $workbook
+     *
+     * @return Writer
      */
     public function setWorkbook(WorkbookInterface $workbook)
     {
@@ -32,6 +34,11 @@ class Writer implements WriterInterface
         return $this;
     }
 
+    /**
+     * Get associated workbook
+     *
+     * @return WorkbookInterface
+     */
     public function getWorkbook()
     {
         return $this->workbook;

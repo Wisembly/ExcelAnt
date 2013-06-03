@@ -134,6 +134,8 @@ class Coordinate
         }
 
         $this->yAxis = $yAxis;
+
+        return $this;
     }
 
     /**

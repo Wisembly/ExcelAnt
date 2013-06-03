@@ -38,8 +38,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
 
     public function testResetXAxis()
     {
-        $coordinate = new Coordinate(1, 2);
-        $coordinate->setXAxis(5);
+        $coordinate = (new Coordinate(1, 2))->setXAxis(5);
 
         $this->assertEquals(5, $coordinate->getXAxis());
         $coordinate->resetXAxis();
@@ -48,8 +47,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
 
     public function testResetYAxis()
     {
-        $coordinate = new Coordinate(1, 2);
-        $coordinate->setYAxis(5);
+        $coordinate = (new Coordinate(1, 2))->setYAxis(5);
 
         $this->assertEquals(5, $coordinate->getYAxis());
         $coordinate->resetYAxis();
@@ -61,14 +59,12 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetXAxisWithWrongParameter()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->setXAxis('foo');
+        $coordinate = (new Coordinate(1, 1))->setXAxis('foo');
     }
 
     public function testSetAndGetXAxis()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->setXAxis(2);
+        $coordinate = (new Coordinate(1, 1))->setXAxis(2);
 
         $this->assertEquals(2, $coordinate->getXAxis());
     }
@@ -78,14 +74,12 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetYAxisWithWrongParameter()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->setYAxis('foo');
+        $coordinate = (new Coordinate(1, 1))->setYAxis('foo');
     }
 
     public function testSetAndGetYAxis()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->setYAxis(2);
+        $coordinate = (new Coordinate(1, 1))->setYAxis(2);
 
         $this->assertEquals(2, $coordinate->getYAxis());
     }
@@ -95,22 +89,19 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      */
     public function testNexXAxisWithWrongParameter()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextXAxis('foo');
+        $coordinate = (new Coordinate(1, 1))->nextXAxis('foo');
     }
 
     public function testNextXAxisWithoutIndex()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextXAxis();
+        $coordinate = (new Coordinate(1, 1))->nextXAxis();
 
         $this->assertEquals(2, $coordinate->getXAxis());
     }
 
     public function testNextXAxisWithIndex()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextXAxis(3);
+        $coordinate = (new Coordinate(1, 1))->nextXAxis(3);
 
         $this->assertEquals(4, $coordinate->getXAxis());
     }
@@ -120,22 +111,19 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      */
     public function testNexYAxisWithWrongParameter()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextYAxis('foo');
+        $coordinate = (new Coordinate(1, 1))->nextYAxis('foo');
     }
 
     public function testNextYAxisWithoutIndex()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextYAxis();
+        $coordinate = (new Coordinate(1, 1))->nextYAxis();
 
         $this->assertEquals(2, $coordinate->getYAxis());
     }
 
     public function testNextYAxisWithIndex()
     {
-        $coordinate = new Coordinate(1, 1);
-        $coordinate->nextYAxis(3);
+        $coordinate = (new Coordinate(1, 1))->nextYAxis(3);
 
         $this->assertEquals(4, $coordinate->getYAxis());
     }

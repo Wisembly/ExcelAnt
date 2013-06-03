@@ -20,8 +20,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetWriter()
     {
-        $workbook = new Workbook();
-        $workbook->setTitle('Foo');
+        $workbook = (new Workbook())->setTitle('Foo');
         $writer = new Writer($workbook);
         $writer->setWorkbook($workbook);
 

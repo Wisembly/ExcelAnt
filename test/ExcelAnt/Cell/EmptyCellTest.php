@@ -47,4 +47,12 @@ class EmptyCellTest extends \PHPUnit_Framework_TestCase
     {
         $this->emptyCell->getStyles();
     }
+
+    /**
+     * @expectedException \BadMethodCallException
+     */
+    public function testHasStyles()
+    {
+        $this->emptyCell->hasStyles();
+    }
 }
