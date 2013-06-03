@@ -59,4 +59,12 @@ class Cell implements CellInterface
     {
         return $this->styleCollection;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStyles()
+    {
+        return empty($this->styleCollection) ? false : true;
+    }
 }

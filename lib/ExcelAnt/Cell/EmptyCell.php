@@ -43,4 +43,12 @@ class EmptyCell implements CellInterface
     {
         throw new \BadMethodCallException("This method cannot be called");
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStyles()
+    {
+        throw new \BadMethodCallException("This method cannot be called");
+    }
 }

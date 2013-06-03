@@ -54,4 +54,11 @@ interface CellInterface
      * @return StyleCollection
      */
     public function getStyles();
+
+    /**
+     * Has styles
+     *
+     * @return boolean true if there are styles, else false
+     */
+    public function hasStyles();
 }
