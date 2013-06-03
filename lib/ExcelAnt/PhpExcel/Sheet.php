@@ -7,7 +7,6 @@ use PHPExcel_Worksheet;
 use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\Sheet\SheetInterface;
 use ExcelAnt\Table\TableInterface;
-use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\CellInterface;
 
 class Sheet implements SheetInterface
@@ -56,7 +55,7 @@ class Sheet implements SheetInterface
     /**
      * {@inheritdoc}
      */
-    public function addCell(CellInterface $cell, Coordinate $coordinate)
+    public function addCell(CellInterface $cell)
     {
         $this->cells[] = $cell;
 
@@ -74,7 +73,7 @@ class Sheet implements SheetInterface
     /**
      * {@inheritdoc}
      */
-    public function addTable(TableInterface $table, Coordinate $coordinate)
+    public function addTable(TableInterface $table)
     {
         $this->tables[] = $table;
 

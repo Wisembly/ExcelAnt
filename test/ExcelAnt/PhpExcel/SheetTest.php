@@ -39,11 +39,10 @@ class SheetTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAndGetTable()
     {
-        $table = new Table();
-        $coordinate = new Coordinate(1, 1);
+        $table = new Table(new Coordinate(1, 1));
 
         $sheet = $this->createSheet();
-        $sheet->addTable($table, $coordinate);
+        $sheet->addTable($table);
 
         $this->assertCount(1, $sheet->getTables());
     }
@@ -51,7 +50,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     public function testAddAndGetCell()
     {
         $sheet = $this->createSheet();
-        $sheet->addCell(new Cell(), new Coordinate(1, 1));
+        $sheet->addCell(new Cell());
 
         $this->assertCount(1, $sheet->getCells());
     }
