@@ -11,15 +11,20 @@ class Writer implements WriterInterface
     private $workbook;
     private $tableWorker;
 
-    public function __construct(WorkbookInterface $workbook = null)
+    /**
+     * @param WorkbookInterface $workbook The workbook to be exported
+     */
+    public function __construct(WorkbookInterface $workbook)
     {
-        if (isset($workbook)) {
-            $this->setWorkbook($workbook);
-        }
-
+        $this->setWorkbook($workbook);
         $this->tableWorker = new TableWorker();
     }
 
+    /**
+     * Set workbook
+     *
+     * @param WorkbookInterface $workbook [description]
+     */
     public function setWorkbook(WorkbookInterface $workbook)
     {
         $this->workbook = $workbook;
@@ -39,9 +44,13 @@ class Writer implements WriterInterface
         foreach ($this->workbook->getAllSheets() as $sheet) {
             $phpExcelWorksheet = $sheet->getRawClass();
 
+            // Write the tables
             foreach ($sheet->getTables() as $table) {
                 $phpExcelWorksheet = $this->tableWorker->writeTable($phpExcelWorksheet, $table);
             }
+
+            // Write the individual cells
+            // TODO
 
             $phpExcel->addSheet($phpExcelWorksheet);
         }

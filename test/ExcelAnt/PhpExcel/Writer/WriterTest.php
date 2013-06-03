@@ -10,12 +10,22 @@ use ExcelAnt\Coordinate\Coordinate;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
 {
+    public function testInstanciateWriter()
+    {
+        $workbook = new Workbook();
+        $writer = new Writer($workbook);
+
+        $this->assertInstanceOf('ExcelAnt\PhpExcel\Workbook', $writer->getWorkbook());
+    }
+
     public function testSetAndGetWriter()
     {
         $workbook = new Workbook();
-        $writer = new Writer();
+        $workbook->setTitle('Foo');
+        $writer = new Writer($workbook);
         $writer->setWorkbook($workbook);
 
         $this->assertInstanceOf('ExcelAnt\PhpExcel\Workbook', $writer->getWorkbook());
+        $this->assertEquals('Foo', $writer->getWorkbook()->getTitle());
     }
 }
