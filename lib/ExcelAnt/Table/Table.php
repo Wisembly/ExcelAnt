@@ -8,36 +8,20 @@ use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Cell\Cell;
 use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Traits\Coordinable;
 
 class Table implements TableInterface
 {
+    use Coordinable;
+
     private $coordinate;
     private $table = [];
     private $label;
     private $cellCollection = [];
 
-    public function __construct(Coordinate $coordinate)
+    public function __construct()
     {
-        $this->setCoordinate($coordinate);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCoordinate(Coordinate $coordinate)
-    {
-        $this->coordinate = $coordinate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCoordinate()
-    {
-        return $this->coordinate;
     }
 
     /**

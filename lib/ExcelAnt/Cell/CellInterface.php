@@ -3,9 +3,26 @@
 namespace ExcelAnt\Cell;
 
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Coordinate\Coordinate;
 
 interface CellInterface
 {
+    /**
+     * Set Coordinate
+     *
+     * @param Coordinate $coordinate
+     *
+     * @return CellInterface
+     */
+    public function setCoordinate(Coordinate $coordinate);
+
+    /**
+     * Get Coordinate
+     *
+     * @return Coordinate
+     */
+    public function getCoordinate();
+
     /**
      * Set value
      *

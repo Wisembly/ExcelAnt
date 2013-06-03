@@ -17,16 +17,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->table = new Table(new Coordinate(1, 1));
-    }
-
-    public function testSetAndGetCoordinate()
-    {
-        $this->table->setCoordinate(new Coordinate(2, 3));
-        $coordinate = $this->table->getCoordinate();
-
-        $this->assertEquals(2, $coordinate->getXAxis());
-        $this->assertEquals(3, $coordinate->getYAxis());
+        $this->table = new Table();
     }
 
     public function testSetAndGetLabel()

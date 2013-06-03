@@ -30,10 +30,11 @@ interface SheetInterface
      * Add a single Cell. Hight priority, override the Tables
      *
      * @param CellInterface $cell
+     * @param Coordinate    $coordinate
      *
      * @return SheetInterface
      */
-    public function addCell(CellInterface $cell);
+    public function addCell(CellInterface $cell, Coordinate $coordinate);
 
     /**
      * Get cells
@@ -46,10 +47,11 @@ interface SheetInterface
      * Add a Table
      *
      * @param TableInterface $table
+     * @param Coordinate     $coordinate
      *
      * @return SheetInterface
      */
-    public function addTable(TableInterface $table);
+    public function addTable(TableInterface $table, Coordinate $coordinate);
 
     /**
      * Get tables

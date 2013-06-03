@@ -4,9 +4,14 @@ namespace ExcelAnt\Cell;
 
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Traits\Coordinable;
 
 class EmptyCell implements CellInterface
 {
+    use Coordinable;
+
+    private $coordinate;
+
     /**
      * @throws BadMethodCallException
      */

@@ -5,9 +5,26 @@ namespace ExcelAnt\Table;
 use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Coordinate\Coordinate;
 
 interface TableInterface
 {
+    /**
+     * Set Coordinate
+     *
+     * @param Coordinate $coordinate
+     *
+     * @return TableInterface
+     */
+    public function setCoordinate(Coordinate $coordinate);
+
+    /**
+     * Get Coordinate
+     *
+     * @return Coordinate
+     */
+    public function getCoordinate();
+
     /**
      * Set label
      *
