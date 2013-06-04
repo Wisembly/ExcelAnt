@@ -6,9 +6,18 @@ use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\Table;
 use ExcelAnt\Cell\EmptyCell;
+use ExcelAnt\PhpExcel\Writer\StyleWorker;
+use ExcelAnt\Style\Format;
 
 class TableWorker
 {
+    private $styleWorker;
+
+    public function __construct(StyleWorker $styleWorker)
+    {
+        $this->styleWorker = $styleWorker;
+    }
+
     /**
      * Convert Table to PHPExcel_Worksheet data
      *
@@ -34,10 +43,19 @@ class TableWorker
                     continue;
                 }
 
-                $phpExcelWorksheet->setCellValueByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue());
+                $cellFormat = null;
+                $styleCollection = $cell->getStyles();
+
+                if (!empty($styleCollection)) {
+                    try {
+                        $cellFormat = $styleCollection->getElement(new Format())->getFormat();
+                    } catch (\OutOfBoundsException $e) {}
+                }
+
+                $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
 
                 if ($cell->hasStyles()) {
-                    // Styles here
+                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $styleCollection);
                 }
 
                 $coordinate->nextXAxis();
