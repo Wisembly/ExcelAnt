@@ -10,7 +10,7 @@ class EmptyCell implements CellInterface
 {
     use Coordinable;
 
-    private $coordinate;
+    private $styleCollection;
 
     /**
      * @throws BadMethodCallException
@@ -29,19 +29,21 @@ class EmptyCell implements CellInterface
     }
 
     /**
-     * @throws BadMethodCallException
+     * {@inheritdoc}
      */
     public function setStyles(StyleCollection $styles)
     {
-        throw new \BadMethodCallException("This method cannot be called");
+        $this->styleCollection = $styles;
+
+        return $this;
     }
 
     /**
-     * @throws BadMethodCallException
+     * {@inheritdoc}
      */
     public function getStyles()
     {
-        throw new \BadMethodCallException("This method cannot be called");
+        return $this->styleCollection;
     }
 
     /**
@@ -49,6 +51,6 @@ class EmptyCell implements CellInterface
      */
     public function hasStyles()
     {
-        throw new \BadMethodCallException("This method cannot be called");
+        return empty($this->styleCollection) ? false : true;
     }
 }
