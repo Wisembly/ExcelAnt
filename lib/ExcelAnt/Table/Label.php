@@ -4,11 +4,12 @@ namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Cell\Cell;
+use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Collections\StyleCollection;
 
 class Label implements LabelInterface
 {
-    private $type;
+    private $type = self::TOP;
     private $values;
 
     public function __construct($type = null)
@@ -58,7 +59,12 @@ class Label implements LabelInterface
     public function setValues(array $values, StyleCollection $styles = null)
     {
         foreach ($values as $value) {
-            $cell = new Cell($value);
+
+            if (null === $value) {
+                $cell = new EmptyCell();
+            } else {
+                $cell = new Cell($value);
+            }
 
             if (null !== $styles) {
                 $cell->setStyles($styles);

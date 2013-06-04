@@ -64,4 +64,16 @@ class LabelTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
         }
     }
+
+    public function testSetValuesWithEmptyValues()
+    {
+        $data = ['Foo', null, 'Bar'];
+
+        $this->label->setValues($data);
+        $values = $this->label->getValues();
+
+        $this->assertEquals('Foo', $values[0]->getValue());
+        $this->assertInstanceOf('ExcelAnt\Cell\EmptyCell', $values[1]);
+        $this->assertEquals('Bar', $values[2]->getValue());
+    }
 }
