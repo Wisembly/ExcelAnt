@@ -16,7 +16,7 @@ class Table implements TableInterface
 
     private $coordinate;
     private $table = [];
-    private $label;
+    private $label = null;
 
     public function __construct()
     {

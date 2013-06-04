@@ -72,6 +72,8 @@ class Label implements LabelInterface
 
             $this->values[] = $cell;
         }
+
+        return $this;
     }
 
     /**

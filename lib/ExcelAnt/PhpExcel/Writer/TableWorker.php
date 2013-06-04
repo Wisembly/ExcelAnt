@@ -8,6 +8,7 @@ use ExcelAnt\Table\Table;
 use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\PhpExcel\Writer\StyleWorker;
 use ExcelAnt\Style\Format;
+use ExcelAnt\Cell\CellInterface;
 
 class TableWorker
 {
@@ -29,13 +30,14 @@ class TableWorker
     public function writeTable(PHPExcel_Worksheet $phpExcelWorksheet, Table $table)
     {
         $coordinate = $table->getCoordinate();
-        $tableValues = $table->getTable();
 
-        // Labels here
+        // Labels handling
+        if (null !== $label = $table->getLabel()) {
+            foreach ($label->getValues() as $cell) {
 
-        // Table handling
-        foreach ($tableValues as $row) {
-            foreach ($row as $index => $cell) {
+                if ($cell->hasStyles()) {
+                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
+                }
 
                 if ($cell instanceof EmptyCell) {
                     $coordinate->nextXAxis();
@@ -43,21 +45,30 @@ class TableWorker
                     continue;
                 }
 
-                $cellFormat = null;
-                $styleCollection = $cell->getStyles();
-
-                if (!empty($styleCollection)) {
-                    try {
-                        $cellFormat = $styleCollection->getElement(new Format())->getFormat();
-                    } catch (\OutOfBoundsException $e) {}
-                }
-
+                $cellFormat = $this->getCellFormat($cell);
                 $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
+                $coordinate->nextXAxis();
+            }
+
+            $coordinate->resetXAxis()->nextYAxis();
+        }
+
+        // Table handling
+        foreach ($table->getTable() as $row) {
+            foreach ($row as $index => $cell) {
 
                 if ($cell->hasStyles()) {
-                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $styleCollection);
+                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
                 }
 
+                if ($cell instanceof EmptyCell) {
+                    $coordinate->nextXAxis();
+
+                    continue;
+                }
+
+                $cellFormat = $this->getCellFormat($cell);
+                $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
                 $coordinate->nextXAxis();
             }
 
@@ -65,5 +76,25 @@ class TableWorker
         }
 
         return $phpExcelWorksheet;
+    }
+
+    /**
+     * Get the cell format.
+     *
+     * @param  CellInterface $cell
+     *
+     * @return mixed The format as string or null
+     */
+    private function getCellFormat(CellInterface $cell)
+    {
+        $styleCollection = $cell->getStyles();
+
+        if (!empty($styleCollection)) {
+            try {
+                return $styleCollection->getElement(new Format())->getFormat();
+            } catch (\OutOfBoundsException $e) {}
+        }
+
+        return null;
     }
 }

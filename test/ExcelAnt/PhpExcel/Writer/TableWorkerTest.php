@@ -7,6 +7,7 @@ use PHPExcel_Style;
 
 use ExcelAnt\PhpExcel\Writer\TableWorker;
 use ExcelAnt\Table\Table;
+use ExcelAnt\Table\Label;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;
@@ -15,9 +16,110 @@ use ExcelAnt\Style\Format;
 
 class TableWorkerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testWriteTable()
+    public function testWriteTableWithLabels()
     {
-        $localCellStorage;
+        $localLabelStorage = [];
+
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->exactly(2))
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localLabelStorage) {
+                $localLabelStorage[$pRow][$pColumn] = $pValue;
+            }));
+
+        $tableWorker = (new TableWorker($this->getStyleWorkerMock()))
+            ->writeTable($phpExcelWorksheet, $this->getTableWithLabels());
+
+        $expectedArray = [
+            1 => [
+                0 => 'foo',
+                2 => 'bar',
+            ],
+        ];
+
+        $this->assertEquals($expectedArray, $localLabelStorage);
+    }
+
+    public function testWriteTableWithLabelsAndStyles()
+    {
+        $localApplyStyles = [];
+
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->exactly(2))
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->returnValue(true));
+
+        $styleWorker = $this->getStyleWorkerMock();
+
+        $styleWorker->expects($this->exactly(2))
+            ->method('applyStyles')
+            ->will($this->returnCallback(function($worksheet, $coordinate, $styleCollection) use (&$localApplyStyles, &$phpExcelWorksheet) {
+                $localApplyStyles[] = [
+                    'xAxis' => $coordinate->getXAxis(),
+                    'yAxis' => $coordinate->getYAxis(),
+                ];
+
+                return $phpExcelWorksheet;
+            }));
+
+        $expected = [
+            ['xAxis' => 1, 'yAxis' => 1],
+            ['xAxis' => 2, 'yAxis' => 1],
+        ];
+
+        $tableWorker = (new TableWorker($styleWorker))
+            ->writeTable($phpExcelWorksheet, $this->getTableWithLabelsAndStyles());
+
+        $this->assertEquals($expected, $localApplyStyles);
+    }
+
+    public function testWriteTableWithLabelsAndData()
+    {
+        $localLabelStorage = [];
+        $localCellStorage = [];
+
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->any())
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->onConsecutiveCalls(
+                $this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localLabelStorage) {
+                    $localLabelStorage[$pRow][$pColumn] = $pValue;
+                }),
+                $this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localLabelStorage) {
+                    $localLabelStorage[$pRow][$pColumn] = $pValue;
+                }),
+                $this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localCellStorage) {
+                    $localCellStorage[$pRow][$pColumn] = $pValue;
+                }),
+                $this->returnCallback(function($pColumn, $pRow, $pValue) use (&$localCellStorage) {
+                    $localCellStorage[$pRow][$pColumn] = $pValue;
+                })
+            ));
+
+        $tableWorker = (new TableWorker($this->getStyleWorkerMock()))
+            ->writeTable($phpExcelWorksheet, $this->getTableWithLabelsAndData());
+
+        $expectedLabelArray = [
+            1 => [
+                0 => 'foo',
+                1 => 'bar',
+            ],
+        ];
+
+        $expectedCellArray = [
+            2 => [
+                0 => 'foofoo',
+                1 => 'barbar',
+            ],
+        ];
+
+        $this->assertEquals($expectedLabelArray, $localLabelStorage);
+        $this->assertEquals($expectedCellArray, $localCellStorage);
+    }
+
+    public function testWriteTableWithoutLabels()
+    {
+        $localCellStorage = [];
 
         $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
         $phpExcelWorksheet->expects($this->any())
@@ -26,8 +128,8 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
                 $localCellStorage[$pRow][$pColumn] = $pValue;
             }));
 
-        $tableWorker = new TableWorker($this->getStyleWorkerMock());
-        $response = $tableWorker->writeTable($phpExcelWorksheet, $this->getTable());
+        $tableWorker = (new TableWorker($this->getStyleWorkerMock()))
+            ->writeTable($phpExcelWorksheet, $this->getTable());
 
         $expectedArray = [
             1 => [
@@ -44,7 +146,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $localCellStorage);
     }
 
-    public function testWriteTableWithASpecificFormat()
+    public function testWriteTableWithASpecificFormatAndWithoutLabels()
     {
         $localCellStorage;
 
@@ -60,8 +162,8 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
             ->method('applyStyles')
             ->will($this->returnValue($phpExcelWorksheet));
 
-        $tableWorker = new TableWorker($styleWorker);
-        $response = $tableWorker->writeTable($phpExcelWorksheet, $this->getTableWithSpecificFormat());
+        $tableWorker = (new TableWorker($styleWorker))
+            ->writeTable($phpExcelWorksheet, $this->getTableWithSpecificFormat());
 
         $expectedArray = [
             1 => [
@@ -78,7 +180,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $localCellStorage);
     }
 
-    public function testWriteTableWithStyles()
+    public function testWriteTableWithStylesAndWithoutLabels()
     {
         $localApplyStyles = [];
 
@@ -106,8 +208,8 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
             ['xAxis' => 2, 'yAxis' => 2],
         ];
 
-        $tableWorker = new TableWorker($styleWorker);
-        $response = $tableWorker->writeTable($phpExcelWorksheet, $this->getTableWithStyles());
+        $tableWorker = (new TableWorker($styleWorker))
+            ->writeTable($phpExcelWorksheet, $this->getTableWithStyles());
 
         $this->assertEquals($expected, $localApplyStyles);
     }
@@ -131,7 +233,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get a Table with data
+     * Get a simple table with data
      *
      * @return Table
      */
@@ -146,7 +248,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get a Table with styles
+     * Get a table with styles on the second row
      *
      * @return Table
      */
@@ -161,7 +263,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get a Table with specific format
+     * Get a table with specific format on the second row
      *
      * @return Table
      */
@@ -170,6 +272,55 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
         $table = (new Table())
             ->setRow(['foo', null, null, 'bar', 'baz', null])
             ->setRow(['foo', 'bar'], null, new StyleCollection([(new Format())->setFormat(Format::TYPE_NUMERIC)]))
+            ->setCoordinate(new Coordinate(1, 1));
+
+        return $table;
+    }
+
+    /**
+     * Get a table with labels
+     *
+     * @return Table
+     */
+    private function getTableWithLabels()
+    {
+        $label = (new Label())->setValues(['foo', null, 'bar']);
+
+        $table = (new Table())
+            ->setLabel($label)
+            ->setCoordinate(new Coordinate(1, 1));
+
+        return $table;
+    }
+
+    /**
+     * Get a table with labels and styles
+     *
+     * @return Table
+     */
+    private function getTableWithLabelsAndStyles()
+    {
+        $label = (new Label())->setValues(['foo', 'bar'], new StyleCollection([new Fill(), new Font()]));
+
+        $table = (new Table())
+            ->setLabel($label)
+            ->setCoordinate(new Coordinate(1, 1));
+
+        return $table;
+    }
+
+    /**
+     * Get a table with labels and data
+     *
+     * @return Table
+     */
+    private function getTableWithLabelsAndData()
+    {
+        $label = (new Label())->setValues(['foo', 'bar']);
+
+        $table = (new Table())
+            ->setLabel($label)
+            ->setRow(['foofoo', 'barbar'])
             ->setCoordinate(new Coordinate(1, 1));
 
         return $table;
