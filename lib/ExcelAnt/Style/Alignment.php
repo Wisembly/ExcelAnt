@@ -23,11 +23,6 @@ class Alignment implements StyleInterface
     private $horizontal = self::HORIZONTAL_GENERAL;
     private $vertical = self::VERTICAL_BOTTOM;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * Set vertical alignment
      *

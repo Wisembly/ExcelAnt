@@ -14,14 +14,8 @@ class Table implements TableInterface
 {
     use Coordinable;
 
-    private $coordinate;
     private $table = [];
     private $label = null;
-
-    public function __construct()
-    {
-
-    }
 
     /**
      * {@inheritdoc}

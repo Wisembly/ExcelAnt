@@ -7,11 +7,6 @@ use ExcelAnt\Style\Fill;
 
 class FillTest extends StyleTestCase
 {
-    public function testInstanciateWithColor()
-    {
-        new Fill('ff0000');
-    }
-
     public function testSetAndGetColor()
     {
         $fill = (new Fill())->setColor('ff0000');

@@ -13,6 +13,15 @@ use ExcelAnt\Style\Alignment;
 
 class StyleWorker
 {
+    /**
+     * Convert StyleCollection to PHPExcel_Worksheet data
+     *
+     * @param  PHPExcel_Worksheet $phpExcelWorksheet The current worksheet
+     * @param  Coordinate         $coordinate        The coordinate where the style must to be applied
+     * @param  StyleCollection    $styleCollection   The StyleCollection
+     *
+     * @return PHPExcel_Worksheet
+     */
     public function applyStyles(PHPExcel_Worksheet $phpExcelWorksheet, Coordinate $coordinate, StyleCollection $styleCollection)
     {
         $styles = [];
@@ -46,6 +55,13 @@ class StyleWorker
         return $phpExcelWorksheet;
     }
 
+    /**
+     * Fill management
+     *
+     * @param Fill $fill
+     *
+     * @return array
+     */
     private function fillManager(Fill $fill)
     {
         return [
@@ -53,6 +69,13 @@ class StyleWorker
         ];
     }
 
+    /**
+     * Font management
+     *
+     * @param Font $font
+     *
+     * @return array
+     */
     private function fontManager(Font $font)
     {
         return [
@@ -65,6 +88,13 @@ class StyleWorker
         ];
     }
 
+    /**
+     * Alignment management
+     *
+     * @param Alignment $alignment
+     *
+     * @return array
+     */
     private function alignmentManager(Alignment $alignemnt)
     {
         return [
@@ -73,6 +103,13 @@ class StyleWorker
         ];
     }
 
+    /**
+     * Boders management
+     *
+     * @param Borders $borders
+     *
+     * @return array
+     */
     private function bordersManager(Borders $borders)
     {
         $bordersToReturn = [];

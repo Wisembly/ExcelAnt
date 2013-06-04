@@ -10,7 +10,6 @@ class Cell implements CellInterface
 {
     use Coordinable;
 
-    private $coordinate;
     private $value;
     private $styleCollection;
 

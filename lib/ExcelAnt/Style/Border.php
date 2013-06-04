@@ -23,11 +23,6 @@ class Border
     private $color = '000000';
     private $type = self::BORDER_NONE;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * Set type
      *

@@ -18,11 +18,6 @@ class Format implements StyleInterface
 
     private $format = self::TYPE_STRING;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * Set format
      *

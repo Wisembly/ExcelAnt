@@ -12,11 +12,6 @@ class Borders implements StyleInterface
     private $left;
     private $right;
 
-    public function __construct()
-    {
-
-    }
-
     public function setTop(Border $border)
     {
         $this->top = $border;

@@ -24,6 +24,24 @@ class Coordinate
     }
 
     /**
+     * Set original xAxis
+     *
+     * @param integer $xAxis
+     *
+     * @return Coordinate
+     */
+    public function setOriginalXAxis($xAxis)
+    {
+        if (false === filter_var($xAxis, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $this->originalXAxis = $xAxis;
+
+        return $this;
+    }
+
+    /**
      * Get the original X Axis
      *
      * @return int
@@ -31,6 +49,24 @@ class Coordinate
     public function getOriginalXAxis()
     {
         return $this->originalXAxis;
+    }
+
+    /**
+     * Set original yAxis
+     *
+     * @param integer $yAxis
+     *
+     * @return Coordinate
+     */
+    public function setOriginalYAxis($yAxis)
+    {
+        if (false === filter_var($yAxis, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $this->originalYAxis = $yAxis;
+
+        return $this;
     }
 
     /**

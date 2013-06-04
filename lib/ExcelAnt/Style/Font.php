@@ -20,11 +20,6 @@ class Font implements StyleInterface
     private $color = '000000';
     private $underline = self::UNDERLINE_NONE;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * Set name
      *

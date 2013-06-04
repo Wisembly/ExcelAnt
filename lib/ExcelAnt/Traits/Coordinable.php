@@ -6,6 +6,8 @@ use ExcelAnt\Coordinate\Coordinate;
 
 trait Coordinable
 {
+    protected $coordinate;
+
     /**
      * {@inheritdoc}
      */

@@ -12,6 +12,9 @@ class Label implements LabelInterface
     private $type = self::TOP;
     private $values;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct($type = null)
     {
         if (isset($type)) {

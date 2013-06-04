@@ -36,6 +36,16 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $coordinate->getOriginalYAxis());
     }
 
+    public function testSetOriginalAxis()
+    {
+        $coordinate = (new Coordinate(1, 2))
+            ->setOriginalXAxis(5)
+            ->setOriginalYAxis(4);
+
+        $this->assertEquals(5, $coordinate->getOriginalXAxis());
+        $this->assertEquals(4, $coordinate->getOriginalYAxis());
+    }
+
     public function testResetXAxis()
     {
         $coordinate = (new Coordinate(1, 2))->setXAxis(5);

@@ -5,10 +5,11 @@ namespace ExcelAnt\PhpExcel\Writer;
 use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\Table;
+use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\EmptyCell;
+use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\PhpExcel\Writer\StyleWorker;
 use ExcelAnt\Style\Format;
-use ExcelAnt\Cell\CellInterface;
 
 class TableWorker
 {
@@ -33,24 +34,28 @@ class TableWorker
 
         // Labels handling
         if (null !== $label = $table->getLabel()) {
-            foreach ($label->getValues() as $cell) {
+            if (Label::TOP === $label->getType()) {
+                foreach ($label->getValues() as $cell) {
 
-                if ($cell->hasStyles()) {
-                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
-                }
+                    if ($cell->hasStyles()) {
+                        $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
+                    }
 
-                if ($cell instanceof EmptyCell) {
+                    if ($cell instanceof EmptyCell) {
+                        $coordinate->nextXAxis();
+
+                        continue;
+                    }
+
+                    $cellFormat = $this->getCellFormat($cell);
+                    $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
                     $coordinate->nextXAxis();
-
-                    continue;
                 }
 
-                $cellFormat = $this->getCellFormat($cell);
-                $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
-                $coordinate->nextXAxis();
+                $coordinate->resetXAxis()->nextYAxis();
             }
 
-            $coordinate->resetXAxis()->nextYAxis();
+            // TODO les autres types de labels
         }
 
         // Table handling
