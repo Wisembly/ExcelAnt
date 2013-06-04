@@ -14,8 +14,7 @@ class FillTest extends StyleTestCase
 
     public function testSetAndGetColor()
     {
-        $fill = new Fill();
-        $fill->setColor('ff0000');
+        $fill = (new Fill())->setColor('ff0000');
 
         $this->assertEquals('ff0000', $fill->getColor());
     }

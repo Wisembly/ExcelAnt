@@ -9,8 +9,7 @@ class CoordinableTest extends \PHPUnit_Framework_Testcase
 {
     public function testSetAndGetCoordinate()
     {
-        $table = new Table();
-        $table->setCoordinate(new Coordinate(1, 2));
+        $table = (new Table())->setCoordinate(new Coordinate(1, 2));
         $coordinate = $table->getCoordinate();
 
         $this->assertEquals(1, $coordinate->getXAxis());

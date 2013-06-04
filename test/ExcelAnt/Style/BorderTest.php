@@ -22,14 +22,12 @@ class BorderTest extends StyleTestCase
      */
     public function testSetSideWithWrongSideParameter($side)
     {
-        $border = new Border(Border::SIDE_LEFT);
-        $border->setSide($side);
+        $border = (new Border(Border::SIDE_LEFT))->setSide($side);
     }
 
     public function testSetAndGetSide()
     {
-        $border = new Border(Border::SIDE_LEFT);
-        $border->setSide(Border::SIDE_RIGHT);
+        $border = (new Border(Border::SIDE_LEFT))->setSide(Border::SIDE_RIGHT);
 
         $this->assertEquals(Border::SIDE_RIGHT, $border->getSide());
     }
@@ -40,22 +38,19 @@ class BorderTest extends StyleTestCase
      */
     public function testSetTypeWithWrongParameter($type)
     {
-        $border = new Border(Border::SIDE_LEFT);
-        $border->setType($type);
+        $border = (new Border(Border::SIDE_LEFT))->setType($type);
     }
 
     public function testSetAndGetType()
     {
-        $border = new Border(Border::SIDE_LEFT);
-        $border->setType(Border::BORDER_DASHDOT);
+        $border = (new Border(Border::SIDE_LEFT))->setType(Border::BORDER_DASHDOT);
 
         $this->assertEquals(Border::BORDER_DASHDOT, $border->getType());
     }
 
     public function testSetAndGetColor()
     {
-        $border = new Border(Border::SIDE_LEFT);
-        $border->setColor('ff0000');
+        $border = (new Border(Border::SIDE_LEFT))->setColor('ff0000');
 
         $this->assertEquals('ff0000', $border->getColor());
     }

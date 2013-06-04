@@ -15,17 +15,17 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
 {
     public function testRawClass()
     {
-        $worksheet = $this->createWorkbook();
-        $this->assertInstanceOf("PHPExcel", $worksheet->getRawClass());
+        $workbook = $this->createWorkbook();
+        $this->assertInstanceOf("PHPExcel", $workbook->getRawClass());
     }
 
     public function testCreateSheet()
     {
-        $worksheet = $this->createWorkbook();
-        $sheet = $worksheet->createSheet();
+        $workbook = $this->createWorkbook();
+        $sheet = $workbook->createSheet();
 
         $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
-        $this->assertCount(1, $worksheet->getAllSheets());
+        $this->assertCount(1, $workbook->getAllSheets());
     }
 
     /**
@@ -33,8 +33,7 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSheetWithInvalidArgument()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->getSheet("foo");
+        $workbook = $this->createWorkbook()->getSheet("foo");
     }
 
     /**
@@ -42,50 +41,50 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSheetWithNonExistentIndex()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->getSheet(count($worksheet->getAllSheets()) + 1);
+        $workbook = $this->createWorkbook();
+        $workbook->getSheet(count($workbook->getAllSheets()) + 1);
     }
 
     public function testGetSheet()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->createSheet();
-        $sheet = $worksheet->getSheet(0);
+        $workbook = $this->createWorkbook();
+        $workbook->createSheet();
+        $sheet = $workbook->getSheet(0);
 
         $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
     }
 
     public function testCountSheets()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->createSheet();
-        $worksheet->createSheet();
-        $worksheet->createSheet();
+        $workbook = $this->createWorkbook();
+        $workbook->createSheet();
+        $workbook->createSheet();
+        $workbook->createSheet();
 
-        $this->assertEquals(3, $worksheet->countSheets());
+        $this->assertEquals(3, $workbook->countSheets());
     }
 
     public function testAddSheetWithoutIndex()
     {
-        $worksheet = $this->createWorkbook();
+        $workbook = $this->createWorkbook();
         $sheet = $this->getSheetMock('Foo');
-        $worksheet->addSheet($sheet);
+        $workbook->addSheet($sheet);
 
-        $this->assertCount(1, $worksheet->getAllSheets());
-        $this->assertEquals('Foo', $worksheet->getSheet($worksheet->countSheets() - 1)->getTitle());
+        $this->assertCount(1, $workbook->getAllSheets());
+        $this->assertEquals('Foo', $workbook->getSheet($workbook->countSheets() - 1)->getTitle());
     }
 
     public function testAddSheetWithIndex()
     {
-        $worksheet = $this->createWorkbook();
+        $workbook = $this->createWorkbook();
         $sheet = $this->getSheetMock('Foo');
-        $worksheet->addSheet($sheet);
+        $workbook->addSheet($sheet);
 
         $sheet = $this->getSheetMock('Bar');
-        $worksheet->addSheet($sheet, 0);
+        $workbook->addSheet($sheet, 0);
 
-        $this->assertEquals('Bar', $worksheet->getSheet(0)->getTitle());
-        $this->assertCount(1, $worksheet->getAllSheets());
+        $this->assertEquals('Bar', $workbook->getSheet(0)->getTitle());
+        $this->assertCount(1, $workbook->getAllSheets());
     }
 
     /**
@@ -93,9 +92,9 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddSheetWithAWrongParameter()
     {
-        $worksheet = $this->createWorkbook();
+        $workbook = $this->createWorkbook();
         $sheet = $this->getSheetMock('Foo');
-        $worksheet->addSheet($sheet, 'foo');
+        $workbook->addSheet($sheet, 'foo');
     }
 
     /**
@@ -103,19 +102,19 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testInsertSheet($sheetCollection, $sheetToInsert, $index)
     {
-        $worksheet = $this->createWorkbook();
+        $workbook = $this->createWorkbook();
 
         // Add sheets
         foreach ($sheetCollection as $sheet) {
-            $worksheet->addSheet($sheet);
+            $workbook->addSheet($sheet);
         }
 
         // Insert
-        $worksheet->addSheet($sheetToInsert, $index, true);
+        $workbook->addSheet($sheetToInsert, $index, true);
 
         // Get new data
-        $newSheetCollection = $worksheet->getAllSheets();
-        $countNewSheetCollection = $worksheet->countSheets();
+        $newSheetCollection = $workbook->getAllSheets();
+        $countNewSheetCollection = $workbook->countSheets();
 
         // Asserts
         $this->assertCount(count($sheetCollection) + 1, $newSheetCollection);
@@ -139,7 +138,7 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
 
     public function getDataToInsert()
     {
-        $worksheet = $this->createWorkbook();
+        $workbook = $this->createWorkbook();
 
         return [
             [[$this->getSheetMock('Foo'), $this->getSheetMock('Bar'), $this->getSheetMock('Baz')], $this->getSheetMock('Insert'), 0],
@@ -153,11 +152,10 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveSheetWithNonExistentIndex()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->createSheet();
-        $worksheet->createSheet();
-
-        $worksheet->removeSheet(2);
+        $workbook = $this->createWorkbook();
+        $workbook->createSheet();
+        $workbook->createSheet();
+        $workbook->removeSheet(2);
     }
 
     /**
@@ -165,20 +163,18 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveSheetWithAWrongParameter()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->createSheet();
-
-        $worksheet->removeSheet('foo');
+        $workbook = $this->createWorkbook();
+        $workbook->createSheet();
+        $workbook->removeSheet('foo');
     }
 
     public function testRemoveSheet()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->addSheet($this->getSheetMock('Foo'));
-        $worksheet->addSheet($this->getSheetMock('Bar'));
-
-        $worksheet->removeSheet(0);
-        $sheeCollection = $worksheet->getAllSheets();
+        $workbook = $this->createWorkbook()
+            ->addSheet($this->getSheetMock('Foo'))
+            ->addSheet($this->getSheetMock('Bar'))
+            ->removeSheet(0);
+        $sheeCollection = $workbook->getAllSheets();
 
         $this->assertCount(1, $sheeCollection);
         $this->assertTrue(array_key_exists(0, $sheeCollection));
@@ -197,8 +193,8 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
-        $worksheet->setTitle('Foo');
+        $workbook = $this->createWorkbook($phpExcel)
+            ->setTitle('Foo');
     }
 
     public function testGetTitle()
@@ -213,9 +209,9 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
+        $workbook = $this->createWorkbook($phpExcel);
 
-        $this->assertEquals('Foo', $worksheet->getTitle());
+        $this->assertEquals('Foo', $workbook->getTitle());
     }
 
     public function testSetCreator()
@@ -230,8 +226,8 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
-        $worksheet->setCreator('Foo');
+        $workbook = $this->createWorkbook($phpExcel)
+            ->setCreator('Foo');
     }
 
     public function testGetCreator()
@@ -246,9 +242,9 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
+        $workbook = $this->createWorkbook($phpExcel);
 
-        $this->assertEquals('Foo', $worksheet->getCreator());
+        $this->assertEquals('Foo', $workbook->getCreator());
     }
 
     public function testSetDescription()
@@ -263,8 +259,8 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
-        $worksheet->setDescription('Foo');
+        $workbook = $this->createWorkbook($phpExcel)
+            ->setDescription('Foo');
     }
 
     public function testGetDescription()
@@ -279,9 +275,9 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
+        $workbook = $this->createWorkbook($phpExcel);
 
-        $this->assertEquals('Foo', $worksheet->getDescription());
+        $this->assertEquals('Foo', $workbook->getDescription());
     }
 
     public function testSetCompany()
@@ -296,8 +292,8 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
-        $worksheet->setCompany('Foo');
+        $workbook = $this->createWorkbook($phpExcel)
+            ->setCompany('Foo');
     }
 
     public function testGetCompany()
@@ -312,9 +308,9 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
+        $workbook = $this->createWorkbook($phpExcel);
 
-        $this->assertEquals('Foo', $worksheet->getCompany());
+        $this->assertEquals('Foo', $workbook->getCompany());
     }
 
     public function testSetSubject()
@@ -329,8 +325,8 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
-        $worksheet->setSubject('Foo');
+        $workbook = $this->createWorkbook($phpExcel)
+            ->setSubject('Foo');
     }
 
     public function testGetSubject()
@@ -345,18 +341,18 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
             ->method('getProperties')
             ->will($this->returnValue($phpExcelDocument));
 
-        $worksheet = $this->createWorkbook($phpExcel);
+        $workbook = $this->createWorkbook($phpExcel);
 
-        $this->assertEquals('Foo', $worksheet->getSubject());
+        $this->assertEquals('Foo', $workbook->getSubject());
     }
 
     public function testAddStyleAndGetStyleCollection()
     {
-        $worksheet = $this->createWorkbook();
-        $worksheet->addStyles(new StyleCollection([new Fill(), new Font()]));
+        $workbook = $this->createWorkbook()
+            ->addStyles(new StyleCollection([new Fill(), new Font()]));
 
-        $this->assertCount(2, $worksheet->getStyles());
-        $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $worksheet->getStyles());
+        $this->assertCount(2, $workbook->getStyles());
+        $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $workbook->getStyles());
     }
 
     /**
