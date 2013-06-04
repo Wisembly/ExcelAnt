@@ -4,6 +4,7 @@ namespace ExcelAnt\PhpExcel\Writer;
 
 use ExcelAnt\Writer\WriterInterface;
 use ExcelAnt\PhpExcel\Writer\TableWorker;
+use ExcelAnt\PhpExcel\Writer\StyleWorker;
 use ExcelAnt\Workbook\WorkbookInterface;
 
 class Writer implements WriterInterface
@@ -14,10 +15,10 @@ class Writer implements WriterInterface
     /**
      * @param WorkbookInterface $workbook The workbook to be exported
      */
-    public function __construct(WorkbookInterface $workbook)
+    public function __construct(WorkbookInterface $workbook, TableWorker $tableWorker)
     {
         $this->setWorkbook($workbook);
-        $this->tableWorker = new TableWorker();
+        $this->tableWorker = $tableWorker;
     }
 
     /**
