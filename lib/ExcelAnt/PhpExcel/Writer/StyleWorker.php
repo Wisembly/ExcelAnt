@@ -51,8 +51,6 @@ class StyleWorker
         $phpExcelWorksheet
             ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
             ->applyFromArray($styles);
-
-        return $phpExcelWorksheet;
     }
 
     /**
