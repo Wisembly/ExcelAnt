@@ -50,6 +50,6 @@ class CellWorker
             } catch (\OutOfBoundsException $e) {}
         }
 
-        return null;
+        return Format::TYPE_STRING;
     }
 }

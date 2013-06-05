@@ -65,7 +65,7 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $cellWorker = new CellWorker($styleWorker);
         $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
 
-        $this->assertNull($localFormatStorage);
+        $this->assertEquals(Format::TYPE_STRING, $localFormatStorage);
     }
 
     public function testWriteCellWithAFormatStyle()
