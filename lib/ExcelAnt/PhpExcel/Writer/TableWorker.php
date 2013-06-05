@@ -8,16 +8,19 @@ use ExcelAnt\Table\Table;
 use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\PhpExcel\Writer\StyleWorker;
+use ExcelAnt\PhpExcel\Writer\CellWorker;
+use ExcelAnt\PhpExcel\Writer\LabelWorker;
 use ExcelAnt\Style\Format;
 
 class TableWorker
 {
-    private $styleWorker;
+    private $cellWorker;
+    private $labelWorker;
 
-    public function __construct(StyleWorker $styleWorker)
+    public function __construct(CellWorker $cellWorker, LabelWorker $labelWorker)
     {
-        $this->styleWorker = $styleWorker;
+        $this->cellWorker = $cellWorker;
+        $this->labelWorker = $labelWorker;
     }
 
     /**
@@ -34,47 +37,13 @@ class TableWorker
 
         // Labels handling
         if (null !== $label = $table->getLabel()) {
-            if (Label::TOP === $label->getType()) {
-                foreach ($label->getValues() as $cell) {
-
-                    if ($cell->hasStyles()) {
-                        $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
-                    }
-
-                    if ($cell instanceof EmptyCell) {
-                        $coordinate->nextXAxis();
-
-                        continue;
-                    }
-
-                    $cellFormat = $this->getCellFormat($cell);
-                    $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
-                    $coordinate->nextXAxis();
-                }
-
-                $coordinate->resetXAxis()->nextYAxis();
-            }
-
-            // TODO les autres types de labels
+            $this->labelWorker->writeLabel($phpExcelWorksheet, $label, $coordinate);
         }
 
         // Table handling
         foreach ($table->getTable() as $row) {
             foreach ($row as $index => $cell) {
-
-                if ($cell->hasStyles()) {
-                    $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
-                }
-
-                if ($cell instanceof EmptyCell) {
-                    $coordinate->nextXAxis();
-
-                    continue;
-                }
-
-                $cellFormat = $this->getCellFormat($cell);
-                $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
-                $coordinate->nextXAxis();
+                $this->cellWorker->writeCell($phpExcelWorksheet, $label, $cell);
             }
 
             $coordinate->resetXAxis()->nextYAxis();
