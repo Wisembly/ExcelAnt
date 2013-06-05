@@ -5,12 +5,8 @@ namespace ExcelAnt\PhpExcel\Writer;
 use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\Table;
-use ExcelAnt\Table\Label;
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\PhpExcel\Writer\CellWorker;
 use ExcelAnt\PhpExcel\Writer\LabelWorker;
-use ExcelAnt\Style\Format;
 
 class TableWorker
 {

@@ -6,6 +6,7 @@ use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\PhpExcel\Writer\CellWorker;
 
 class LabelWorker
 {

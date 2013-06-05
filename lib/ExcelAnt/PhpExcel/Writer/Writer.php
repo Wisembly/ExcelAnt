@@ -4,21 +4,23 @@ namespace ExcelAnt\PhpExcel\Writer;
 
 use ExcelAnt\Writer\WriterInterface;
 use ExcelAnt\PhpExcel\Writer\TableWorker;
-use ExcelAnt\PhpExcel\Writer\StyleWorker;
+use ExcelAnt\PhpExcel\Writer\CellWorker;
 use ExcelAnt\Workbook\WorkbookInterface;
 
 class Writer implements WriterInterface
 {
     private $workbook;
     private $tableWorker;
+    private $cellWorker;
 
     /**
      * @param WorkbookInterface $workbook The workbook to be exported
      */
-    public function __construct(WorkbookInterface $workbook, TableWorker $tableWorker)
+    public function __construct(WorkbookInterface $workbook, TableWorker $tableWorker, CellWorker $cellWorker)
     {
         $this->setWorkbook($workbook);
         $this->tableWorker = $tableWorker;
+        $this->cellWorker = $cellWorker;
     }
 
     /**
@@ -57,8 +59,10 @@ class Writer implements WriterInterface
                 $this->tableWorker->writeTable($phpExcelWorksheet, $table);
             }
 
-            // Write the individual cells
-            // TODO
+            // Write the individuals cells
+            foreach ($sheet->getCells() as $cell) {
+                $this->cellWorker->writeCell($cell, $phpExcelWorksheet, $cell->getCoordinate());
+            }
 
             $phpExcel->addSheet($phpExcelWorksheet);
         }

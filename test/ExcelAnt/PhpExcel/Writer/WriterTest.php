@@ -7,6 +7,7 @@ use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\PhpExcel\Sheet;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Cell\Cell;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,8 +26,42 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addTable(new Table(), new Coordinate(1, 1));
         $workbook->addSheet($sheet);
 
-        $writer = new Writer($workbook, $tableWorker);
+        $writer = new Writer($workbook, $tableWorker, $this->getCellWorkerMock());
         $writer->write('foo');
+    }
+
+    public function testWriteASingleCell()
+    {
+        $cellWorker = $this->getCellWorkerMock();
+        $cellWorker->expects($this->exactly(2))
+            ->method('writeCell')
+            ->will($this->returnCallback(function($cell, $phpExcelWorksheet, $coordinate) use (&$localCellStorage) {
+                $localCellStorage[] = [$cell->getValue(), $coordinate->getXAxis(), $coordinate->getYAxis()];
+            }));
+
+        $tableWorker = $this->getTableWorkerMock();
+        $tableWorker->expects($this->exactly(0))
+            ->method('writeTable');
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('addSheet');
+
+        $workbook = $this->createWorkbook($phpExcel);
+        $sheet = (new Sheet($workbook, $this->getPhpExcelWorksheetMock()))
+            ->addCell((new Cell())->setValue('foo'), new Coordinate(1, 1))
+            ->addCell((new Cell())->setValue('bar'), new Coordinate(2, 1));
+        $workbook->addSheet($sheet);
+
+        $writer = new Writer($workbook, $tableWorker, $cellWorker);
+        $writer->write('foo');
+
+        $expected = [
+            ['foo', 1, 1],
+            ['bar', 2, 1],
+        ];
+
+        $this->assertEquals($expected, $localCellStorage);
     }
 
     /**
@@ -51,6 +86,16 @@ class WriterTest extends \PHPUnit_Framework_TestCase
     public function getTableWorkerMock()
     {
         return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\TableWorker')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock CellWorker
+     *
+     * @return Mock_CellWorker
+     */
+    public function getCellWorkerMock()
+    {
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\CellWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
