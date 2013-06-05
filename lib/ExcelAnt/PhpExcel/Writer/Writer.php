@@ -54,7 +54,7 @@ class Writer implements WriterInterface
 
             // Write the tables
             foreach ($sheet->getTables() as $table) {
-                $phpExcelWorksheet = $this->tableWorker->writeTable($phpExcelWorksheet, $table);
+                $this->tableWorker->writeTable($phpExcelWorksheet, $table);
             }
 
             // Write the individual cells
