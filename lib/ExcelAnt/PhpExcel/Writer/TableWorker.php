@@ -37,36 +37,17 @@ class TableWorker
 
         // Labels handling
         if (null !== $label = $table->getLabel()) {
-            $this->labelWorker->writeLabel($phpExcelWorksheet, $label, $coordinate);
+            $this->labelWorker->writeLabel($label, $phpExcelWorksheet, $coordinate);
         }
 
         // Table handling
         foreach ($table->getTable() as $row) {
             foreach ($row as $index => $cell) {
-                $this->cellWorker->writeCell($phpExcelWorksheet, $label, $cell);
+                $this->cellWorker->writeCell($cell, $phpExcelWorksheet, $coordinate);
+                $coordinate->nextXAxis();
             }
 
             $coordinate->resetXAxis()->nextYAxis();
         }
-    }
-
-    /**
-     * Get the cell format.
-     *
-     * @param  CellInterface $cell
-     *
-     * @return mixed The format as string or null
-     */
-    private function getCellFormat(CellInterface $cell)
-    {
-        $styleCollection = $cell->getStyles();
-
-        if (!empty($styleCollection)) {
-            try {
-                return $styleCollection->getElement(new Format())->getFormat();
-            } catch (\OutOfBoundsException $e) {}
-        }
-
-        return null;
     }
 }

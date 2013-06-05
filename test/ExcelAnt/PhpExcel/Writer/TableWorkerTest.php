@@ -29,6 +29,8 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteTableWithLabelsAndData()
     {
+        $localCoordinateStorage = [];
+
         $labelWorker = $this->getLabelWorkerMock();
         $labelWorker->expects($this->once())
             ->method('writeLabel');
