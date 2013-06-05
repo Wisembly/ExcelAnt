@@ -5,6 +5,7 @@ namespace ExcelAnt\PhpExcel\Writer;
 use ExcelAnt\Writer\WriterInterface;
 use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
 use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
+use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 use ExcelAnt\Workbook\WorkbookInterface;
 
 class Writer implements WriterInterface
@@ -21,7 +22,10 @@ class Writer implements WriterInterface
         $this->cellWorker = $cellWorker;
     }
 
-    public function write(WorkbookInterface $workbook, $path)
+    /**
+     * {@inheritdoc}
+     */
+    public function write(WorkbookInterface $workbook, PhpExcelWriterInterface $writer)
     {
         $phpExcel = $workbook->getRawClass();
 
@@ -40,5 +44,7 @@ class Writer implements WriterInterface
 
             $phpExcel->addSheet($phpExcelWorksheet);
         }
+
+        $writer->save($phpExcel);
     }
 }
