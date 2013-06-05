@@ -8,6 +8,7 @@ use ExcelAnt\PhpExcel\Sheet;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\Cell;
+use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,7 +28,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $workbook->addSheet($sheet);
 
         $writer = new Writer($tableWorker, $this->getCellWorkerMock());
-        $writer->write($workbook, 'foo');
+        $writer->write($workbook, $this->getPhpExcelWriterInterfaceMock());
     }
 
     public function testWriteASingleCell()
@@ -54,7 +55,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $workbook->addSheet($sheet);
 
         $writer = new Writer($tableWorker, $cellWorker);
-        $writer->write($workbook, 'foo');
+        $writer->write($workbook, $this->getPhpExcelWriterInterfaceMock());
 
         $expected = [
             ['foo', 1, 1],
@@ -76,6 +77,16 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $phpExcel = $phpExcel ?: $this->getPhpExcelMock();
 
         return new Workbook($phpExcel);
+    }
+
+    /**
+     * Mock PhpExcelWriterInterface
+     *
+     * @return Mock_PhpExcelWriterInterface
+     */
+    public function getPhpExcelWriterInterfaceMock()
+    {
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface')->disableOriginalConstructor()->getMock();
     }
 
     /**
