@@ -1,8 +1,8 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer;
+namespace ExcelAnt\PhpExcel\Writer\Worker;
 
-use ExcelAnt\PhpExcel\Writer\CellWorker;
+use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
 use ExcelAnt\Cell\Cell;
 use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Coordinate\Coordinate;
@@ -106,6 +106,6 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
      */
     private function getStyleWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\StyleWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
     }
 }

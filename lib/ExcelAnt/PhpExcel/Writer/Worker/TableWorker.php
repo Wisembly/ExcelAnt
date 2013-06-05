@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer;
+namespace ExcelAnt\PhpExcel\Writer\Worker;
 
 use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\Table;
-use ExcelAnt\PhpExcel\Writer\CellWorker;
-use ExcelAnt\PhpExcel\Writer\LabelWorker;
+use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
+use ExcelAnt\PhpExcel\Writer\Worker\LabelWorker;
 
 class TableWorker
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer;
+namespace ExcelAnt\PhpExcel\Writer\Worker;
 
 use PHPExcel_Worksheet;
 
 use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\PhpExcel\Writer\CellWorker;
+use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
 
 class LabelWorker
 {

@@ -26,8 +26,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addTable(new Table(), new Coordinate(1, 1));
         $workbook->addSheet($sheet);
 
-        $writer = new Writer($workbook, $tableWorker, $this->getCellWorkerMock());
-        $writer->write('foo');
+        $writer = new Writer($tableWorker, $this->getCellWorkerMock());
+        $writer->write($workbook, 'foo');
     }
 
     public function testWriteASingleCell()
@@ -53,8 +53,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addCell((new Cell())->setValue('bar'), new Coordinate(2, 1));
         $workbook->addSheet($sheet);
 
-        $writer = new Writer($workbook, $tableWorker, $cellWorker);
-        $writer->write('foo');
+        $writer = new Writer($tableWorker, $cellWorker);
+        $writer->write($workbook, 'foo');
 
         $expected = [
             ['foo', 1, 1],
@@ -85,7 +85,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getTableWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\TableWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\TableWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -95,7 +95,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getCellWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\CellWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
