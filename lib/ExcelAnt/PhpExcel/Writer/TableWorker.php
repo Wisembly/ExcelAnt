@@ -38,7 +38,7 @@ class TableWorker
                 foreach ($label->getValues() as $cell) {
 
                     if ($cell->hasStyles()) {
-                        $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
+                        $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
                     }
 
                     if ($cell instanceof EmptyCell) {
@@ -63,7 +63,7 @@ class TableWorker
             foreach ($row as $index => $cell) {
 
                 if ($cell->hasStyles()) {
-                    $phpExcelWorksheet = $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
+                    $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
                 }
 
                 if ($cell instanceof EmptyCell) {
@@ -79,8 +79,6 @@ class TableWorker
 
             $coordinate->resetXAxis()->nextYAxis();
         }
-
-        return $phpExcelWorksheet;
     }
 
     /**

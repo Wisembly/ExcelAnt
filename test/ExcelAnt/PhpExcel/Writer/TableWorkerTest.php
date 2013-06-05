@@ -53,13 +53,11 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
 
         $styleWorker->expects($this->exactly(2))
             ->method('applyStyles')
-            ->will($this->returnCallback(function($worksheet, $coordinate, $styleCollection) use (&$localApplyStyles, &$phpExcelWorksheet) {
+            ->will($this->returnCallback(function($worksheet, $coordinate, $styleCollection) use (&$localApplyStyles) {
                 $localApplyStyles[] = [
                     'xAxis' => $coordinate->getXAxis(),
                     'yAxis' => $coordinate->getYAxis(),
                 ];
-
-                return $phpExcelWorksheet;
             }));
 
         $expected = [
@@ -73,7 +71,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $localApplyStyles);
     }
 
-    public function testWriteTableWithLabelsAndData()
+    public function testWriteTableWithLabelsAndDataWithoutStyles()
     {
         $localLabelStorage = [];
         $localCellStorage = [];
@@ -194,13 +192,11 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
 
         $styleWorker->expects($this->atLeastOnce())
             ->method('applyStyles')
-            ->will($this->returnCallback(function($worksheet, $coordinate, $styleCollection) use (&$localApplyStyles, &$phpExcelWorksheet) {
+            ->will($this->returnCallback(function($worksheet, $coordinate, $styleCollection) use (&$localApplyStyles) {
                 $localApplyStyles[] = [
                     'xAxis' => $coordinate->getXAxis(),
                     'yAxis' => $coordinate->getYAxis(),
                 ];
-
-                return $phpExcelWorksheet;
             }));
 
         $expected = [
