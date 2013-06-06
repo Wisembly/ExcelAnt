@@ -29,7 +29,8 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
     {
         $styleWorker = $this->getStyleWorkerMock();
         $styleWorker->expects($this->once())
-            ->method('convertStyles');
+            ->method('convertStyles')
+            ->will($this->returnValue(['foo']));
 
         $phpExcelStyle = $this->getPhpExcelStyleMock();
         $phpExcelStyle->expects($this->once())
@@ -60,7 +61,8 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
     {
         $styleWorker = $this->getStyleWorkerMock();
         $styleWorker->expects($this->once())
-            ->method('convertStyles');
+            ->method('convertStyles')
+            ->will($this->returnValue(['foo']));
 
         $phpExcelStyle = $this->getPhpExcelStyleMock();
         $phpExcelStyle->expects($this->once())
@@ -84,26 +86,58 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Format::TYPE_STRING, $localFormatStorage);
     }
 
-    // public function testWriteCellWithAFormatStyle()
-    // {
-    //     $styleWorker = $this->getStyleWorkerMock();
-    //     $styleWorker->expects($this->once())
-    //         ->method('applyStyles');
+    public function testWriteCellWithAFormatStyleAndStyle()
+    {
+        $styleWorker = $this->getStyleWorkerMock();
+        $styleWorker->expects($this->once())
+            ->method('convertStyles')
+            ->will($this->returnValue(['foo']));
 
-    //     $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
-    //     $phpExcelWorksheet->expects($this->once())
-    //         ->method('setCellValueExplicitByColumnAndRow')
-    //         ->will($this->returnCallback(function($xAxis, $yAxis, $value, $format) use (&$localFormatStorage) {
-    //             $localFormatStorage = $format;
-    //         }));
+        $phpExcelStyle = $this->getPhpExcelStyleMock();
+        $phpExcelStyle->expects($this->once())
+            ->method('applyFromArray');
 
-    //     $cell = (new Cell())->setStyles(new StyleCollection([(new Format())->setFormat(Format::TYPE_NUMERIC), new Font()]));
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->once())
+            ->method('getStyleByColumnAndRow')
+            ->will($this->returnValue($phpExcelStyle));
+        $phpExcelWorksheet->expects($this->once())
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->returnCallback(function($xAxis, $yAxis, $value, $format) use (&$localFormatStorage) {
+                $localFormatStorage = $format;
+            }));
 
-    //     $cellWorker = new CellWorker($styleWorker);
-    //     $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
+        $cell = (new Cell())->setStyles(new StyleCollection([(new Format())->setFormat(Format::TYPE_NUMERIC), new Font()]));
 
-    //     $this->assertEquals('n', $localFormatStorage);
-    // }
+        $cellWorker = new CellWorker($styleWorker);
+        $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
+
+        $this->assertEquals('n', $localFormatStorage);
+    }
+
+    public function testWriteCellWithAFormatStyleAndNoStyle()
+    {
+        $styleWorker = $this->getStyleWorkerMock();
+        $styleWorker->expects($this->once())
+            ->method('convertStyles')
+            ->will($this->returnValue([]));
+
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->exactly(0))
+            ->method('getStyleByColumnAndRow');
+        $phpExcelWorksheet->expects($this->once())
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->returnCallback(function($xAxis, $yAxis, $value, $format) use (&$localFormatStorage) {
+                $localFormatStorage = $format;
+            }));
+
+        $cell = (new Cell())->setStyles(new StyleCollection([(new Format())->setFormat(Format::TYPE_NUMERIC)]));
+
+        $cellWorker = new CellWorker($styleWorker);
+        $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
+
+        $this->assertEquals('n', $localFormatStorage);
+    }
 
     /**
      * Mock PHPExcel_Worksheet
