@@ -34,8 +34,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $phpExcelWriterInterace->expects($this->once())
             ->method('save');
 
-        $writer = new Writer($tableWorker, $this->getCellWorkerMock(), $this->getStyleWorkerMock());
-        $writer->write($workbook, $phpExcelWriterInterace);
+        $writer = new Writer($phpExcelWriterInterace, $tableWorker, $this->getCellWorkerMock(), $this->getStyleWorkerMock());
+        $writer->write($workbook);
     }
 
     public function testWriteASingleCell()
@@ -65,8 +65,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $phpExcelWriterInterace->expects($this->once())
             ->method('save');
 
-        $writer = new Writer($tableWorker, $cellWorker, $this->getStyleWorkerMock());
-        $writer->write($workbook, $phpExcelWriterInterace);
+        $writer = new Writer($phpExcelWriterInterace, $tableWorker, $cellWorker, $this->getStyleWorkerMock());
+        $writer->write($workbook);
 
         $expected = [
             ['foo', 1, 1],
@@ -99,8 +99,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $phpExcelWriterInterace->expects($this->once())
             ->method('save');
 
-        $writer = new Writer($this->getTableWorkerMock(), $this->getCellWorkerMock(), $styleWorker);
-        $writer->write($workbook, $phpExcelWriterInterace);
+        $writer = new Writer($phpExcelWriterInterace, $this->getTableWorkerMock(), $this->getCellWorkerMock(), $styleWorker);
+        $writer->write($workbook);
     }
 
     /**

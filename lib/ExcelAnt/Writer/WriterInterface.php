@@ -11,7 +11,6 @@ interface WriterInterface
      * Write your Workbook
      *
      * @param  WorkbookInterface       $workbook
-     * @param  PhpExcelWriterInterface $writer    Which you want to use
      */
-    public function write(WorkbookInterface $workbook, PhpExcelWriterInterface $writer);
+    public function write(WorkbookInterface $workbook);
 }

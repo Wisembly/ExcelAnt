@@ -14,21 +14,23 @@ class Writer implements WriterInterface
     private $tableWorker;
     private $cellWorker;
     private $styleWorker;
+    private $writer;
 
     /**
      * @param WorkbookInterface $workbook The workbook to be exported
      */
-    public function __construct(TableWorker $tableWorker, CellWorker $cellWorker, StyleWorker $styleWorker)
+    public function __construct(PhpExcelWriterInterface $writer, TableWorker $tableWorker, CellWorker $cellWorker, StyleWorker $styleWorker)
     {
         $this->tableWorker = $tableWorker;
         $this->cellWorker = $cellWorker;
         $this->styleWorker = $styleWorker;
+        $this->writer = $writer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function write(WorkbookInterface $workbook, PhpExcelWriterInterface $writer)
+    public function write(WorkbookInterface $workbook)
     {
         $phpExcel = $workbook->getRawClass();
 
@@ -55,6 +57,6 @@ class Writer implements WriterInterface
             }
         }
 
-        $writer->save($phpExcel);
+        $this->writer->save($phpExcel);
     }
 }
