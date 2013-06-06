@@ -22,7 +22,11 @@ class CellWorker
     public function writeCell(CellInterface $cell, PHPExcel_Worksheet $phpExcelWorksheet, Coordinate $coordinate)
     {
         if ($cell->hasStyles()) {
-            $this->styleWorker->applyStyles($phpExcelWorksheet, $coordinate, $cell->getStyles());
+            $styles = $this->styleWorker->convertStyles($cell->getStyles());
+
+            $phpExcelWorksheet
+                ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
+                ->applyFromArray($styles);
         }
 
         if ($cell instanceof EmptyCell) {

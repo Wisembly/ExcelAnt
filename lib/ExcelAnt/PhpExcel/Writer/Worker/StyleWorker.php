@@ -2,9 +2,6 @@
 
 namespace ExcelAnt\PhpExcel\Writer\Worker;
 
-use PHPExcel_Worksheet;
-
-use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
@@ -16,13 +13,11 @@ class StyleWorker
     /**
      * Convert StyleCollection to PHPExcel_Worksheet data
      *
-     * @param  PHPExcel_Worksheet $phpExcelWorksheet The current worksheet
-     * @param  Coordinate         $coordinate        The coordinate where the style must to be applied
      * @param  StyleCollection    $styleCollection   The StyleCollection
      *
      * @return PHPExcel_Worksheet
      */
-    public function applyStyles(PHPExcel_Worksheet $phpExcelWorksheet, Coordinate $coordinate, StyleCollection $styleCollection)
+    public function convertStyles(StyleCollection $styleCollection)
     {
         $styles = [];
 
@@ -47,10 +42,8 @@ class StyleWorker
                     break;
             }
         }
-        error_log(var_export($styles, true));
-        $phpExcelWorksheet
-            ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
-            ->applyFromArray($styles);
+
+        return $styles;
     }
 
     /**

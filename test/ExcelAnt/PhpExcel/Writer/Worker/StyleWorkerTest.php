@@ -15,21 +15,6 @@ class StyleWorkerTest extends \PHPUnit_Framework_TestCase
 {
     public function testApplyStyleOnCell()
     {
-        $localStyleStorage = [];
-
-        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
-        $phpExcelStyle = $this->getPhpExcelStyleMock();
-
-        $phpExcelStyle->expects($this->any())
-            ->method('applyFromArray')
-            ->will($this->returnCallback(function($styles) use (&$localStyleStorage) {
-                $localStyleStorage = $styles;
-            }));
-
-        $phpExcelWorksheet->expects($this->any())
-            ->method('getStyleByColumnAndRow')
-            ->will($this->returnValue($phpExcelStyle));
-
         $styleCollection = new StyleCollection([
             (new Fill())->setColor('000000'),
             (new Font())->setName('Verdana'),
@@ -60,26 +45,8 @@ class StyleWorkerTest extends \PHPUnit_Framework_TestCase
             ],
         ];
 
-        $styleWorker = (new StyleWorker())->applyStyles($phpExcelWorksheet, new Coordinate(1, 1), $styleCollection);
+        $styles = (new StyleWorker())->convertStyles($styleCollection);
 
-        $this->assertEquals($expected, $localStyleStorage);
-    }
-
-    /**
-     * Mock PHPExcel_Worksheet
-     * @return Mock
-     */
-    private function getPhpExcelWorksheetMock()
-    {
-        return $this->getMockBuilder('PHPExcel_Worksheet')->disableOriginalConstructor()->getMock();
-    }
-
-    /**
-     * Mock PHPExcel_Style
-     * @return Mock
-     */
-    private function getPhpExcelStyleMock()
-    {
-        return $this->getMockBuilder('PHPExcel_Style')->disableOriginalConstructor()->getMock();
+        $this->assertEquals($expected, $styles);
     }
 }
