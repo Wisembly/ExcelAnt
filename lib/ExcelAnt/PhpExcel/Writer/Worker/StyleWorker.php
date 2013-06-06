@@ -47,7 +47,7 @@ class StyleWorker
                     break;
             }
         }
-
+        error_log(var_export($styles, true));
         $phpExcelWorksheet
             ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
             ->applyFromArray($styles);
@@ -115,28 +115,28 @@ class StyleWorker
         if (null !== $borders->getTop()) {
             $bordersToReturn['top'] = [
                 'color' => ['rgb' => $borders->getTop()->getColor()],
-                'type'  => $borders->getTop()->getType(),
+                'style'  => $borders->getTop()->getType(),
             ];
         }
 
         if (null !== $borders->getBottom()) {
             $bordersToReturn['bottom'] = [
                 'color' => ['rgb' => $borders->getBottom()->getColor()],
-                'type'  => $borders->getBottom()->getType(),
+                'style'  => $borders->getBottom()->getType(),
             ];
         }
 
         if (null !== $borders->getLeft()) {
             $bordersToReturn['left'] = [
                 'color' => ['rgb' => $borders->getLeft()->getColor()],
-                'type'  => $borders->getLeft()->getType(),
+                'style'  => $borders->getLeft()->getType(),
             ];
         }
 
         if (null !== $borders->getRight()) {
             $bordersToReturn['right'] = [
                 'color' => ['rgb' => $borders->getRight()->getColor()],
-                'type'  => $borders->getRight()->getType(),
+                'style'  => $borders->getRight()->getType(),
             ];
         }
 

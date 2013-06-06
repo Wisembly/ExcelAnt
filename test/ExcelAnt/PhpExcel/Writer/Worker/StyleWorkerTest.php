@@ -54,8 +54,8 @@ class StyleWorkerTest extends \PHPUnit_Framework_TestCase
             ],
             'borders' => [
                 'top' => [
-                    'color' => ['rgb' => 'ff0000'],
-                    'type'  => Border::BORDER_MEDIUM,
+                    'color'  => ['rgb' => 'ff0000'],
+                    'style'  => Border::BORDER_MEDIUM,
                 ],
             ],
         ];
