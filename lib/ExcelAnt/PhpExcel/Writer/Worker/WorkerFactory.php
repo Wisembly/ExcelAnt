@@ -9,23 +9,36 @@ use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
 
 class WorkerFactory
 {
-    public function createTableWorker()
+    private $styleWorker;
+    private $cellWorker;
+    private $labelWorker;
+    private $tableWorker;
+
+    public function __construct()
     {
-        return new TableWorker($this->createCellWorker(), $this->createLabelWorker());
+        $this->styleWorker = new StyleWorker();
+        $this->cellWorker = new CellWorker($this->styleWorker);
+        $this->labelWorker = new LabelWorker($this->cellWorker);
+        $this->tableWorker = new TableWorker($this->cellWorker, $this->labelWorker);
     }
 
-    public function createLabelWorker()
+    public function getTableWorker()
     {
-        return new LabelWorker($this->createCellWorker());
+        return $this->styleWorker;
     }
 
-    public function createStyleWorker()
+    public function getLabelWorker()
     {
-        return new StyleWorker();
+        return $this->labelWorker;
     }
 
-    public function createCellWorker()
+    public function getStyleWorker()
     {
-        return new CellWorker($this->createStyleWorker());
+        return $this->styleWorker;
+    }
+
+    public function getCellWorker()
+    {
+        return $this->cellWorker;
     }
 }

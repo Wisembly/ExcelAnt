@@ -15,6 +15,6 @@ class WriterFactory
 
     public function createWriter()
     {
-        return new Writer($this->workerFactory->createTableWorker(), $this->workerFactory->createCellWorker(), $this->workerFactory->createStyleWorker());
+        return new Writer($this->workerFactory->getTableWorker(), $this->workerFactory->getCellWorker(), $this->workerFactory->getStyleWorker());
     }
 }
