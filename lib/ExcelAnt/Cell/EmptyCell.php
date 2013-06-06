@@ -4,9 +4,14 @@ namespace ExcelAnt\Cell;
 
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Traits\Coordinable;
 
 class EmptyCell implements CellInterface
 {
+    use Coordinable;
+
+    private $styleCollection;
+
     /**
      * @throws BadMethodCallException
      */
@@ -24,18 +29,28 @@ class EmptyCell implements CellInterface
     }
 
     /**
-     * @throws BadMethodCallException
+     * {@inheritdoc}
      */
     public function setStyles(StyleCollection $styles)
     {
-        throw new \BadMethodCallException("This method cannot be called");
+        $this->styleCollection = $styles;
+
+        return $this;
     }
 
     /**
-     * @throws BadMethodCallException
+     * {@inheritdoc}
      */
     public function getStyles()
     {
-        throw new \BadMethodCallException("This method cannot be called");
+        return $this->styleCollection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStyles()
+    {
+        return empty($this->styleCollection) ? false : true;
     }
 }

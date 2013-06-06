@@ -19,8 +19,7 @@ class CellTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetValue()
     {
-        $cell = new Cell();
-        $cell->setValue('foo');
+        $cell = (new Cell())->setValue('foo');
 
         $this->assertEquals('foo', $cell->getValue());
     }
@@ -28,9 +27,20 @@ class CellTest extends \PHPUnit_Framework_TestCase
     public function testAddAndStyle()
     {
         $styleCollection = new StyleCollection([new Fill(), new Font()]);
-        $cell = new Cell();
-        $cell->setStyles($styleCollection);
+        $cell = (new Cell())->setStyles($styleCollection);
 
         $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
+    }
+
+    public function testHasStyles()
+    {
+        $styleCollection = new StyleCollection([new Fill(), new Font()]);
+        $cell = new Cell();
+
+        $this->assertFalse($cell->hasStyles());
+
+        $cell->setStyles($styleCollection);
+
+        $this->assertTrue($cell->hasStyles());
     }
 }

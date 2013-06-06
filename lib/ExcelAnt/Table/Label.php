@@ -4,13 +4,17 @@ namespace ExcelAnt\Table;
 
 use ExcelAnt\Table\LabelInterface;
 use ExcelAnt\Cell\Cell;
+use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Collections\StyleCollection;
 
 class Label implements LabelInterface
 {
-    private $type;
+    private $type = self::TOP;
     private $values;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct($type = null)
     {
         if (isset($type)) {
@@ -58,14 +62,29 @@ class Label implements LabelInterface
     public function setValues(array $values, StyleCollection $styles = null)
     {
         foreach ($values as $value) {
-            $cell = new Cell($value);
 
-            if (null !== $styles) {
-                $cell->setStyles($styles);
+            // If we have an array here, this is because the client want to create a FULL label
+            if (is_array($value)) {
+
+                if (count($values) > 2) {
+                    throw new \InvalidArgumentException("If you want to create a full label, you must to pass only an array of two arrays");
+                }
+
+                $cells = [];
+
+                foreach ($value as $val) {
+                    $cells[] = $this->createCell($val, $styles);
+                }
+
+                $this->values[] = $cells;
+
+                continue;
             }
 
-            $this->values[] = $cell;
+            $this->values[] = $this->createCell($value, $styles);
         }
+
+        return $this;
     }
 
     /**
@@ -74,5 +93,20 @@ class Label implements LabelInterface
     public function getValues()
     {
         return $this->values;
+    }
+
+    private function createCell($value = null, StyleCollection $styles = null)
+    {
+        if (null === $value) {
+            $cell = new EmptyCell();
+        } else {
+            $cell = new Cell($value);
+        }
+
+        if (null !== $styles) {
+            $cell->setStyles($styles);
+        }
+
+        return $cell;
     }
 }

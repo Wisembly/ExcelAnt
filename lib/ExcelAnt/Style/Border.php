@@ -2,17 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleInterface;
-
-class Border implements StyleInterface
+class Border
 {
-    /* Border side */
-    const SIDE_LEFT   = 'left';
-    const SIDE_TOP    = 'top';
-    const SIDE_RIGHT  = 'right';
-    const SIDE_BOTTOM = 'bottom';
-    const SIDE_ALL    = 'all';
-
     /* Border style */
     const BORDER_NONE             = 'none';
     const BORDER_DASHDOT          = 'dashDot';
@@ -29,49 +20,8 @@ class Border implements StyleInterface
     const BORDER_THICK            = 'thick';
     const BORDER_THIN             = 'thin';
 
-    private $side;
     private $color = '000000';
-    private $type = self::BORDER_NONE;
-
-    /**
-     * @param string $side
-     *
-     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
-     *
-     * @return Border
-     */
-    public function __construct($side)
-    {
-        $this->checkSideParameter($side);
-        $this->side = $side;
-    }
-
-    /**
-     * Set side
-     *
-     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
-     *
-     * @param string $side
-     *
-     * @return Border
-     */
-    public function setSide($side)
-    {
-        $this->checkSideParameter($side);
-        $this->side = $side;
-
-        return $this;
-    }
-
-    /**
-     * Get side
-     *
-     * @return string
-     */
-    public function getSide()
-    {
-        return $this->side;
-    }
+    private $type = self::BORDER_THIN;
 
     /**
      * Set type
@@ -128,21 +78,6 @@ class Border implements StyleInterface
     }
 
     /**
-     * Return the side parameter list
-     *
-     * @return array
-     */
-    public function getSides()
-    {
-        return [
-            self::SIDE_LEFT,
-            self::SIDE_TOP,
-            self::SIDE_RIGHT,
-            self::SIDE_BOTTOM,
-        ];
-    }
-
-    /**
      * Return the type parameter list
      *
      * @return array
@@ -165,19 +100,5 @@ class Border implements StyleInterface
             self::BORDER_THICK,
             self::BORDER_THIN,
         ];
-    }
-
-    /**
-     * Check if the side parameter belong the side parameter list
-     *
-     * @throws InvalidArgumentException If the parameter doesn't belong the side parameter list
-     *
-     * @param  string $side
-     */
-    private function checkSideParameter($side)
-    {
-        if (!in_array($side, $this->getSides())) {
-            throw new \InvalidArgumentException("The parameter must belong to the Side parameter list");
-        }
     }
 }

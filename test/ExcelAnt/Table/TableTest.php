@@ -9,6 +9,7 @@ use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Coordinate\Coordinate;
 
 class TableTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,15 +25,6 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->table->setLabel(new Label());
 
         $this->assertInstanceOf('ExcelAnt\Table\Label', $this->table->getLabel());
-    }
-
-    public function testSetAndGetCell()
-    {
-        $this->table->setCell(new Cell('Foo'));
-        $cellCollection = $this->table->getCells();
-
-        $this->assertCount(1, $cellCollection);
-        $this->assertEquals('Foo', $cellCollection[0]->getValue());
     }
 
     /**
@@ -85,8 +77,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRowWhenWhereAreAlreadyRows()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby']);
         $row = $this->table->getRow(1);
 
         $this->assertEquals('bob', $row[0]->getValue());
@@ -95,21 +87,24 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastRow()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby']);
+
         $this->assertEquals(1, $this->table->getLastRow());
     }
 
     public function testGetLastRowWithIndexesNonContinue()
     {
         $this->table->setRow(['foo', 'bar', 'baz'], 2);
+
         $this->assertEquals(2, $this->table->getLastRow());
     }
 
     public function testGetLastRowWithColumn()
     {
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->setColumn(['bob', 'bobby']);
+        $this->table->setColumn(['foo', 'bar', 'baz'])
+            ->setColumn(['bob', 'bobby']);
+
         $this->assertEquals(2, $this->table->getLastRow());
     }
 
@@ -131,8 +126,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testCleanRow()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->cleanRow(0);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->cleanRow(0);
         $row = $this->table->getRow(0);
 
         $this->assertCount(3, $row);
@@ -164,8 +159,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRowWithAnExistingIndex()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby'], 0);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby'], 0);
         $row = $this->table->getRow(0);
 
         $this->assertEquals('bob', $row[0]->getValue());
@@ -176,8 +171,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRowWithAnExistingIndexAndTheNewDataAreMoreLength()
     {
-        $this->table->setRow(['bob', 'bobby',]);
-        $this->table->setRow(['foo', 'bar', 'baz'], 0);
+        $this->table->setRow(['bob', 'bobby',])
+            ->setRow(['foo', 'bar', 'baz'], 0);
         $row = $this->table->getRow(0);
 
         $this->assertEquals('foo', $row[0]->getValue());
@@ -188,8 +183,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRowWithAnExistingRowAndEmptyValue()
     {
-        $this->table->setRow(['bob', 'bobby', null, null]);
-        $this->table->setRow(['foo', 'bar', 'baz'], 0);
+        $this->table->setRow(['bob', 'bobby', null, null])
+            ->setRow(['foo', 'bar', 'baz'], 0);
         $row = $this->table->getRow(0);
 
         $this->assertEquals('foo', $row[0]->getValue());
@@ -228,9 +223,9 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveRow()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
-        $this->table->removeRow(0);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby'])
+            ->removeRow(0);
 
         $this->assertCount(1, $this->table->getTable());
 
@@ -241,9 +236,9 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveRowWithReIndex()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
-        $this->table->removeRow(0, true);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby'])
+            ->removeRow(0, true);
 
         $this->assertCount(1, $this->table->getTable());
 
@@ -308,10 +303,10 @@ class TableTest extends \PHPUnit_Framework_TestCase
     {
         $data = ['col1', 'col2', 'col3'];
 
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby'])
+            ->setColumn($data);
 
-        $this->table->setColumn($data);
         $column = $this->table->getColumn(3);
 
         foreach ($column as $key => $cell) {
@@ -321,16 +316,16 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastColumn()
     {
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->setColumn(['foo', 'bar', 'baz']);
+        $this->table->setColumn(['foo', 'bar', 'baz'])
+            ->setColumn(['foo', 'bar', 'baz']);
 
         $this->assertEquals(1, $this->table->getLastColumn());
     }
 
     public function testGetLastColumnWithRows()
     {
-        $this->table->setRow(['foo', 'bar', 'baz']);
-        $this->table->setRow(['bob', 'bobby']);
+        $this->table->setRow(['foo', 'bar', 'baz'])
+            ->setRow(['bob', 'bobby']);
 
         $this->assertEquals(2, $this->table->getLastColumn());
     }
@@ -353,8 +348,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testCleanColumn()
     {
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->cleanColumn(0);
+        $this->table->setColumn(['foo', 'bar', 'baz'])
+            ->cleanColumn(0);
         $column = $this->table->getColumn(0);
 
         $this->assertCount(3, $column);
@@ -382,10 +377,10 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveColumn()
     {
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->setColumn(['foo', 'bar', 'baz']);
-        $this->table->removeColumn(1);
+        $this->table->setColumn(['foo', 'bar', 'baz'])
+            ->setColumn(['foo', 'bar', 'baz'])
+            ->setColumn(['foo', 'bar', 'baz'])
+            ->removeColumn(1);
 
         $row = $this->table->getRow(0);
         $this->assertFalse(array_key_exists(1, $row));
@@ -398,39 +393,41 @@ class TableTest extends \PHPUnit_Framework_TestCase
     public function testGetWith()
     {
         $this->table->setRow(['foo', 'bar', 'baz']);
+
         $this->assertEquals(3, $this->table->getWidth());
     }
 
     public function testGetWidthWithEmptyCell()
     {
         $this->table->setRow(['foo', null, 'bar', 'baz', null]);
+
         $this->assertEquals(5, $this->table->getWidth());
     }
 
     public function testGetHeight()
     {
         $this->table->setColumn(['foo', 'bar', 'baz']);
+
         $this->assertEquals(3, $this->table->getHeight());
     }
 
     public function testGetHeightWithEmptyCell()
     {
         $this->table->setColumn(['foo', null, 'bar', 'baz', null]);
+
         $this->assertEquals(5, $this->table->getHeight());
     }
 
     public function testBigArray()
     {
-        $this->table->setRow(['foo', null, null, 'bar', 'baz', null]);
-        $this->table->setRow(['foo', 'bar']);
-        $this->table->setRow(['foo', null, null, 'bar']);
-        $this->table->setRow(['foo', null, 'bar', 'baz']);
-
-        $this->table->cleanRow(1);
-
-        $this->table->setColumn(['foo', 'bar', null, 'baz']);
-        $this->table->setColumn(['foo', 'bar', null, 'baz'], 0);
-        $this->table->setColumn([null, 'foo', null, 'baz']);
+        $this->table->setRow(['foo', null, null, 'bar', 'baz', null])
+            ->setRow(['foo', 'bar'])
+            ->setRow(['foo', null, null, 'bar'])
+            ->setRow(['foo', null, 'bar', 'baz'])
+            ->cleanRow(1)
+            ->setColumn(['foo', 'bar', null, 'baz'])
+            ->setColumn(['foo', 'bar', null, 'baz'], 0)
+            ->setColumn([null, 'foo', null, 'baz']);
 
         $row = $this->table->getRow(0);
         $this->assertCount(8, $row);

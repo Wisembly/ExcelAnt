@@ -9,8 +9,7 @@ class FontTest extends StyleTestCase
 {
     public function testSetAndGetName()
     {
-        $font = new Font();
-        $font->setName('Arial');
+        $font = (new Font())->setName('Arial');
 
         $this->assertEquals('Arial', $font->getName());
     }
@@ -20,14 +19,12 @@ class FontTest extends StyleTestCase
      */
     public function testSetSizeWithWrongParameter()
     {
-        $font = new Font();
-        $font->setSize('foo');
+        $font = (new Font())->setSize('foo');
     }
 
     public function testSetAndGetSize()
     {
-        $font = new Font();
-        $font->setSize(20);
+        $font = (new Font())->setSize(20);
 
         $this->assertEquals(20, $font->getSize());
     }
@@ -37,14 +34,12 @@ class FontTest extends StyleTestCase
      */
     public function testSetBoldWithWrongParameter()
     {
-        $font = new Font();
-        $font->setBold('foo');
+        $font = (new Font())->setBold('foo');
     }
 
     public function testEnableAndDisableBold()
     {
-        $font = new Font();
-        $font->setBold(true);
+        $font = (new Font())->setBold(true);
 
         $this->assertTrue($font->isBold());
 
@@ -58,14 +53,12 @@ class FontTest extends StyleTestCase
      */
     public function testSetItalicWithWrongParameter()
     {
-        $font = new Font();
-        $font->setItalic('foo');
+        $font = (new Font())->setItalic('foo');
     }
 
     public function testEnableAndDisableItalic()
     {
-        $font = new Font();
-        $font->setItalic(true);
+        $font = (new Font())->setItalic(true);
 
         $this->assertTrue($font->isItalic());
 
@@ -76,8 +69,7 @@ class FontTest extends StyleTestCase
 
     public function testSetAndGetColor()
     {
-        $font = new Font();
-        $font->setColor('ff0000');
+        $font = (new Font())->setColor('ff0000');
 
         $this->assertEquals('ff0000', $font->getColor());
     }
@@ -88,14 +80,12 @@ class FontTest extends StyleTestCase
      */
     public function testSetUnderlineWithWongParameter()
     {
-        $font = new Font();
-        $font->setUnderline('foo');
+        $font = (new Font())->setUnderline('foo');
     }
 
     public function testSetAndGetUnderline()
     {
-        $font = new Font();
-        $font->setUnderline(Font::UNDERLINE_DOUBLE);
+        $font = (new Font())->setUnderline(Font::UNDERLINE_DOUBLE);
 
         $this->assertEquals(Font::UNDERLINE_DOUBLE, $font->getUnderline());
     }

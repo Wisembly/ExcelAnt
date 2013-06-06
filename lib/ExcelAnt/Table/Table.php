@@ -8,17 +8,14 @@ use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Cell\Cell;
 use ExcelAnt\Cell\EmptyCell;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Traits\Coordinable;
 
 class Table implements TableInterface
 {
+    use Coordinable;
+
     private $table = [];
-    private $label;
-    private $cellCollection = [];
-
-    public function __construct()
-    {
-
-    }
+    private $label = null;
 
     /**
      * {@inheritdoc}
@@ -162,24 +159,6 @@ class Table implements TableInterface
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCell(CellInterface $cell)
-    {
-        $this->cellCollection[] = $cell;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCells()
-    {
-        return $this->cellCollection;
     }
 
     /**

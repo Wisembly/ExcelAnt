@@ -4,9 +4,12 @@ namespace ExcelAnt\Cell;
 
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Traits\Coordinable;
 
 class Cell implements CellInterface
 {
+    use Coordinable;
+
     private $value;
     private $styleCollection;
 
@@ -54,5 +57,13 @@ class Cell implements CellInterface
     public function getStyles()
     {
         return $this->styleCollection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStyles()
+    {
+        return empty($this->styleCollection) ? false : true;
     }
 }

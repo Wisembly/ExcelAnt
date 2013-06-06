@@ -32,19 +32,22 @@ class EmptyCellTest extends \PHPUnit_Framework_TestCase
         $this->emptyCell->getValue();
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
-    public function testCannotSetStyles()
+    public function testAddAndStyle()
     {
-        $this->emptyCell->setStyles(new StyleCollection([new Fill(), new Font()]));
+        $styleCollection = new StyleCollection([new Fill(), new Font()]);
+        $this->emptyCell->setStyles($styleCollection);
+
+        $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $this->emptyCell->getStyles());
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
-    public function testCannotGetStyles()
+    public function testHasStyles()
     {
-        $this->emptyCell->getStyles();
+        $styleCollection = new StyleCollection([new Fill(), new Font()]);
+
+        $this->assertFalse($this->emptyCell->hasStyles());
+
+        $this->emptyCell->setStyles($styleCollection);
+
+        $this->assertTrue($this->emptyCell->hasStyles());
     }
 }
