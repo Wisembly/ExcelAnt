@@ -24,9 +24,11 @@ class CellWorker
         if ($cell->hasStyles()) {
             $styles = $this->styleWorker->convertStyles($cell->getStyles());
 
-            $phpExcelWorksheet
-                ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
-                ->applyFromArray($styles);
+            if (!empty($styles)) {
+                $phpExcelWorksheet
+                    ->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())
+                    ->applyFromArray($styles);
+            }
         }
 
         if ($cell instanceof EmptyCell) {
