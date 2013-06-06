@@ -114,28 +114,28 @@ class StyleWorker
 
         if (null !== $borders->getTop()) {
             $bordersToReturn['top'] = [
-                'color' => $borders->getTop()->getcolor(),
+                'color' => ['rgb' => $borders->getTop()->getColor()],
                 'type'  => $borders->getTop()->getType(),
             ];
         }
 
         if (null !== $borders->getBottom()) {
             $bordersToReturn['bottom'] = [
-                'color' => $borders->getBottom()->getcolor(),
+                'color' => ['rgb' => $borders->getBottom()->getColor()],
                 'type'  => $borders->getBottom()->getType(),
             ];
         }
 
         if (null !== $borders->getLeft()) {
             $bordersToReturn['left'] = [
-                'color' => $borders->getLeft()->getcolor(),
+                'color' => ['rgb' => $borders->getLeft()->getColor()],
                 'type'  => $borders->getLeft()->getType(),
             ];
         }
 
         if (null !== $borders->getRight()) {
             $bordersToReturn['right'] = [
-                'color' => $borders->getRight()->getcolor(),
+                'color' => ['rgb' => $borders->getRight()->getColor()],
                 'type'  => $borders->getRight()->getType(),
             ];
         }

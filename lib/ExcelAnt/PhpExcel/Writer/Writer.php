@@ -32,6 +32,8 @@ class Writer implements WriterInterface
         foreach ($workbook->getAllSheets() as $sheet) {
             $phpExcelWorksheet = $sheet->getRawClass();
 
+            $phpExcel->addSheet($phpExcelWorksheet);
+
             // Write the tables
             foreach ($sheet->getTables() as $table) {
                 $this->tableWorker->writeTable($phpExcelWorksheet, $table);
@@ -41,8 +43,6 @@ class Writer implements WriterInterface
             foreach ($sheet->getCells() as $cell) {
                 $this->cellWorker->writeCell($cell, $phpExcelWorksheet, $cell->getCoordinate());
             }
-
-            $phpExcel->addSheet($phpExcelWorksheet);
         }
 
         $writer->save($phpExcel);

@@ -21,7 +21,7 @@ class Border
     const BORDER_THIN             = 'thin';
 
     private $color = '000000';
-    private $type = self::BORDER_NONE;
+    private $type = self::BORDER_MEDIUM;
 
     /**
      * Set type
