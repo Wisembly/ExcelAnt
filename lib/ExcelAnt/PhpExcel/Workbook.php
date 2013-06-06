@@ -225,6 +225,14 @@ class Workbook implements WorkbookInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasStyles()
+    {
+        return empty($this->styleCollection) ? false : true;
+    }
+
+    /**
      * Check if the index parameter used by many method to handle the sheetCollection answers the requirements
      *
      * @param integer $index Numeric index of the sheetCollection
