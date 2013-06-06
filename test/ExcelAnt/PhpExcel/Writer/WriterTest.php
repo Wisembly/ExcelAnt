@@ -5,6 +5,9 @@ namespace ExcelAnt\PhpExcel\Writer;
 use ExcelAnt\PhpExcel\Writer\Writer;
 use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\PhpExcel\Sheet;
+use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Style\Fill;
+use ExcelAnt\Style\Font;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\Cell;
@@ -27,8 +30,12 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addTable(new Table(), new Coordinate(1, 1));
         $workbook->addSheet($sheet);
 
-        $writer = new Writer($tableWorker, $this->getCellWorkerMock());
-        $writer->write($workbook, $this->getPhpExcelWriterInterfaceMock());
+        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
+        $phpExcelWriterInterace->expects($this->once())
+            ->method('save');
+
+        $writer = new Writer($tableWorker, $this->getCellWorkerMock(), $this->getStyleWorkerMock());
+        $writer->write($workbook, $phpExcelWriterInterace);
     }
 
     public function testWriteASingleCell()
@@ -54,8 +61,12 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addCell((new Cell())->setValue('bar'), new Coordinate(2, 1));
         $workbook->addSheet($sheet);
 
-        $writer = new Writer($tableWorker, $cellWorker);
-        $writer->write($workbook, $this->getPhpExcelWriterInterfaceMock());
+        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
+        $phpExcelWriterInterace->expects($this->once())
+            ->method('save');
+
+        $writer = new Writer($tableWorker, $cellWorker, $this->getStyleWorkerMock());
+        $writer->write($workbook, $phpExcelWriterInterace);
 
         $expected = [
             ['foo', 1, 1],
@@ -63,6 +74,33 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         ];
 
         $this->assertEquals($expected, $localCellStorage);
+    }
+
+    public function testApplyTheStylesOfTheWorkbook()
+    {
+        $phpExcelStyle = $this->getPhpExcelStyleMock();
+        $phpExcelStyle->expects($this->once())
+            ->method('applyFromArray');
+
+        $phpExcel = $this->getPhpExcelMock();
+        $phpExcel->expects($this->once())
+            ->method('getDefaultStyle')
+            ->will($this->returnValue($phpExcelStyle));
+
+        $workbook = $this->createWorkbook($phpExcel);
+
+        $workbook->addStyles(new StyleCollection([new Fill(), new Font()]));
+
+        $styleWorker = $this->getStyleWorkerMock();
+        $styleWorker->expects($this->once())
+            ->method('convertStyles');
+
+        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
+        $phpExcelWriterInterace->expects($this->once())
+            ->method('save');
+
+        $writer = new Writer($this->getTableWorkerMock(), $this->getCellWorkerMock(), $styleWorker);
+        $writer->write($workbook, $phpExcelWriterInterace);
     }
 
     /**
@@ -90,6 +128,15 @@ class WriterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Mock PHPExcel_Style
+     * @return Mock
+     */
+    private function getPhpExcelStyleMock()
+    {
+        return $this->getMockBuilder('PHPExcel_Style')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
      * Mock TableWorker
      *
      * @return Mock_TableWorker
@@ -107,6 +154,16 @@ class WriterTest extends \PHPUnit_Framework_TestCase
     public function getCellWorkerMock()
     {
         return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
+    }
+
+    /**
+     * Mock StyleWorker
+     *
+     * @return Mock_StyleWorker
+     */
+    public function getStyleWorkerMock()
+    {
+        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**

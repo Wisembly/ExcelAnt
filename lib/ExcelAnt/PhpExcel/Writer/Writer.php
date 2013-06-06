@@ -5,6 +5,7 @@ namespace ExcelAnt\PhpExcel\Writer;
 use ExcelAnt\Writer\WriterInterface;
 use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
 use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
+use ExcelAnt\PhpExcel\Writer\Worker\StyleWorker;
 use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 use ExcelAnt\Workbook\WorkbookInterface;
 
@@ -12,14 +13,16 @@ class Writer implements WriterInterface
 {
     private $tableWorker;
     private $cellWorker;
+    private $styleWorker;
 
     /**
      * @param WorkbookInterface $workbook The workbook to be exported
      */
-    public function __construct(TableWorker $tableWorker, CellWorker $cellWorker)
+    public function __construct(TableWorker $tableWorker, CellWorker $cellWorker, StyleWorker $styleWorker)
     {
         $this->tableWorker = $tableWorker;
         $this->cellWorker = $cellWorker;
+        $this->styleWorker = $styleWorker;
     }
 
     /**
@@ -28,6 +31,13 @@ class Writer implements WriterInterface
     public function write(WorkbookInterface $workbook, PhpExcelWriterInterface $writer)
     {
         $phpExcel = $workbook->getRawClass();
+
+        // Apply default workbook styles
+        if ($workbook->hasStyles()) {
+            $styles = $this->styleWorker->convertStyles($workbook->getStyles());
+
+            $phpExcel->getDefaultStyle()->applyFromArray($styles);
+        }
 
         foreach ($workbook->getAllSheets() as $sheet) {
             $phpExcelWorksheet = $sheet->getRawClass();
