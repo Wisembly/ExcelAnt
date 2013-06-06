@@ -6,12 +6,7 @@ use ExcelAnt\Style\StyleInterface;
 
 class Fill implements StyleInterface
 {
-    private $color;
-
-    public function __construct($color = null)
-    {
-        $this->color = $color ?: 'ffffff';
-    }
+    private $color = 'ffffff';
 
     /**
      * Set color

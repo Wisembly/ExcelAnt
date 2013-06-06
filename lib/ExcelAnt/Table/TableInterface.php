@@ -5,9 +5,26 @@ namespace ExcelAnt\Table;
 use ExcelAnt\Table\Label;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Coordinate\Coordinate;
 
 interface TableInterface
 {
+    /**
+     * Set Coordinate
+     *
+     * @param Coordinate $coordinate
+     *
+     * @return TableInterface
+     */
+    public function setCoordinate(Coordinate $coordinate);
+
+    /**
+     * Get Coordinate
+     *
+     * @return Coordinate
+     */
+    public function getCoordinate();
+
     /**
      * Set label
      *
@@ -81,20 +98,6 @@ interface TableInterface
      * @return TableInterface
      */
     public function removeRow($index, $reindex = false);
-
-    /**
-     * Set cell
-     *
-     * @param CellInterface $cell The cell to add
-     */
-    public function setCell(CellInterface $cell);
-
-    /**
-     * Return the cells
-     *
-     * @return array Containing Cell classes
-     */
-    public function getCells();
 
     /**
      * Set column

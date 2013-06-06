@@ -13,14 +13,12 @@ class AlignmentTest extends StyleTestCase
      */
     public function testSetVerticalWithWrongParameter($param)
     {
-        $alignment = new Alignment();
-        $alignment->setVertical($param);
+        $alignment = (new Alignment())->setVertical($param);
     }
 
     public function testSetAndGetVertical()
     {
-        $alignment = new Alignment();
-        $alignment->setVertical(Alignment::VERTICAL_BOTTOM);
+        $alignment = (new Alignment())->setVertical(Alignment::VERTICAL_BOTTOM);
 
         $this->assertEquals(Alignment::VERTICAL_BOTTOM, $alignment->getVertical());
     }
@@ -31,14 +29,12 @@ class AlignmentTest extends StyleTestCase
      */
     public function testSetHorizontalWithWrongParameter($param)
     {
-        $alignment = new Alignment();
-        $alignment->setHorizontal($param);
+        $alignment = (new Alignment())->setHorizontal($param);
     }
 
     public function testSetAndGetHorizontal()
     {
-        $alignment = new Alignment();
-        $alignment->setHorizontal(Alignment::HORIZONTAL_LEFT);
+        $alignment = (new Alignment())->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $this->assertEquals(Alignment::HORIZONTAL_LEFT, $alignment->getHorizontal());
     }

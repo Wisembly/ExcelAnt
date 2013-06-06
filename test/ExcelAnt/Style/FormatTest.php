@@ -13,14 +13,12 @@ class FormatTest extends StyleTestCase
      */
     public function testSetFormatWithWrongParameter($format)
     {
-        $format = new Format();
-        $format->setFormat($format);
+        $format = (new Format())->setFormat($format);
     }
 
     public function testSetAndGetFormat()
     {
-        $format = new Format();
-        $format->setFormat(Format::TYPE_NUMERIC);
+        $format = (new Format())->setFormat(Format::TYPE_NUMERIC);
 
         $this->assertEquals(Format::TYPE_NUMERIC, $format->getFormat());
     }

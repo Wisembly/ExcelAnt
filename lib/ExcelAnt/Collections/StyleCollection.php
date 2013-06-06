@@ -133,6 +133,20 @@ class StyleCollection implements StyleCollectionInterface
     /**
      * {@inheritDoc}
      */
+    public function getElement(StyleInterface $style)
+    {
+        $key = $this->contains($style);
+
+        if (false === $key) {
+            throw new \OutOfBoundsException("This style doesn't exist in the styleCollection");
+        }
+
+        return $this->get($key);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getKeys()
     {
         return array_keys($this->_styles);
@@ -193,7 +207,7 @@ class StyleCollection implements StyleCollectionInterface
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->styles);
+        return new ArrayIterator($this->_styles);
     }
 
     /*

@@ -5,6 +5,7 @@ namespace ExcelAnt\Collections;
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
+use ExcelAnt\Style\Format;
 use ExcelAnt\Style\Alignment;
 
 class StyleCollectionTest extends \PHPUnit_Framework_TestCase
@@ -102,6 +103,23 @@ class StyleCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->styleCollection->containsKey(0));
         $this->assertFalse($this->styleCollection->containsKey(2));
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testGetElementWithNonExistentElement()
+    {
+        $this->styleCollection->getElement(new Format());
+    }
+
+    public function testGetElement()
+    {
+        $this->styleCollection->add((new Format())->setFormat(Format::TYPE_NUMERIC));
+        $element = $this->styleCollection->getElement(new Format());
+
+        $this->assertInstanceOf('ExcelAnt\Style\Format', $element);
+        $this->assertEquals(Format::TYPE_NUMERIC, $element->getFormat());
     }
 
     public function testGet()

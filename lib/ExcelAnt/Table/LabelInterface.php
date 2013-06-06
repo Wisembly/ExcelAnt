@@ -11,6 +11,11 @@ interface LabelInterface
     const FULL = 'full';
 
     /**
+     * @param string $type The label type
+     */
+    public function __construct($type = null);
+
+    /**
      * Set type
      *
      * @param string $type

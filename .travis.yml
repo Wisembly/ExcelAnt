@@ -21,6 +21,8 @@ before_install:
   - sudo service apache2 restart &> /dev/null
 
 before_script:
+  - cp .travis/phpunit.xml phpunit.xml
+
   # composer
   - curl -s https://getcomposer.org/installer | php
   - php composer.phar install --dev --prefer-source --optimize-autoloader --no-interaction
