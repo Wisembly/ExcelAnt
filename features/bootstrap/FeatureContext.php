@@ -26,6 +26,7 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         $this->useContext('sheet', new SheetContext);
+        $this->useContext('style', new StyleContext);
     }
 
     /**
@@ -69,5 +70,13 @@ class FeatureContext extends BehatContext
                 }
             }
         }
+    }
+
+    /**
+     * @Given /^I add the StyleCollection with the index "([^"]*)" into my Workbook$/
+     */
+    public function iAddTheStylecollectionWithTheIndexIntoMyWorkbook($index)
+    {
+        throw new PendingException();
     }
 }
