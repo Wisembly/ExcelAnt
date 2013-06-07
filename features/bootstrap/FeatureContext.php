@@ -77,6 +77,7 @@ class FeatureContext extends BehatContext
      */
     public function iAddTheStylecollectionWithTheIndexIntoMyWorkbook($index)
     {
-        throw new PendingException();
+        $styleCollection = 'current' === $index ? $this->getSubcontext('style')->styleCollection[$this->getSubcontext('style')->currentStyleCollection] : $this->getSubcontext('style')->styleCollection[$index];
+        $this->workbook->addStyles($styleCollection);
     }
 }

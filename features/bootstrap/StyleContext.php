@@ -23,8 +23,8 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class StyleContext extends BehatContext
 {
-    private $styleCollection = [];
-    private $currentStyleCollection = 0;
+    public $styleCollection = [];
+    public $currentStyleCollection = 0;
 
     /**
      * @Given /^I create a StyleCollection$/
@@ -49,9 +49,9 @@ class StyleContext extends BehatContext
     }
 
     /**
-     * @Given /^I add a Style "([^"]*)" with the following data to the StyleCollection with the index "":$/
+     * @Given /^I add a Style "([^"]*)" with the following data to the StyleCollection with the index "([^"]*)":$/
      */
-    public function iAddAStyleWithTheFollowingDataToTheStylecollectionWithTheIndex($style, TableNode $data)
+    public function iAddAStyleWithTheFollowingDataToTheStylecollectionWithTheIndex($style, $styleCollectionIndex, TableNode $data)
     {
         switch ($style) {
             case 'Alignment':
@@ -78,5 +78,7 @@ class StyleContext extends BehatContext
                 $class->$method($value);
             }
         }
+
+        $this->styleCollection['current' === $styleCollectionIndex ? $this->currentStyleCollection : $styleCollecitonIndex]->add($class);
     }
 }
