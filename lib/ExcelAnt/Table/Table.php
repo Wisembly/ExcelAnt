@@ -187,6 +187,10 @@ class Table implements TableInterface
                 $cell = new Cell($data[$i]);
             }
 
+            if (null !== $styles) {
+                $cell->setStyles($styles);
+            }
+
             $this->table[$i][$index] = $cell;
         }
 

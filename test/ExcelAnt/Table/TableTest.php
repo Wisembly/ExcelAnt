@@ -314,6 +314,17 @@ class TableTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testSetColumnWithStyles()
+    {
+        $styles = new StyleCollection([new Fill(), new Font()]);
+        $this->table->setColumn(['foo', 'bar', 'baz'], null, $styles);
+        $column = $this->table->getColumn(0);
+
+        foreach ($column as $cell) {
+            $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
+        }
+    }
+
     public function testGetLastColumn()
     {
         $this->table->setColumn(['foo', 'bar', 'baz'])
