@@ -134,7 +134,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(3));
 
         $phpExcelWorksheet->expects($this->any())
-            ->method('getColumnDimension')
+            ->method('getColumnDimensionByColumn')
             ->will($this->returnValue($phpExcelRowDimension));
 
         $sheet = $this->createSheet(null, $phpExcelWorksheet)->setColumnWidth(3, 1);

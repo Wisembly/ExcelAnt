@@ -134,7 +134,7 @@ class Sheet implements SheetInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        $this->phpExcelWorksheet->getColumnDimension($index)->setWidth($width);
+        $this->phpExcelWorksheet->getColumnDimensionByColumn($index)->setWidth($width);
 
         return $this;
     }
@@ -148,7 +148,7 @@ class Sheet implements SheetInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        return $this->phpExcelWorksheet->getColumnDimension($index)->getWidth();
+        return $this->phpExcelWorksheet->getColumnDimensionByColumn($index)->getWidth();
     }
 
     public function importImage()
