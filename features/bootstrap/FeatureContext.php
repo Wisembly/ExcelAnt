@@ -10,30 +10,22 @@ use Behat\Gherkin\Node\PyStringNode,
 use ExcelAnt\PhpExcel\Workbook,
     ExcelAnt\PhpExcel\Sheet;
 
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
  * Features context.
  */
 class FeatureContext extends BehatContext
 {
-    private $workbook;
-    private $sheet;
+    public $workbook;
 
     /**
-     * Initializes context.
-     * Every scenario gets it's own context object.
-     *
      * @param array $parameters context parameters (set them up through behat.yml)
      */
     public function __construct(array $parameters)
     {
-        // Initialize your context here
+        $this->useContext('sheet', new SheetContext);
     }
 
     /**
@@ -45,19 +37,20 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @Given /^I create a Sheet$/
+     * @Given /^I add the Sheet with the index "([^"]*)" into the Workbook$/
      */
-    public function iCreateASheet()
+    public function iAddTheSheetWithTheIndexIntoTheWorkbook($index)
     {
-        $this->sheet = new Sheet($this->workbook);
+        $this->workbook->addSheet($this->getSubContext('sheet')->sheetCollection[$index]);
     }
 
     /**
-     * @Then /^I add a sheet in the Workbook$/
+     * @Given /^I add all Sheet into the Workbook$/
      */
-    public function iAddASheetInTheWorkbook()
+    public function iAddAllSheetIntoTheWorkbook()
     {
-        $this->workbook->addSheet($this->sheet);
-        die(var_dump($this->workbook));
+        foreach ($this->getSubContext('sheet')->sheetCollection as $key => $sheet) {
+            $this->iAddTheSheetWithTheIndexIntoTheWorkbook($key);
+        }
     }
 }
