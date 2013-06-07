@@ -60,9 +60,16 @@ class FeatureContext extends BehatContext
      */
     public function iSetTheFollowingPropertiesToMyWorkbook(TableNode $table)
     {
+        $authorizedProperties = ['title', 'creator', 'description', 'company', 'subject'];
+
         foreach ($table->getHash() as $values) {
 
             foreach ($values as $property => $value) {
+
+                if (!in_array($property, $$authorizedProperties)) {
+                    continue;
+                }
+
                 $method = 'set' . ucfirst($property);
 
                 if (method_exists($this->workbook, $method)) {

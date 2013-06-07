@@ -7,7 +7,10 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
-use ExcelAnt\PhpExcel\Sheet;
+use ExcelAnt\PhpExcel\Sheet,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Cell\EmptyCell;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -44,5 +47,73 @@ class SheetContext extends BehatContext
         end($keys);
 
         $this->currentSheetIndex = current($keys);
+    }
+
+    /**
+     * @Given /^I set the following properties to my Sheet with the index "([^"]*)":$/
+     */
+    public function iSetTheFollowingPropertiesToMySheet($index, TableNode $table)
+    {
+        $authorizedProperties = ['title'];
+        $index = 'current' === $index ? $this->currentSheetIndex : $index;
+
+        foreach ($table->getHash() as $values) {
+
+            foreach ($values as $property => $value) {
+
+                if (!in_array($property, $authorizedProperties)) {
+                    continue;
+                }
+
+                $method = 'set' . ucfirst($property);
+
+                if (method_exists($this->sheetCollection[$index], $method)) {
+                    $this->sheetCollection[$index]->$method($value);
+                }
+            }
+        }
+    }
+
+    /**
+     * @Given /^I add a new Cell with the value "([^"]*)" with the styleCollection with index "([^"]*)" in the Sheet with index "([^"]*)" at the coordinates "([^"]*)"$/
+     */
+    public function iAddANewCellWithTheValueWithTheStylecollectionWithIndexInTheSheetWithIndexAtTheCoordinates($value, $styleCollectionIndex, $sheetIndex, $coordinate)
+    {
+        $coordinate = explode(',', $coordinate);
+        $coordinate = new Coordinate($coordinate[0], $coordinate[1]);
+
+        if ('null' === $styleCollectionIndex) {
+            $styleCollection = null;
+        } elseif ('current' === $styleCollectionIndex) {
+            $styleCollection = $this->getMainContext()->getSubcontext('style')->styleCollection[$this->getMainContext()->getSubcontext('style')->currentStyleCollection];
+        } else {
+            $styleCollection = $this->getMainContext()->getSubcontext('style')->styleCollection[$styleCollectionIndex];
+        }
+
+        if ('null' === $value) {
+            $cell = new EmptyCell();
+        } else {
+            $cell = new Cell($value);
+        }
+
+        $this->sheetCollection['current' === $sheetIndex ? $this->currentSheetIndex : $sheetIndex]->addCell($cell, $coordinate);
+    }
+
+    /**
+     * @Given /^I set the row "([^"]*)" height with the value "([^"]*)" of the Sheet with index "([^"]*)"$/
+     */
+    public function iSetTheRowHeightOfTheSheetWithIndex($value, $indexRow, $index)
+    {
+        $value = (int) $value;
+        $this->sheetCollection['current' === $index ? $this->currentSheetIndex : $index]->setRowHeight($value, $indexRow);
+    }
+
+    /**
+     * @Given /^I set the column "([^"]*)" width with the value "([^"]*)" of the Sheet with index "([^"]*)"$/
+     */
+    public function iSetTheColumnWidthWithTheValueOfTheSheetWithIndex($value, $indexColumn, $index)
+    {
+        $value = (int) $value;
+        $this->sheetCollection['current' === $index ? $this->currentSheetIndex : $index]->setColumnWidth($value, $indexColumn);
     }
 }
