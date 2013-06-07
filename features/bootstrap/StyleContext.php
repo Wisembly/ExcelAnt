@@ -45,7 +45,6 @@ class StyleContext extends BehatContext
         end($keys);
 
         $this->currentStyleCollection = current($keys);
-        error_log(var_export($this->currentStyleCollection, true));
     }
 
     /**

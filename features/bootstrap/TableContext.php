@@ -7,7 +7,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
-use ExcelAnt\Table\Table;
+use ExcelAnt\Table\Table,
+    ExcelAnt\Table\Label;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -47,12 +48,12 @@ class TableContext extends BehatContext
     }
 
     /**
-     * @Given /^I insert the following rows in the Table "([^"]*)" at the index "([^"]*)" with the style "([^"]*)":$/
+     * @Given /^I insert the following rows in the Table "([^"]*)" at the index "([^"]*)" with the styleCollection "([^"]*)":$/
      */
-    public function iInsertTheFollowingRowsInTheTableAtTheIndexWithTheStyle($tableIndex, $rowIndex, $styleIndex, TableNode $rows)
+    public function iInsertTheFollowingRowsInTheTableAtTheIndexWithTheStyle($tableIndex, $rowIndex, $styleCollectionIndex, TableNode $rows)
     {
-        $tableIndex = 'current' === $tableIndex ? $this->currentTableIndex : $tableIndex;
-        $table = $this->getTable($tableIndex);
+        $table = $this->getTable('current' === $tableIndex ? $this->currentTableIndex : $tableIndex);
+        $styleCollection = $this->getStyleCollection($styleCollectionIndex);
 
         foreach ($rows->getHash() as $row) {
             $values = explode(',', $row['rows']);
@@ -64,17 +65,17 @@ class TableContext extends BehatContext
                 }
             }
 
-            $table->setRow($values, 'null' === $rowIndex ? null : $rowIndex, 'null' === $styleIndex ? null : $styleIndex);
+            $table->setRow($values, 'null' === $rowIndex ? null : $rowIndex, $styleCollection);
         }
     }
 
     /**
-     * @Given /^I insert the following columns in the Table "([^"]*)" at the index "([^"]*)" with the style "([^"]*)":$/
+     * @Given /^I insert the following columns in the Table "([^"]*)" at the index "([^"]*)" with the styleCollection "([^"]*)":$/
      */
-    public function iInsertTheFollowingColumnsInTheTableAtTheIndexWithTheStyle($tableIndex, $columnIndex, $styleIndex, TableNode $columns)
+    public function iInsertTheFollowingColumnsInTheTableAtTheIndexWithTheStyle($tableIndex, $columnIndex, $styleCollectionIndex, TableNode $columns)
     {
-        $tableIndex = 'current' === $tableIndex ? $this->currentTableIndex : $tableIndex;
-        $table = $this->getTable($tableIndex);
+        $table = $this->getTable('current' === $tableIndex ? $this->currentTableIndex : $tableIndex);
+        $styleCollection = $this->getStyleCollection($styleCollectionIndex);
 
         foreach ($columns->getHash() as $column) {
             $values = explode(',', $column['columns']);
@@ -86,12 +87,41 @@ class TableContext extends BehatContext
                 }
             }
 
-            $table->setColumn($values, 'null' === $columnIndex ? null : $columnIndex, 'null' === $styleIndex ? null : $styleIndex);
+            $table->setColumn($values, 'null' === $columnIndex ? null : $columnIndex, $styleCollection);
         }
+    }
+
+    /**
+     * @Given /^I set a "([^"]*)" label of the Table "([^"]*)" with the following values and with the styleCollection "([^"]*)":$/
+     */
+    public function iSetTheLabelOfTheTableWithTheFollowingValuesAndWithTheStylecollectionCurrent($type, $tableIndex, $styleCollectionIndex, TableNode $table)
+    {
+        foreach ($table->getHash() as $value) {
+            $values[] = $value['labels'];
+        }
+
+        $styleCollection = $this->getStyleCollection($styleCollectionIndex);
+
+        $label = (new Label($type))->setValues($values, $styleCollection);
+        $table = $this->getTable('current' === $tableIndex ? $this->currentTableIndex : $tableIndex);
+        $table->setLabel($label);
     }
 
     private function getTable($index)
     {
         return $this->tableCollection[$index];
+    }
+
+    private function getStyleCollection($styleCollectionIndex)
+    {
+        if ('null' === $styleCollectionIndex) {
+            $styleCollection = null;
+        } elseif ('current' === $styleCollectionIndex) {
+            $styleCollection = $this->getMainContext()->getSubcontext('style')->styleCollection[$this->getMainContext()->getSubcontext('style')->currentStyleCollection];
+        } else {
+            $styleCollection = $this->getMainContext()->getSubcontext('style')->styleCollection[$styleCollectionIndex];
+        }
+
+        return $styleCollection;
     }
 }
