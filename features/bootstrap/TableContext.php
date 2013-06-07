@@ -21,11 +21,6 @@ class TableContext extends BehatContext
     public $currentTableIndex = 0;
     public $tableCollection = [];
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * @Given /^I create a Table$/
      */
