@@ -53,4 +53,21 @@ class FeatureContext extends BehatContext
             $this->iAddTheSheetWithTheIndexIntoTheWorkbook($key);
         }
     }
+
+    /**
+     * @Given /^I set the following properties to my Workbook:$/
+     */
+    public function iSetTheFollowingPropertiesToMyWorkbook(TableNode $table)
+    {
+        foreach ($table->getHash() as $values) {
+
+            foreach ($values as $property => $value) {
+                $method = 'set' . ucfirst($property);
+
+                if (method_exists($this->workbook, $method)) {
+                    $this->workbook->$method($value);
+                }
+            }
+        }
+    }
 }
