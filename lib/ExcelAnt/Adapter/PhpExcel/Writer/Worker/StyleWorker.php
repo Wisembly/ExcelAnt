@@ -56,6 +56,7 @@ class StyleWorker
     private function fillManager(Fill $fill)
     {
         return [
+            'type'  => $fill->getType(),
             'color' => ['rgb' => $fill->getColor()],
         ];
     }

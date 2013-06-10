@@ -35,7 +35,7 @@ class SheetContext extends BehatContext
      */
     public function iCreateASheet()
     {
-        $this->sheetCollection[] = new Sheet($this->getMainContext()->workbook);
+        $this->sheetCollection[] = (new Sheet($this->getMainContext()->workbook))->setTitle('Sheet' . (count($this->sheetCollection) + 1));
     }
 
     /**
@@ -79,7 +79,7 @@ class SheetContext extends BehatContext
     /**
      * @Given /^I add a new Cell with the value "([^"]*)" with the styleCollection with index "([^"]*)" in the Sheet with index "([^"]*)" at the coordinates "([^"]*)"$/
      */
-    public function iAddANewCellWithTheValueWithTheStylecollectionWithIndexInTheSheetWithIndexAtTheCoordinates($value, $styleCollectionIndex, $sheetIndex, $coordinate)
+    public function iAddANewCell($value, $styleCollectionIndex, $sheetIndex, $coordinate)
     {
         $coordinate = explode(',', $coordinate);
         $coordinate = new Coordinate($coordinate[0], $coordinate[1]);
@@ -96,6 +96,10 @@ class SheetContext extends BehatContext
             $cell = new EmptyCell();
         } else {
             $cell = new Cell($value);
+        }
+
+        if (null !== $styleCollection) {
+            $cell->setStyles($styleCollection);
         }
 
         $this->sheetCollection['current' === $sheetIndex ? $this->currentSheetIndex : $sheetIndex]->addCell($cell, $coordinate);

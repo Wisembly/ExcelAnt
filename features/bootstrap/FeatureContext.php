@@ -17,7 +17,8 @@ use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
     ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker,
     ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
     ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
-    ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker;
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker,
+    ExcelAnt\Coordinate\Coordinate;
 
 /**
  * Features context.
@@ -92,6 +93,27 @@ class FeatureContext extends BehatContext
                 }
             }
         }
+    }
+
+    /**
+     * @Given /^I create a simple Workbook to be tested$/
+     */
+    public function iCreateASimpleWorkbookToBeTested()
+    {
+        $this->iCreateAWorkbook();
+        $this->getSubcontext('sheet')->iCreateASheet();
+        $this->getSubcontext('style')->iCreateAStyleCollectionAndIUseIt();
+
+        $styleData = new TableNode();
+        $styleData->setRows([['name', 'color', 'size'], ['Verdana', 'ff0000', 14]]);
+        $this->getSubcontext('style')->iAddAStyle('Font', 'current', $styleData);
+
+        $this->getSubcontext('sheet')->iAddANewCell('Foo', "null", "current", "1,1");
+        $this->getSubcontext('sheet')->iCreateASheetAndIUseIt();
+        $this->getSubcontext('sheet')->iAddANewCell('Bar', "null", "current", "1,1");
+        $this->iAddAllSheetIntoTheWorkbook();
+
+        $this->iAddTheStylecollectionWithTheIndexIntoMyWorkbook("current");
     }
 
     /**

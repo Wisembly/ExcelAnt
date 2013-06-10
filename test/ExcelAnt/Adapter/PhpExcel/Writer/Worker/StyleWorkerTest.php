@@ -24,7 +24,10 @@ class StyleWorkerTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $expected = [
-            'fill' => ['color' => ['rgb' => '000000']],
+            'fill' => [
+                'type'  => 'solid',
+                'color' => ['rgb' => '000000']
+            ],
             'font' => [
                 'name'      => 'Verdana',
                 'size'      => 11,

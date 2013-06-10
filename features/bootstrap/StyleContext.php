@@ -52,7 +52,7 @@ class StyleContext extends BehatContext
     /**
      * @Given /^I add a Style "([^"]*)" with the following data to the StyleCollection with the index "([^"]*)":$/
      */
-    public function iAddAStyleWithTheFollowingDataToTheStylecollectionWithTheIndex($style, $styleCollectionIndex, TableNode $data)
+    public function iAddAStyle($style, $styleCollectionIndex, TableNode $data)
     {
         switch ($style) {
             case 'Alignment':
@@ -81,5 +81,44 @@ class StyleContext extends BehatContext
         }
 
         $this->styleCollection['current' === $styleCollectionIndex ? $this->currentStyleCollection : $styleCollecitonIndex]->add($class);
+    }
+
+    /**
+     * @Then /^I should have a "([^"]*)" style with the following data on the cell with the coordinates "(\d+),(\d+)" in the sheet "(\d+)":$/
+     */
+    public function iShouldHaveAStyleWithTheFollowingDataOnTheCell($style, $x, $y, $sheetIndex, TableNode $data)
+    {
+        $phpExcelStyle = $this->getMainContext()->excelOutput->getSheet($sheetIndex)->getStyleByColumnAndRow($x, $y);
+
+        switch ($style) {
+            case 'Alignment':
+                $style = $phpExcelStyle->getAlignment();
+                break;
+            case 'Fill':
+                $style = $phpExcelStyle->getFill();
+                break;
+            case 'Font':
+                $style = $phpExcelStyle->getFont();
+                break;
+            default:
+                throw new Exception("You must specify a following style : Font, Fill, Alignment, Format");
+                break;
+        }
+
+        foreach ($data->getHash()[0] as $property => $value) {
+            $method = 'get' . ucfirst($property);
+
+            if (method_exists($style, $method)) {
+                $rawValue = $style->$method();
+
+                if (is_object($rawValue)) {
+                    Assert::assertEquals($value, $style->$method()->getRGB());
+
+                    continue;
+                }
+
+                Assert::assertEquals($value, $style->$method());
+            }
+        }
     }
 }
