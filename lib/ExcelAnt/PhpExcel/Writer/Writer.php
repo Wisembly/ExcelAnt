@@ -2,8 +2,6 @@
 
 namespace ExcelAnt\PhpExcel\Writer;
 
-use PHPExcel;
-
 use ExcelAnt\Writer\WriterInterface;
 use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
 use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
@@ -65,7 +63,7 @@ class Writer implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function write(PHPExcel $phpExcel)
+    public function write($phpExcel)
     {
         $this->writer->save($phpExcel);
     }

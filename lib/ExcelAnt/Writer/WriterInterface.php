@@ -2,8 +2,6 @@
 
 namespace ExcelAnt\Writer;
 
-use PHPExcel;
-
 use ExcelAnt\Workbook\WorkbookInterface;
 use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
@@ -20,8 +18,6 @@ interface WriterInterface
 
     /**
      * Write your Workbook
-     *
-     * @param PHPExcel $phpExcel
      */
-    public function write(PHPExcel $phpExcel);
+    public function write($classToWrite);
 }
