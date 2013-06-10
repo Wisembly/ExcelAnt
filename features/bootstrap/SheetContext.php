@@ -7,6 +7,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use \PHPUnit_Framework_Assert as Assert;
+
 use ExcelAnt\PhpExcel\Sheet,
     ExcelAnt\Coordinate\Coordinate,
     ExcelAnt\Cell\Cell,
@@ -115,5 +117,13 @@ class SheetContext extends BehatContext
     {
         $value = (int) $value;
         $this->sheetCollection['current' === $index ? $this->currentSheetIndex : $index]->setColumnWidth($value, $indexColumn);
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" sheet\(s\)$/
+     */
+    public function iShouldSeeSheetS($number)
+    {
+        Assert::assertEquals($number, $this->getMainContext()->excelOutput->getSheetCount());
     }
 }

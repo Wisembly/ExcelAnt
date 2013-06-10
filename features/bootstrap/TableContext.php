@@ -7,6 +7,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use \PHPUnit_Framework_Assert as Assert;
+
 use ExcelAnt\Table\Table,
     ExcelAnt\Table\Label;
 

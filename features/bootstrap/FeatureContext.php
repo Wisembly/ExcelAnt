@@ -119,12 +119,4 @@ class FeatureContext extends BehatContext
         $this->excelOutput = (new PHPExcel_Reader_Excel5())
             ->load('./features/behat.xls');
     }
-
-    /**
-     * @Then /^I should see "([^"]*)" sheet\(s\)$/
-     */
-    public function iShouldSeeSheetS($number)
-    {
-        Assert::assertEquals($number, $this->excelOutput->getSheetCount());
-    }
 }
