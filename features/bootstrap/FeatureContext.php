@@ -3,15 +3,21 @@
 use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
     Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
+    Behat\Behat\Exception\PendingException,
+    Behat\Behat\Event\ScenarioEvent;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
-use ExcelAnt\PhpExcel\Workbook,
-    ExcelAnt\PhpExcel\Sheet;
+use \PHPUnit_Framework_Assert as Assert;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
+use ExcelAnt\PhpExcel\Workbook,
+    ExcelAnt\PhpExcel\Sheet,
+    ExcelAnt\PhpExcel\Writer\PhpExcelWriter\Excel5,
+    ExcelAnt\PhpExcel\Writer\Writer,
+    ExcelAnt\PhpExcel\Writer\Worker\CellWorker,
+    ExcelAnt\PhpExcel\Writer\Worker\LabelWorker,
+    ExcelAnt\PhpExcel\Writer\Worker\StyleWorker,
+    ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
 
 /**
  * Features context.
@@ -19,6 +25,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext extends BehatContext
 {
     public $workbook;
+    public $excelOutput;
 
     /**
      * @param array $parameters context parameters (set them up through behat.yml)
@@ -28,6 +35,14 @@ class FeatureContext extends BehatContext
         $this->useContext('sheet', new SheetContext);
         $this->useContext('style', new StyleContext);
     }
+
+    /**
+     * @AfterScenario
+     */
+     public function removeExportFile(ScenarioEvent $event)
+     {
+        unlink('./features/behat.xls');
+     }
 
     /**
      * @Given /^I create a Workbook$/
@@ -86,5 +101,30 @@ class FeatureContext extends BehatContext
     {
         $styleCollection = 'current' === $index ? $this->getSubcontext('style')->styleCollection[$this->getSubcontext('style')->currentStyleCollection] : $this->getSubcontext('style')->styleCollection[$index];
         $this->workbook->addStyles($styleCollection);
+    }
+
+    /**
+     * @When /^I use the writer "([^"]*)" and I write the Workbook$/
+     */
+    public function iUseTheWriterAndIWriteTheWorkbook($arg1)
+    {
+        $styleWorker = new StyleWorker();
+        $cellWorker = new CellWorker($styleWorker);
+        $labelWorker = new LabelWorker($cellWorker);
+        $tableWorker = new TableWorker($cellWorker, $labelWorker);
+        $writer = new Writer(new Excel5('./features/behat.xls'), $tableWorker, $cellWorker, $styleWorker);
+        $phpExcel = $writer->convert($this->workbook);
+        $writer->write($phpExcel);
+
+        $this->excelOutput = (new PHPExcel_Reader_Excel5())
+            ->load('./features/behat.xls');
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" sheet\(s\)$/
+     */
+    public function iShouldSeeSheetS($number)
+    {
+        Assert::assertEquals($number, $this->excelOutput->getSheetCount());
     }
 }
