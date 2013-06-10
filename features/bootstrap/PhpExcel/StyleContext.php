@@ -17,9 +17,6 @@ use ExcelAnt\Collections\StyleCollection,
     ExcelAnt\Style\Alignment,
     ExcelAnt\Style\Format;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 /**
  * Style context.
  */

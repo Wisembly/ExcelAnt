@@ -12,9 +12,6 @@ use \PHPUnit_Framework_Assert as Assert;
 use ExcelAnt\Table\Table,
     ExcelAnt\Table\Label;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 /**
  * Table context.
  */

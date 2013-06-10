@@ -14,9 +14,6 @@ use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
     ExcelAnt\Cell\Cell,
     ExcelAnt\Cell\EmptyCell;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 /**
  * Sheet context.
  */
