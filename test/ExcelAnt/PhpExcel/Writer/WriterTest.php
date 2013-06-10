@@ -30,12 +30,10 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addTable(new Table(), new Coordinate(1, 1));
         $workbook->addSheet($sheet);
 
-        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
-        $phpExcelWriterInterace->expects($this->once())
-            ->method('save');
+        $writer = new Writer($this->getPhpExcelWriterInterfaceMock(), $tableWorker, $this->getCellWorkerMock(), $this->getStyleWorkerMock());
+        $phpExcel = $writer->convert($workbook);
 
-        $writer = new Writer($phpExcelWriterInterace, $tableWorker, $this->getCellWorkerMock(), $this->getStyleWorkerMock());
-        $writer->write($workbook);
+        $this->assertInstanceOf('PHPExcel', $phpExcel);
     }
 
     public function testWriteASingleCell()
@@ -61,12 +59,8 @@ class WriterTest extends \PHPUnit_Framework_TestCase
             ->addCell((new Cell())->setValue('bar'), new Coordinate(2, 1));
         $workbook->addSheet($sheet);
 
-        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
-        $phpExcelWriterInterace->expects($this->once())
-            ->method('save');
-
-        $writer = new Writer($phpExcelWriterInterace, $tableWorker, $cellWorker, $this->getStyleWorkerMock());
-        $writer->write($workbook);
+        $writer = new Writer($this->getPhpExcelWriterInterfaceMock(), $tableWorker, $cellWorker, $this->getStyleWorkerMock());
+        $phpExcel = $writer->convert($workbook);
 
         $expected = [
             ['foo', 1, 1],
@@ -74,6 +68,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         ];
 
         $this->assertEquals($expected, $localCellStorage);
+        $this->assertInstanceOf('PHPExcel', $phpExcel);
     }
 
     public function testApplyTheStylesOfTheWorkbook()
@@ -95,12 +90,10 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $styleWorker->expects($this->once())
             ->method('convertStyles');
 
-        $phpExcelWriterInterace = $this->getPhpExcelWriterInterfaceMock();
-        $phpExcelWriterInterace->expects($this->once())
-            ->method('save');
+        $writer = new Writer($this->getPhpExcelWriterInterfaceMock(), $this->getTableWorkerMock(), $this->getCellWorkerMock(), $styleWorker);
+        $phpExcel = $writer->convert($workbook);
 
-        $writer = new Writer($phpExcelWriterInterace, $this->getTableWorkerMock(), $this->getCellWorkerMock(), $styleWorker);
-        $writer->write($workbook);
+        $this->assertInstanceOf('PHPExcel', $phpExcel);
     }
 
     /**
