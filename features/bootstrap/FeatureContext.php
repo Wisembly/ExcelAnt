@@ -10,14 +10,14 @@ use Behat\Gherkin\Node\PyStringNode,
 
 use \PHPUnit_Framework_Assert as Assert;
 
-use ExcelAnt\PhpExcel\Workbook\Workbook,
-    ExcelAnt\PhpExcel\Sheet\Sheet,
-    ExcelAnt\PhpExcel\Writer\PhpExcelWriter\Excel5,
-    ExcelAnt\PhpExcel\Writer\Writer,
-    ExcelAnt\PhpExcel\Writer\Worker\CellWorker,
-    ExcelAnt\PhpExcel\Writer\Worker\LabelWorker,
-    ExcelAnt\PhpExcel\Writer\Worker\StyleWorker,
-    ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5,
+    ExcelAnt\Adapter\PhpExcel\Writer\Writer,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker;
 
 /**
  * Features context.
