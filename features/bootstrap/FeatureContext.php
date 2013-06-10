@@ -81,7 +81,7 @@ class FeatureContext extends BehatContext
 
             foreach ($values as $property => $value) {
 
-                if (!in_array($property, $$authorizedProperties)) {
+                if (!in_array($property, $authorizedProperties)) {
                     continue;
                 }
 
@@ -106,17 +106,64 @@ class FeatureContext extends BehatContext
     /**
      * @When /^I use the writer "([^"]*)" and I write the Workbook$/
      */
-    public function iUseTheWriterAndIWriteTheWorkbook($arg1)
+    public function iUseTheWriterAndIWriteTheWorkbook($writer)
     {
         $styleWorker = new StyleWorker();
         $cellWorker = new CellWorker($styleWorker);
         $labelWorker = new LabelWorker($cellWorker);
         $tableWorker = new TableWorker($cellWorker, $labelWorker);
         $writer = new Writer(new Excel5('./features/behat.xls'), $tableWorker, $cellWorker, $styleWorker);
+
+        // If there isn't Sheet, there is an issue with the export
+        // So, we add one
+        if (0 === $this->workbook->countSheets()) {
+            $this->workbook->addSheet(new Sheet($this->workbook));
+        }
+
         $phpExcel = $writer->convert($this->workbook);
         $writer->write($phpExcel);
 
         $this->excelOutput = (new PHPExcel_Reader_Excel5())
             ->load('./features/behat.xls');
+    }
+
+    /**
+     * @Then /^I should have "([^"]*)" as title of the workbook$/
+     */
+    public function iShouldHaveAsTitleOfTheWorkbook($title)
+    {
+        Assert::assertEquals($title, $this->excelOutput->getProperties()->getTitle());
+    }
+
+    /**
+     * @Then /^I should have "([^"]*)" as creator of the workbook$/
+     */
+    public function iShouldHaveAsCreatorOfTheWorkbook($creator)
+    {
+        Assert::assertEquals($creator, $this->excelOutput->getProperties()->getCreator());
+    }
+
+    /**
+     * @Then /^I should have "([^"]*)" as description of the workbook$/
+     */
+    public function iShouldHaveAsDescriptionOfTheWorkbook($description)
+    {
+        Assert::assertEquals($description, $this->excelOutput->getProperties()->getDescription());
+    }
+
+    /**
+     * @Then /^I should have "([^"]*)" as company of the workbook$/
+     */
+    public function iShouldHaveAsCompanyOfTheWorkbook($company)
+    {
+        Assert::assertEquals($company, $this->excelOutput->getProperties()->getCompany());
+    }
+
+    /**
+     * @Then /^I should have "([^"]*)" as subject of the workbook$/
+     */
+    public function iShouldHaveAsSubjectOfTheWorkbook($subject)
+    {
+        Assert::assertEquals($subject, $this->excelOutput->getProperties()->getSubject());
     }
 }
