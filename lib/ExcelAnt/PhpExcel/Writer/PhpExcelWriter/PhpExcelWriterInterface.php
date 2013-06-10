@@ -2,7 +2,7 @@
 
 namespace ExcelAnt\PhpExcel\Writer\PhpExcelWriter;
 
-use PHPExcel;
+use \PHPExcel;
 
 interface PhpExcelWriterInterface
 {

@@ -2,9 +2,9 @@
 
 namespace ExcelAnt\PhpExcel;
 
-use PHPExcel_Worksheet;
-use PHPExcel_Worksheet_RowDimension;
-use PHPExcel_Worksheet_ColumnDimension;
+use \PHPExcel_Worksheet;
+use \PHPExcel_Worksheet_RowDimension;
+use \PHPExcel_Worksheet_ColumnDimension;
 
 use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\PhpExcel\Sheet;

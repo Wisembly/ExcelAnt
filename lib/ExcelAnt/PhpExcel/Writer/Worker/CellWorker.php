@@ -2,7 +2,7 @@
 
 namespace ExcelAnt\PhpExcel\Writer\Worker;
 
-use PHPExcel_Worksheet;
+use \PHPExcel_Worksheet;
 
 use ExcelAnt\PhpExcel\Writer\Worker\StyleWorker;
 use ExcelAnt\Cell\CellInterface;

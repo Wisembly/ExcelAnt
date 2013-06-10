@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\PhpExcel\Writer\Worker;
 
-use PHPExcel_Worksheet;
-use PHPExcel_Style;
+use \PHPExcel_Worksheet;
+use \PHPExcel_Style;
 
 use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
 use ExcelAnt\PhpExcel\Writer\Worker\LabelWorker;

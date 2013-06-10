@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\PhpExcel\Writer\PhpExcelWriter;
 
-use PHPExcel;
-use PHPExcel_Writer_Excel5;
+use \PHPExcel;
+use \PHPExcel_Writer_Excel5;
 
 use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 

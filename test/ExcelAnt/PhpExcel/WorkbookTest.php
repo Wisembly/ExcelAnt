@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\PhpExcel;
 
-use PHPExcel;
-use PHPExcel_DocumentProperties;
+use \PHPExcel;
+use \PHPExcel_DocumentProperties;
 
 use ExcelAnt\PhpExcel\Workbook;
 use ExcelAnt\PhpExcel\Sheet;

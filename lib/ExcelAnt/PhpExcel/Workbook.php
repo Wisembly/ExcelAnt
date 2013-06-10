@@ -2,7 +2,7 @@
 
 namespace ExcelAnt\PhpExcel;
 
-use PHPExcel;
+use \PHPExcel;
 
 use ExcelAnt\Workbook\WorkbookInterface;
 use ExcelAnt\Sheet\SheetInterface;
