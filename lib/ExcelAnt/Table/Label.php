@@ -2,10 +2,10 @@
 
 namespace ExcelAnt\Table;
 
-use ExcelAnt\Table\LabelInterface;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Table\LabelInterface,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Cell\EmptyCell,
+    ExcelAnt\Collections\StyleCollection;
 
 class Label implements LabelInterface
 {

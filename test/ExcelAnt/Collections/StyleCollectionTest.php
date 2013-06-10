@@ -2,11 +2,11 @@
 
 namespace ExcelAnt\Collections;
 
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Style\Format;
-use ExcelAnt\Style\Alignment;
+use ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Style\Format,
+    ExcelAnt\Style\Alignment;
 
 class StyleCollectionTest extends \PHPUnit_Framework_TestCase
 {

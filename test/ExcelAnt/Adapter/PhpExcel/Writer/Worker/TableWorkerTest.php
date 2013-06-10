@@ -5,15 +5,15 @@ namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 use \PHPExcel_Worksheet;
 use \PHPExcel_Style;
 
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker;
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker;
-use ExcelAnt\Table\Table;
-use ExcelAnt\Table\Label;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Style\Format;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
+    ExcelAnt\Table\Table,
+    ExcelAnt\Table\Label,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Style\Format;
 
 class TableWorkerTest extends \PHPUnit_Framework_TestCase
 {

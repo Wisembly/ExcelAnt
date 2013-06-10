@@ -2,9 +2,9 @@
 
 namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker;
-use ExcelAnt\Table\Label;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
+    ExcelAnt\Table\Label,
+    ExcelAnt\Coordinate\Coordinate;
 
 class LabelWorkerTest extends \PHPUnit_Framework_TestCase
 {

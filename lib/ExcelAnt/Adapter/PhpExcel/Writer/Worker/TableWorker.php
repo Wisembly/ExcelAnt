@@ -4,9 +4,9 @@ namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\Table\Table;
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker;
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker;
+use ExcelAnt\Table\Table,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker,
+    ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker;
 
 class TableWorker
 {

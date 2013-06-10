@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Writer;
 
-use ExcelAnt\Workbook\WorkbookInterface;
-use ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Workbook\WorkbookInterface,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 interface WriterInterface
 {

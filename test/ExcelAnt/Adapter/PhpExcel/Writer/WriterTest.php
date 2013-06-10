@@ -2,16 +2,16 @@
 
 namespace ExcelAnt\Adapter\PhpExcel\Writer;
 
-use ExcelAnt\Adapter\PhpExcel\Writer\Writer;
-use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
-use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Table\Table;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Adapter\PhpExcel\Writer\Writer,
+    ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Table\Table,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
 {

@@ -4,10 +4,10 @@ namespace ExcelAnt\Adapter\PhpExcel\Workbook;
 
 use \PHPExcel;
 
-use ExcelAnt\Adapter\PhpExcel\Workbook\WorkbookExcelInterface;
-use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
-use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Adapter\PhpExcel\Workbook\WorkbookExcelInterface,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Sheet\SheetInterface,
+    ExcelAnt\Collections\StyleCollection;
 
 class Workbook implements WorkbookExcelInterface
 {

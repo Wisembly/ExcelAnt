@@ -4,11 +4,11 @@ namespace ExcelAnt\Adapter\PhpExcel\Sheet;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
-use ExcelAnt\Adapter\PhpExcel\Sheet\SheetExcelInterface;
-use ExcelAnt\Table\TableInterface;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Cell\CellInterface;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\SheetExcelInterface,
+    ExcelAnt\Table\TableInterface,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\CellInterface;
 
 class Sheet implements SheetExcelInterface
 {

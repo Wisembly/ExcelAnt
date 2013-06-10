@@ -2,11 +2,11 @@
 
 namespace ExcelAnt\Cell;
 
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Style\StyleInterface;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Cell\Cell,
+    ExcelAnt\Style\StyleInterface,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Collections\StyleCollection;
 
 class CellTest extends \PHPUnit_Framework_TestCase
 {

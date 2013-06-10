@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Traits;
 
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Table\Table;
+use ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Table\Table;
 
 class CoordinableTest extends \PHPUnit_Framework_Testcase
 {

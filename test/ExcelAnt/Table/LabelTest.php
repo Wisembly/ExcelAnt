@@ -2,11 +2,11 @@
 
 namespace ExcelAnt\Table;
 
-use ExcelAnt\Table\Label;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Table\Label,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Collections\StyleCollection;
 
 class LabelTest extends \PHPUnit_Framework_TestCase
 {

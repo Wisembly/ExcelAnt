@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleTestCase;
-use ExcelAnt\Style\Fill;
+use ExcelAnt\Style\StyleTestCase,
+    ExcelAnt\Style\Fill;
 
 class FillTest extends StyleTestCase
 {

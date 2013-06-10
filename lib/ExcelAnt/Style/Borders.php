@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleInterface;
-use ExcelAnt\Style\Border;
+use ExcelAnt\Style\StyleInterface,
+    ExcelAnt\Style\Border;
 
 class Borders implements StyleInterface
 {

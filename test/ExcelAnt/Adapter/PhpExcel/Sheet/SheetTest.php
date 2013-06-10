@@ -6,11 +6,11 @@ use \PHPExcel_Worksheet;
 use \PHPExcel_Worksheet_RowDimension;
 use \PHPExcel_Worksheet_ColumnDimension;
 
-use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
-use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
-use ExcelAnt\Table\Table;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Cell\Cell;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Table\Table,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\Cell;
 
 class SheetTest extends \PHPUnit_Framework_TestCase
 {

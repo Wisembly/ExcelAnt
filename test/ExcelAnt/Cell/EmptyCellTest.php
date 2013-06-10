@@ -2,10 +2,10 @@
 
 namespace ExcelAnt\Cell;
 
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Cell\EmptyCell,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Collections\StyleCollection;
 
 class EmptyCellTest extends \PHPUnit_Framework_TestCase
 {

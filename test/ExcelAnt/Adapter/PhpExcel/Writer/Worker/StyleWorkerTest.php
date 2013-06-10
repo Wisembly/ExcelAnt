@@ -2,14 +2,14 @@
 
 namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Style\Format;
-use ExcelAnt\Style\Borders;
-use ExcelAnt\Style\Border;
-use ExcelAnt\Style\Alignment;
+use ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Style\Format,
+    ExcelAnt\Style\Borders,
+    ExcelAnt\Style\Border,
+    ExcelAnt\Style\Alignment;
 
 class StyleWorkerTest extends \PHPUnit_Framework_TestCase
 {

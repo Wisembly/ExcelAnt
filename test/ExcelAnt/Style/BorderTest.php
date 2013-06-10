@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleTestCase;
-use ExcelAnt\Style\Border;
+use ExcelAnt\Style\StyleTestCase,
+    ExcelAnt\Style\Border;
 
 class BorderTest extends StyleTestCase
 {

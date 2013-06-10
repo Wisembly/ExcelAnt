@@ -5,11 +5,11 @@ namespace ExcelAnt\Adapter\PhpExcel;
 use \PHPExcel;
 use \PHPExcel_DocumentProperties;
 
-use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
-use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font;
 
 class WorkbookTest extends \PHPUnit_Framework_TestCase
 {

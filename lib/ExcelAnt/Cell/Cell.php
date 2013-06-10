@@ -2,9 +2,9 @@
 
 namespace ExcelAnt\Cell;
 
-use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Traits\Coordinable;
+use ExcelAnt\Cell\CellInterface,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Traits\Coordinable;
 
 class Cell implements CellInterface
 {
