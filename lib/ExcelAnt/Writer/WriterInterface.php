@@ -3,7 +3,7 @@
 namespace ExcelAnt\Writer;
 
 use ExcelAnt\Workbook\WorkbookInterface;
-use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 interface WriterInterface
 {

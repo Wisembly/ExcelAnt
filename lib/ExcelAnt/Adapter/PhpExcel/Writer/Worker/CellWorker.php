@@ -1,10 +1,10 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\PhpExcel\Writer\Worker\StyleWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker;
 use ExcelAnt\Cell\CellInterface;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\EmptyCell;

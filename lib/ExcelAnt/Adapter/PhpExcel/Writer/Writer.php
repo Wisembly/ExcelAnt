@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer;
+namespace ExcelAnt\Adapter\PhpExcel\Writer;
 
 use ExcelAnt\Writer\WriterInterface;
-use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
-use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
-use ExcelAnt\PhpExcel\Writer\Worker\StyleWorker;
-use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 use ExcelAnt\Workbook\WorkbookInterface;
 
 class Writer implements WriterInterface

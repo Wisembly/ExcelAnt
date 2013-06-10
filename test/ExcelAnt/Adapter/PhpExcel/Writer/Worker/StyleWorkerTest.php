@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Collections\StyleCollection;

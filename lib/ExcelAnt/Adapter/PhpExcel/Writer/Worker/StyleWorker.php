@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;

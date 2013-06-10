@@ -1,17 +1,17 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer;
+namespace ExcelAnt\Adapter\PhpExcel\Writer;
 
-use ExcelAnt\PhpExcel\Writer\Writer;
-use ExcelAnt\PhpExcel\Workbook\Workbook;
-use ExcelAnt\PhpExcel\Sheet\Sheet;
+use ExcelAnt\Adapter\PhpExcel\Writer\Writer;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
+use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\Cell;
-use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
 {
@@ -117,7 +117,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getPhpExcelWriterInterfaceMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface')->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -136,7 +136,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getTableWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\TableWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -146,7 +146,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getCellWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -156,7 +156,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
      */
     public function getStyleWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**

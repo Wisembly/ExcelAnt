@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Workbook;
+namespace ExcelAnt\Adapter\PhpExcel\Workbook;
 
 use ExcelAnt\Workbook\WorkbookInterface;
 

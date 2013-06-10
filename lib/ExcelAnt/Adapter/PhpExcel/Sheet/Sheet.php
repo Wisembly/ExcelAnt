@@ -1,11 +1,11 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Sheet;
+namespace ExcelAnt\Adapter\PhpExcel\Sheet;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\PhpExcel\Workbook\Workbook;
-use ExcelAnt\PhpExcel\Sheet\SheetExcelInterface;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook;
+use ExcelAnt\Adapter\PhpExcel\Sheet\SheetExcelInterface;
 use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\CellInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\PhpExcelWriter;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter;
 
 use \PHPExcel;
 

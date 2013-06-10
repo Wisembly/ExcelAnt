@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Workbook;
+namespace ExcelAnt\Adapter\PhpExcel\Workbook;
 
 use \PHPExcel;
 
-use ExcelAnt\PhpExcel\Workbook\WorkbookExcelInterface;
+use ExcelAnt\Adapter\PhpExcel\Workbook\WorkbookExcelInterface;
+use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Collections\StyleCollection;
 
 class Workbook implements WorkbookExcelInterface

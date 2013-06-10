@@ -1,6 +1,6 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Sheet;
+namespace ExcelAnt\Adapter\PhpExcel\Sheet;
 
 use ExcelAnt\Sheet\SheetInterface;
 

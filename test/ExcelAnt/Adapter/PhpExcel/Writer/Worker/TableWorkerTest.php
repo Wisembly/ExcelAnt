@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use \PHPExcel_Worksheet;
 use \PHPExcel_Style;
 
-use ExcelAnt\PhpExcel\Writer\Worker\TableWorker;
-use ExcelAnt\PhpExcel\Writer\Worker\LabelWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker;
 use ExcelAnt\Table\Table;
 use ExcelAnt\Table\Label;
 use ExcelAnt\Coordinate\Coordinate;
@@ -70,7 +70,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
      */
     private function getCellWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -80,7 +80,7 @@ class TableWorkerTest extends \PHPUnit_Framework_TestCase
      */
     private function getLabelWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\LabelWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker')->disableOriginalConstructor()->getMock();
     }
 
     /**
