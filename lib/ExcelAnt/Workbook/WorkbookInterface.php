@@ -8,13 +8,6 @@ use ExcelAnt\Collections\StyleCollection;
 interface WorkbookInterface
 {
     /**
-     * Get raw class
-     *
-     * @return mixed
-     */
-    public function getRawClass();
-
-    /**
      * Create Sheet
      *
      * @return Sheet

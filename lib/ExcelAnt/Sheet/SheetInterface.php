@@ -8,8 +8,6 @@ use ExcelAnt\Coordinate\Coordinate;
 
 interface SheetInterface
 {
-    public function getRawClass();
-
     /**
      * Set title
      *

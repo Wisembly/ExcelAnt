@@ -3,8 +3,8 @@
 namespace ExcelAnt\PhpExcel\Writer;
 
 use ExcelAnt\PhpExcel\Writer\Writer;
-use ExcelAnt\PhpExcel\Workbook;
-use ExcelAnt\PhpExcel\Sheet;
+use ExcelAnt\PhpExcel\Workbook\Workbook;
+use ExcelAnt\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Collections\StyleCollection;
 use ExcelAnt\Style\Fill;
 use ExcelAnt\Style\Font;

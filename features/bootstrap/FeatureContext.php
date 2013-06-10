@@ -10,8 +10,8 @@ use Behat\Gherkin\Node\PyStringNode,
 
 use \PHPUnit_Framework_Assert as Assert;
 
-use ExcelAnt\PhpExcel\Workbook,
-    ExcelAnt\PhpExcel\Sheet,
+use ExcelAnt\PhpExcel\Workbook\Workbook,
+    ExcelAnt\PhpExcel\Sheet\Sheet,
     ExcelAnt\PhpExcel\Writer\PhpExcelWriter\Excel5,
     ExcelAnt\PhpExcel\Writer\Writer,
     ExcelAnt\PhpExcel\Writer\Worker\CellWorker,

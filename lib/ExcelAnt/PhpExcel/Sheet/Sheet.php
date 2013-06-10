@@ -1,16 +1,16 @@
 <?php
 
-namespace ExcelAnt\PhpExcel;
+namespace ExcelAnt\PhpExcel\Sheet;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\PhpExcel\Workbook;
-use ExcelAnt\Sheet\SheetInterface;
+use ExcelAnt\PhpExcel\Workbook\Workbook;
+use ExcelAnt\PhpExcel\Sheet\SheetExcelInterface;
 use ExcelAnt\Table\TableInterface;
 use ExcelAnt\Coordinate\Coordinate;
 use ExcelAnt\Cell\CellInterface;
 
-class Sheet implements SheetInterface
+class Sheet implements SheetExcelInterface
 {
     private $phpExcelWorksheet;
     private $tables = [];

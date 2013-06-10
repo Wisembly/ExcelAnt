@@ -1,15 +1,15 @@
 <?php
 
-namespace ExcelAnt\PhpExcel;
+namespace ExcelAnt\PhpExcel\Workbook;
 
 use \PHPExcel;
 
-use ExcelAnt\Workbook\WorkbookInterface;
+use ExcelAnt\PhpExcel\Workbook\WorkbookExcelInterface;
 use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\PhpExcel\Sheet;
+use ExcelAnt\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Collections\StyleCollection;
 
-class Workbook implements WorkbookInterface
+class Workbook implements WorkbookExcelInterface
 {
     private $phpExcel;
     private $sheetCollection = [];

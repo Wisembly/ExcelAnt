@@ -9,7 +9,7 @@ use Behat\Gherkin\Node\PyStringNode,
 
 use \PHPUnit_Framework_Assert as Assert;
 
-use ExcelAnt\PhpExcel\Sheet,
+use ExcelAnt\PhpExcel\Sheet\Sheet,
     ExcelAnt\Coordinate\Coordinate,
     ExcelAnt\Cell\Cell,
     ExcelAnt\Cell\EmptyCell;
