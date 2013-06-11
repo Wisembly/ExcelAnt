@@ -1,15 +1,15 @@
 <?php
 
-namespace ExcelAnt\PhpExcel;
+namespace ExcelAnt\Adapter\PhpExcel;
 
-use PHPExcel;
-use PHPExcel_DocumentProperties;
+use \PHPExcel;
+use \PHPExcel_DocumentProperties;
 
-use ExcelAnt\PhpExcel\Workbook;
-use ExcelAnt\PhpExcel\Sheet;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font;
 
 class WorkbookTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
         $workbook = $this->createWorkbook();
         $sheet = $workbook->createSheet();
 
-        $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
+        $this->assertInstanceOf("ExcelAnt\Adapter\PhpExcel\Sheet\Sheet", $sheet);
         $this->assertCount(1, $workbook->getAllSheets());
     }
 
@@ -51,7 +51,7 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
         $workbook->createSheet();
         $sheet = $workbook->getSheet(0);
 
-        $this->assertInstanceOf("ExcelAnt\PhpExcel\Sheet", $sheet);
+        $this->assertInstanceOf("ExcelAnt\Adapter\PhpExcel\Sheet\Sheet", $sheet);
     }
 
     public function testCountSheets()
@@ -380,13 +380,13 @@ class WorkbookTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Mock ExcelAnt\PhpExcel\Sheet
+     * Mock ExcelAnt\Adapter\PhpExcel\Sheet\Sheet
      *
      * @return Mock_Sheet
      */
     private function getSheetMock($title = null)
     {
-        $sheet = $this->getMockBuilder('ExcelAnt\PhpExcel\Sheet')->disableOriginalConstructor()->getMock();
+        $sheet = $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Sheet\Sheet')->disableOriginalConstructor()->getMock();
 
         if (null !== $title) {
             $sheet->expects($this->any())

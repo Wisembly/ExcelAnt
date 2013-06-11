@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Cell;
 
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Coordinate\Coordinate;
 
 interface CellInterface
 {

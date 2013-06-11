@@ -28,6 +28,7 @@ before_script:
   - php composer.phar install --dev --prefer-source --optimize-autoloader --no-interaction
 
 script:
+  - ./bin/behat -f progress
   - phpunit --stop-on-failure
 
 after_failure:

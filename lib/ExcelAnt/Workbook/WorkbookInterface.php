@@ -2,18 +2,11 @@
 
 namespace ExcelAnt\Workbook;
 
-use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\Collections\StyleCollection;
+use ExcelAnt\Sheet\SheetInterface,
+    ExcelAnt\Collections\StyleCollection;
 
 interface WorkbookInterface
 {
-    /**
-     * Get raw class
-     *
-     * @return mixed
-     */
-    public function getRawClass();
-
     /**
      * Create Sheet
      *

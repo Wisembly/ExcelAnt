@@ -1,16 +1,16 @@
 <?php
 
-namespace ExcelAnt\PhpExcel;
+namespace ExcelAnt\Adapter\PhpExcel\Sheet;
 
-use PHPExcel_Worksheet;
+use \PHPExcel_Worksheet;
 
-use ExcelAnt\PhpExcel\Workbook;
-use ExcelAnt\Sheet\SheetInterface;
-use ExcelAnt\Table\TableInterface;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Cell\CellInterface;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\SheetExcelInterface,
+    ExcelAnt\Table\TableInterface,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\CellInterface;
 
-class Sheet implements SheetInterface
+class Sheet implements SheetExcelInterface
 {
     private $phpExcelWorksheet;
     private $tables = [];
@@ -134,7 +134,7 @@ class Sheet implements SheetInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        $this->phpExcelWorksheet->getColumnDimension($index)->setWidth($width);
+        $this->phpExcelWorksheet->getColumnDimensionByColumn($index)->setWidth($width);
 
         return $this;
     }
@@ -148,7 +148,7 @@ class Sheet implements SheetInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        return $this->phpExcelWorksheet->getColumnDimension($index)->getWidth();
+        return $this->phpExcelWorksheet->getColumnDimensionByColumn($index)->getWidth();
     }
 
     public function importImage()

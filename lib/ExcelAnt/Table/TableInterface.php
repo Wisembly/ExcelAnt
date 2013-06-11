@@ -2,10 +2,10 @@
 
 namespace ExcelAnt\Table;
 
-use ExcelAnt\Table\Label;
-use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Table\Label,
+    ExcelAnt\Cell\CellInterface,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Coordinate\Coordinate;
 
 interface TableInterface
 {

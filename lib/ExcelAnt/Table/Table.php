@@ -2,13 +2,13 @@
 
 namespace ExcelAnt\Table;
 
-use ExcelAnt\Table\TableInterface;
-use ExcelAnt\Table\LabelInterface;
-use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Traits\Coordinable;
+use ExcelAnt\Table\TableInterface,
+    ExcelAnt\Table\LabelInterface,
+    ExcelAnt\Cell\CellInterface,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Cell\EmptyCell,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Traits\Coordinable;
 
 class Table implements TableInterface
 {
@@ -185,6 +185,10 @@ class Table implements TableInterface
                 $cell = new EmptyCell();
             } else {
                 $cell = new Cell($data[$i]);
+            }
+
+            if (null !== $styles) {
+                $cell->setStyles($styles);
             }
 
             $this->table[$i][$index] = $cell;

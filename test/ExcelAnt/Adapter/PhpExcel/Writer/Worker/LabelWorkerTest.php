@@ -1,10 +1,10 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use ExcelAnt\PhpExcel\Writer\Worker\LabelWorker;
-use ExcelAnt\Table\Label;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
+    ExcelAnt\Table\Label,
+    ExcelAnt\Coordinate\Coordinate;
 
 class LabelWorkerTest extends \PHPUnit_Framework_TestCase
 {
@@ -127,6 +127,6 @@ class LabelWorkerTest extends \PHPUnit_Framework_TestCase
      */
     private function getCellWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker')->disableOriginalConstructor()->getMock();
     }
 }
