@@ -1,12 +1,12 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Style\Borders;
-use ExcelAnt\Style\Alignment;
+use ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Style\Borders,
+    ExcelAnt\Style\Alignment;
 
 class StyleWorker
 {
@@ -56,6 +56,7 @@ class StyleWorker
     private function fillManager(Fill $fill)
     {
         return [
+            'type'  => $fill->getType(),
             'color' => ['rgb' => $fill->getColor()],
         ];
     }

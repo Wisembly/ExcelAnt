@@ -2,14 +2,12 @@
 
 namespace ExcelAnt\Sheet;
 
-use ExcelAnt\Table\TableInterface;
-use ExcelAnt\Cell\CellInterface;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Table\TableInterface,
+    ExcelAnt\Cell\CellInterface,
+    ExcelAnt\Coordinate\Coordinate;
 
 interface SheetInterface
 {
-    public function getRawClass();
-
     /**
      * Set title
      *

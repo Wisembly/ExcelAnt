@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleTestCase;
-use ExcelAnt\Style\Font;
+use ExcelAnt\Style\StyleTestCase,
+    ExcelAnt\Style\Font;
 
 class FontTest extends StyleTestCase
 {

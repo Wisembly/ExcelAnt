@@ -1,16 +1,16 @@
 <?php
 
-namespace ExcelAnt\PhpExcel;
+namespace ExcelAnt\Adapter\PhpExcel;
 
-use PHPExcel_Worksheet;
-use PHPExcel_Worksheet_RowDimension;
-use PHPExcel_Worksheet_ColumnDimension;
+use \PHPExcel_Worksheet;
+use \PHPExcel_Worksheet_RowDimension;
+use \PHPExcel_Worksheet_ColumnDimension;
 
-use ExcelAnt\PhpExcel\Workbook;
-use ExcelAnt\PhpExcel\Sheet;
-use ExcelAnt\Table\Table;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Cell\Cell;
+use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Table\Table,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Cell\Cell;
 
 class SheetTest extends \PHPUnit_Framework_TestCase
 {
@@ -134,7 +134,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(3));
 
         $phpExcelWorksheet->expects($this->any())
-            ->method('getColumnDimension')
+            ->method('getColumnDimensionByColumn')
             ->will($this->returnValue($phpExcelRowDimension));
 
         $sheet = $this->createSheet(null, $phpExcelWorksheet)->setColumnWidth(3, 1);
@@ -186,11 +186,11 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Mock ExcelAnt\PhpExcel\Workbook
+     * Mock ExcelAnt\Adapter\PhpExcel\Workbook\Workbook
      * @return Mock
      */
     private function getWorkbookMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Workbook')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Workbook\Workbook')->disableOriginalConstructor()->getMock();
     }
 }

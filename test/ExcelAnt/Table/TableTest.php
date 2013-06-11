@@ -2,14 +2,14 @@
 
 namespace ExcelAnt\Table;
 
-use ExcelAnt\Table\Table;
-use ExcelAnt\Table\Label;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Coordinate\Coordinate;
+use ExcelAnt\Table\Table,
+    ExcelAnt\Table\Label,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Cell\EmptyCell,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Coordinate\Coordinate;
 
 class TableTest extends \PHPUnit_Framework_TestCase
 {
@@ -311,6 +311,17 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
         foreach ($column as $key => $cell) {
             $this->assertEquals($data[$key], $cell->getValue());
+        }
+    }
+
+    public function testSetColumnWithStyles()
+    {
+        $styles = new StyleCollection([new Fill(), new Font()]);
+        $this->table->setColumn(['foo', 'bar', 'baz'], null, $styles);
+        $column = $this->table->getColumn(0);
+
+        foreach ($column as $cell) {
+            $this->assertInstanceOf('ExcelAnt\Collections\StyleCollection', $cell->getStyles());
         }
     }
 

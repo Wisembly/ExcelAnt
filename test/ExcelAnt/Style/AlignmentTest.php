@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Style;
 
-use ExcelAnt\Style\StyleTestCase;
-use ExcelAnt\Style\Alignment;
+use ExcelAnt\Style\StyleTestCase,
+    ExcelAnt\Style\Alignment;
 
 class AlignmentTest extends StyleTestCase
 {

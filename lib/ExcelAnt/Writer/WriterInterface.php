@@ -2,15 +2,22 @@
 
 namespace ExcelAnt\Writer;
 
-use ExcelAnt\Workbook\WorkbookInterface;
-use ExcelAnt\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
+use ExcelAnt\Workbook\WorkbookInterface,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
 
 interface WriterInterface
 {
     /**
-     * Write your Workbook
+     * Convert your Workbook into PHPExcel class
      *
-     * @param  WorkbookInterface       $workbook
+     * @param WorkbookInterface $workbook
+     *
+     * @return PHPExcel
      */
-    public function write(WorkbookInterface $workbook);
+    public function convert(WorkbookInterface $workbook);
+
+    /**
+     * Write your Workbook
+     */
+    public function write($classToWrite);
 }

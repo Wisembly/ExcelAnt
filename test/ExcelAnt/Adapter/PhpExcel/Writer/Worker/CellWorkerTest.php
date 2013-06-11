@@ -1,15 +1,15 @@
 <?php
 
-namespace ExcelAnt\PhpExcel\Writer\Worker;
+namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use ExcelAnt\PhpExcel\Writer\Worker\CellWorker;
-use ExcelAnt\Cell\Cell;
-use ExcelAnt\Cell\EmptyCell;
-use ExcelAnt\Coordinate\Coordinate;
-use ExcelAnt\Collections\StyleCollection;
-use ExcelAnt\Style\Fill;
-use ExcelAnt\Style\Font;
-use ExcelAnt\Style\Format;
+use ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker,
+    ExcelAnt\Cell\Cell,
+    ExcelAnt\Cell\EmptyCell,
+    ExcelAnt\Coordinate\Coordinate,
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Style\Fill,
+    ExcelAnt\Style\Font,
+    ExcelAnt\Style\Format;
 
 class CellWorkerTest extends \PHPUnit_Framework_TestCase
 {
@@ -165,6 +165,6 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
      */
     private function getStyleWorkerMock()
     {
-        return $this->getMockBuilder('ExcelAnt\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
+        return $this->getMockBuilder('ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker')->disableOriginalConstructor()->getMock();
     }
 }
