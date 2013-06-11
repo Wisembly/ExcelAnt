@@ -74,6 +74,15 @@ class SheetContext extends BehatContext
     }
 
     /**
+     * @Given /^I insert the Table with the index "([^"]*)" with the coodinates "(\d+),(\d+)" in the Sheet with the index "([^"]*)"$/
+     */
+    public function iInsertTheTableWithTheIndexInTheSheetWithTheIndex($tableIndex, $x, $y, $sheetIndex)
+    {
+        $this->sheetCollection['current' === $sheetIndex ? $this->currentSheetIndex : $sheetIndex]
+            ->addTable($this->getSubcontext('table')->tableCollection['current' === $tableIndex ? $this->getSubcontext('table')->currentTableIndex : $tableIndex], new Coordinate($x, $y));
+    }
+
+    /**
      * @Given /^I add a new Cell with the value "([^"]*)" with the styleCollection with index "([^"]*)" in the Sheet with index "([^"]*)" at the coordinates "([^"]*)"$/
      */
     public function iAddANewCell($value, $styleCollectionIndex, $sheetIndex, $coordinate)
@@ -126,5 +135,13 @@ class SheetContext extends BehatContext
     public function iShouldSeeSheetS($number)
     {
         Assert::assertEquals($number, $this->getMainContext()->excelOutput->getSheetCount());
+    }
+
+    /**
+     * @Then /^I should have the value "([^"]*)" in the cell "(\d+),(\d+)" of the sheet "(\d+)"$/
+     */
+    public function iShouldHaveTheValueInTheCell($value, $x, $y, $sheetIndex)
+    {
+        Assert::assertEquals($value, $this->getMainContext()->excelOutput->getSheet($sheetIndex)->getCellByColumnAndRow($x, $y)->getValue());
     }
 }

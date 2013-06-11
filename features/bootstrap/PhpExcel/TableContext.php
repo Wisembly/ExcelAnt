@@ -90,7 +90,25 @@ class TableContext extends BehatContext
      */
     public function iSetTheLabelOfTheTableWithTheFollowingValuesAndWithTheStylecollectionCurrent($type, $tableIndex, $styleCollectionIndex, TableNode $table)
     {
+        $values = [];
+
         foreach ($table->getHash() as $value) {
+
+            // Full case
+            if ('full' === $type) {
+                foreach ($value as $property => $row) {
+                    if (!empty($row)) {
+                        if ('top' === $property) {
+                            $values[0][] = $row;
+                        } elseif ('left' === $property) {
+                            $values[1][] = $row;
+                        }
+                    }
+                }
+
+                continue;
+            }
+
             $values[] = $value['labels'];
         }
 
