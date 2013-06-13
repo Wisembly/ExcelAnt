@@ -161,4 +161,28 @@ interface TableInterface
      * @return int Readable and human value
      */
     public function getHeight();
+
+    /**
+     * Apply a StyleCollection on all cells of a column
+     *
+     * @param int             $index  The numeric index of the column
+     * @param StyleCollection $styles
+     *
+     * @throws InvalidException     If index isn't numeric
+     *
+     * @return TableInterface
+     */
+    public function applyStylesOnColumn($index, StyleCollection $styles = null);
+
+    /**
+     * Apply a StyleCollection on all cells of a row
+     *
+     * @param int             $index  The numeric index of the row
+     * @param StyleCollection $styles
+     *
+     * @throws InvalidException     If index isn't numeric
+     *
+     * @return TableInterface
+     */
+    public function applyStylesOnRow($index, StyleCollection $styles = null);
 }

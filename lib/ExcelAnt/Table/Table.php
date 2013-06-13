@@ -317,6 +317,51 @@ class Table implements TableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function applyStylesOnColumn($index, StyleCollection $styles = null)
+    {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $applied = false;
+
+        foreach ($this->table as $key => $row) {
+            if (array_key_exists($index, $row)) {
+                $this->table[$key][$index]->setStyles($styles);
+                $applied = true;
+            }
+        }
+
+        if (false === $applied) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyStylesOnRow($index, StyleCollection $styles = null)
+    {
+        if (false === filter_var($index, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        if (!isset($this->table[$index])) {
+            throw new \OutOfBoundsException("Index doesn't exist");
+        }
+
+        foreach ($this->table[$index] as $key => $value) {
+            $this->table[$index][$key]->setStyles($styles);
+        }
+
+        return $this;
+    }
+
+    /**
      * Create a new row from data, index and styles
      *
      * @param  array $data
