@@ -83,6 +83,24 @@ interface SheetInterface
     public function getRowHeight($index);
 
     /**
+     * Set default row height of the sheet
+     *
+     * @param int $height
+     *
+     * @throws InvalidException If height isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setDefaultRowHeight($height);
+
+    /**
+     * Get default row height of the sheet
+     *
+     * @return int
+     */
+    public function getDefaultRowHeight();
+
+    /**
      * Set the width of a column
      *
      * @param int $width

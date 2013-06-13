@@ -97,7 +97,7 @@ class Sheet implements SheetExcelInterface
     public function setRowHeight($height, $index)
     {
         if (false === filter_var($height, FILTER_VALIDATE_INT)) {
-            throw new \InvalidArgumentException("Index must be numeric");
+            throw new \InvalidArgumentException("Height must be numeric");
         }
 
         if (false === filter_var($index, FILTER_VALIDATE_INT)) {
@@ -107,6 +107,25 @@ class Sheet implements SheetExcelInterface
         $this->phpExcelWorksheet->getRowDimension($index)->setRowHeight($height);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultRowHeight($height)
+    {
+        if (false === filter_var($height, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Index must be numeric");
+        }
+
+        $this->phpExcelWorksheet->getDefaultRowDimension()->setRowHeight($height);
+
+        return $this;
+    }
+
+    public function getDefaultRowHeight()
+    {
+        return $this->phpExcelWorksheet->getDefaultRowDimension()->getRowHeight();
     }
 
     /**

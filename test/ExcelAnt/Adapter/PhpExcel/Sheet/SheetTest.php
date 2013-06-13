@@ -100,6 +100,33 @@ class SheetTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
+    public function testSetDefaultRowHeightWithWrongHeightParameter()
+    {
+        $sheet = $this->createSheet()->setDefaultRowHeight('foo');
+    }
+
+    public function testSetAndGetDefaultRowHeight()
+    {
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelRowDimension = $this->getPhpExcelRowDimensionMock();
+
+        $phpExcelRowDimension->expects($this->any())
+            ->method('setRowHeight')
+            ->will($this->returnValue($phpExcelRowDimension));
+        $phpExcelRowDimension->expects($this->any())
+            ->method('getRowHeight')
+            ->will($this->returnValue(30));
+
+        $phpExcelWorksheet->expects($this->any())
+            ->method('getDefaultRowDimension')
+            ->will($this->returnValue($phpExcelRowDimension));
+
+        $this->assertEquals(30, $this->createSheet(null, $phpExcelWorksheet)->setDefaultRowHeight(30)->getDefaultRowHeight());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testSetColumnWidthWithWrongWidthParameter()
     {
         $sheet = $this->createSheet()->setColumnWidth('foo', 1);
