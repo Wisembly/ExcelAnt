@@ -15,13 +15,15 @@
 
 [![Build Status](https://travis-ci.org/Wisembly/ExcelAnt.png?branch=master)](https://travis-ci.org/Wisembly/ExcelAnt)
 
-ExcelAnt is an Excel manipulation library for PHP 5.4. Actually it works with [PHPExcel](https://github.com/PHPOffice/PHPExcel).
-If you want to add another library, fork and contribute to improve it.
+ExcelAnt is an Excel manipulation library for PHP 5.4. It currently works on top of [PHPExcel](https://github.com/PHPOffice/PHPExcel).
+If you want to add / use another library, feel free to fork and contribute !
 
 #Installation
 
-1. Install composer in your project: `curl -s http://getcomposer.org/installer | php`
-2. Create a `composer.json` file in your project root:
+1. Install composer : `curl -s http://getcomposer.org/installer | php`
+(more info at getcomposer.org)
+2. Create a `composer.json` file in your project root :
+(or add only the excelant line in your existing composer file)
 
 ```yml
   {
@@ -33,7 +35,7 @@ If you want to add another library, fork and contribute to improve it.
 
 3. Install via composer : `php composer.phar install`
 
-#Usage with PHPExcel
+#Use ExcelAnt
 
 Create a simple Table :
 
@@ -51,7 +53,7 @@ Class Export
         $sheet = new Sheet();
         $table = new Table();
 
-        foreach($user as $user) {
+        foreach($users as $user) {
             $table->setRow([
                 $user->getName(),
                 $user->getEmail(),
@@ -64,7 +66,7 @@ Class Export
 }
 ```
 
-Now to export your Workbook, you need to create a Writer :
+Now, to export your Workbook, you need to create a Writer :
 
 ```php
 use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
