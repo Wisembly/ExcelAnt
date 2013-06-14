@@ -74,7 +74,7 @@ class SheetContext extends BehatContext
     }
 
     /**
-     * @Given /^I insert the Table with the index "([^"]*)" with the coodinates "(\d+),(\d+)" in the Sheet with the index "([^"]*)"$/
+     * @Given /^I insert the Table with the index "([^"]*)" with the coordinates "(\d+),(\d+)" in the Sheet with the index "([^"]*)"$/
      */
     public function iInsertTheTableWithTheIndexInTheSheetWithTheIndex($tableIndex, $x, $y, $sheetIndex)
     {
@@ -138,10 +138,10 @@ class SheetContext extends BehatContext
     }
 
     /**
-     * @Then /^I should have the value "([^"]*)" in the cell "(\d+),(\d+)" of the sheet "(\d+)"$/
+     * @Then /^I should have the value "([^"]*)" in the cell "([^"]*)" of the sheet "(\d+)"$/
      */
-    public function iShouldHaveTheValueInTheCell($value, $x, $y, $sheetIndex)
+    public function iShouldHaveTheValueInTheCell($value, $coordinate, $sheetIndex)
     {
-        Assert::assertEquals($value, $this->getMainContext()->excelOutput->getSheet($sheetIndex)->getCellByColumnAndRow($x, $y)->getValue());
+        Assert::assertEquals($value, $this->getMainContext()->excelOutput->getSheet($sheetIndex)->getCell($coordinate)->getValue());
     }
 }
