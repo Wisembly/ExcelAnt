@@ -13,6 +13,8 @@
 
 #ExcelAnt
 
+[![Build Status](https://travis-ci.org/Wisembly/ExcelAnt.png?branch=master)](https://travis-ci.org/Wisembly/ExcelAnt)
+
 ExcelAnt is an Excel manipulation library for PHP 5.4. Actually it works with [PHPExcel](https://github.com/PHPOffice/PHPExcel).
 If you want to add another library, fork and contribute to improve it.
 
