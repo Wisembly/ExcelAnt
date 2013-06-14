@@ -40,22 +40,22 @@ use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
 
 Class Export
 {
-  public function createExport(array $user)
-  {
-    $workbook = new Workbook();
-    $sheet = new Sheet();
-    $table = new Table();
+    public function createExport(array $users)
+    {
+        $workbook = new Workbook();
+        $sheet = new Sheet();
+        $table = new Table();
 
-    foreach($data as $value) {
-      $table->setRow([
-        $user->getName(),
-        $user->getEmail(),
-      ]);
+        foreach($user as $user) {
+            $table->setRow([
+                $user->getName(),
+                $user->getEmail(),
+            ]);
+        }
+
+        $sheet->addTable($table);
+        $workbook->addSheet($sheet);
     }
-
-    $sheet->addTable($table);
-    $workbook->addSheet($sheet);
-  }
 }
 ```
 
@@ -76,7 +76,7 @@ $tableWorker = new TableWorker($cellWorker, $labelWorker);
 $writer = new Writer(new Excel5('myExport.xls'), $tableWorker, $cellWorker, $styleWorker);
 ```
 
-Convert your Worbook to create a PHPExcel object with writer, and save it to export :
+Convert your Worbook to create a PHPExcel object and export it :
 
 ```php
 $phpExcel = $writer->convert($workbook);
@@ -84,6 +84,6 @@ $writer->write($phpExcel);
 ```
 
 #Contributing
-ExcelAnt is an open source project. If you would like to contribute, fork the repository and submitting a pull request.
+ExcelAnt is an open source project. If you would like to contribute, fork the repository and submit a pull request.
 
 #Running ExcelAnt Tests
