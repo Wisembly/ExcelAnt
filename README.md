@@ -53,7 +53,7 @@ Class Export
         $sheet = new Sheet();
         $table = new Table();
 
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $table->setRow([
                 $user->getName(),
                 $user->getEmail(),
