@@ -35,10 +35,13 @@ If you want to add another library, fork and contribute to improve it.
 
 #Usage with PHPExcel
 
+Create a simple Table :
+
 ```php
 use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
     ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
-    ExcelAnt\Table\Table;
+    ExcelAnt\Table\Table,
+    ExcelAnt\Coordinate\Coordinate;
 
 Class Export
 {
@@ -55,7 +58,7 @@ Class Export
             ]);
         }
 
-        $sheet->addTable($table);
+        $sheet->addTable($table, new Coordinate(1, 1));
         $workbook->addSheet($sheet);
     }
 }
@@ -84,6 +87,9 @@ Convert your Worbook to create a PHPExcel object and export it :
 $phpExcel = $writer->convert($workbook);
 $writer->write($phpExcel);
 ```
+
+
+![Simple table](/docs/simple-table.png)
 
 #Contributing
 ExcelAnt is an open source project. If you would like to contribute, fork the repository and submit a pull request.
