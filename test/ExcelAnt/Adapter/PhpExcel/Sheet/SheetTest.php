@@ -129,7 +129,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetColumnWidthWithWrongWidthParameter()
     {
-        $sheet = $this->createSheet()->setColumnWidth('foo', 1);
+        $sheet = $this->createSheet()->setColumnWidth('foo', 0);
     }
 
     /**
@@ -137,7 +137,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetColumnWidthWithWrongIdParameter()
     {
-        $sheet = $this->createSheet()->setColumnWidth(1, 'foo');
+        $sheet = $this->createSheet()->setColumnWidth(0, 'foo');
     }
 
     /**
@@ -164,7 +164,7 @@ class SheetTest extends \PHPUnit_Framework_TestCase
             ->method('getColumnDimensionByColumn')
             ->will($this->returnValue($phpExcelRowDimension));
 
-        $sheet = $this->createSheet(null, $phpExcelWorksheet)->setColumnWidth(3, 1);
+        $sheet = $this->createSheet(null, $phpExcelWorksheet)->setColumnWidth(3, 0);
 
         $this->assertEquals(3, $sheet->getColumnWidth(1));
     }

@@ -153,7 +153,7 @@ class Sheet implements SheetExcelInterface
             throw new \InvalidArgumentException("Index must be numeric");
         }
 
-        $this->phpExcelWorksheet->getColumnDimensionByColumn($index - 1)->setWidth($width);
+        $this->phpExcelWorksheet->getColumnDimensionByColumn($index)->setWidth($width);
 
         return $this;
     }
