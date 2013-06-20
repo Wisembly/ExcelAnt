@@ -2,7 +2,8 @@
 
 namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
-use \PHPExcel_Worksheet;
+use \PHPExcel_Worksheet,
+    \PHPExcel_Style_NumberFormat;
 
 use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
     ExcelAnt\Cell\CellInterface,
@@ -35,27 +36,21 @@ class CellWorker
             return;
         }
 
-        $cellFormat = $this->getCellFormat($cell);
-        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue(), $cellFormat);
-    }
-
-    /**
-     * Get the cell format.
-     *
-     * @param  CellInterface $cell
-     *
-     * @return mixed The format as string or null
-     */
-    private function getCellFormat(CellInterface $cell)
-    {
         $styleCollection = $cell->getStyles();
 
         if (!empty($styleCollection)) {
             try {
-                return $styleCollection->getElement(new Format())->getFormat();
+                $cellFormat = $styleCollection->getElement(new Format())->getFormat();
+
+                if (Format::TYPE_NUMERIC === $cellFormat) {
+                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                } elseif (Format::TYPE_PERCENT === $cellFormat) {
+                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE);
+                }
+
             } catch (\OutOfBoundsException $e) {}
         }
 
-        return Format::TYPE_STRING;
+        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue());
     }
 }
