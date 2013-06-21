@@ -46,6 +46,8 @@ class CellWorker
                     $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
                 } elseif (Format::TYPE_PERCENT === $cellFormat) {
                     $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE);
+                } elseif (Format::TYPE_DATETIME === $cellFormat) {
+                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DATETIME);
                 }
 
             } catch (\OutOfBoundsException $e) {}

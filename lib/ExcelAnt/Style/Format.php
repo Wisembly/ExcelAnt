@@ -16,6 +16,7 @@ class Format implements StyleInterface
     const TYPE_INLINE   = 'inlineStr';
     const TYPE_ERROR    = 'e';
     const TYPE_PERCENT  = 'p';
+    const TYPE_DATETIME = 'dt';
 
     private $format = self::TYPE_STRING;
 
@@ -66,6 +67,7 @@ class Format implements StyleInterface
             self::TYPE_INLINE,
             self::TYPE_ERROR,
             self::TYPE_PERCENT,
+            self::TYPE_DATETIME,
         ];
     }
 }
