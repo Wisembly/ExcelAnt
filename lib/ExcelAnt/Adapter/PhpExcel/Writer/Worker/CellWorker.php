@@ -3,7 +3,11 @@
 namespace ExcelAnt\Adapter\PhpExcel\Writer\Worker;
 
 use \PHPExcel_Worksheet,
-    \PHPExcel_Style_NumberFormat;
+    \PHPExcel_Style_NumberFormat,
+    \PHPExcel_Shared_Date,
+    \PHPExcel_Cell,
+    \PHPExcel_Cell_AdvancedValueBinder,
+    \PHPExcel_Cell_DataType;
 
 use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
     ExcelAnt\Cell\CellInterface,
@@ -37,22 +41,32 @@ class CellWorker
         }
 
         $styleCollection = $cell->getStyles();
+        $value = $cell->getValue();
 
         if (!empty($styleCollection)) {
             try {
-                $cellFormat = $styleCollection->getElement(new Format())->getFormat();
 
-                if (Format::TYPE_NUMERIC === $cellFormat) {
-                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                } elseif (Format::TYPE_PERCENT === $cellFormat) {
-                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE);
-                } elseif (Format::TYPE_DATETIME === $cellFormat) {
-                    $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DATETIME);
+                switch ($styleCollection->getElement(new Format())->getFormat()) {
+                    case Format::TYPE_NUMERIC:
+                        $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), (int) $value, PHPExcel_Cell_DataType::TYPE_NUMERIC);
+
+                        return;
+                        break;
+
+                    case Format::TYPE_PERCENT:
+                        $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE);
+
+                        break;
+
+                    case Format::TYPE_DATETIME:
+                        $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DATETIME);
+
+                        break;
                 }
-
             } catch (\OutOfBoundsException $e) {}
         }
 
-        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $cell->getValue());
+        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), $value);
     }
 }

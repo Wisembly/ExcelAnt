@@ -128,7 +128,7 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $cellWorker = new CellWorker($styleWorker);
         $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
 
-        $this->assertEquals('s', $localFormatStorage);
+        $this->assertEquals('n', $localFormatStorage);
         $this->assertEquals(PHPExcel_Style_NumberFormat::FORMAT_NUMBER, $style);
     }
 
@@ -257,7 +257,7 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $cellWorker = new CellWorker($styleWorker);
         $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
 
-        $this->assertEquals('s', $localFormatStorage);
+        $this->assertEquals('n', $localFormatStorage);
         $this->assertEquals(PHPExcel_Style_NumberFormat::FORMAT_NUMBER, $style);
     }
 
