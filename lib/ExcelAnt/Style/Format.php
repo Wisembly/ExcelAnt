@@ -7,17 +7,18 @@ use ExcelAnt\Style\StyleInterface;
 class Format implements StyleInterface
 {
     /* Data types */
-    const TYPE_STRING2  = 'str';
-    const TYPE_STRING   = 's';
-    const TYPE_FORMULA  = 'f';
-    const TYPE_NUMERIC  = 'n';
-    const TYPE_BOOL     = 'b';
-    const TYPE_NULL     = 'null';
-    const TYPE_INLINE   = 'inlineStr';
-    const TYPE_ERROR    = 'e';
-    const TYPE_PERCENT  = 'p';
-    const TYPE_DATETIME = 'dt';
-    const TYPE_DATE     = 'd';
+    const TYPE_STRING2    = 'str';
+    const TYPE_STRING     = 's';
+    const TYPE_FORMULA    = 'f';
+    const TYPE_NUMERIC    = 'n';
+    const TYPE_BOOL       = 'b';
+    const TYPE_NULL       = 'null';
+    const TYPE_INLINE     = 'inlineStr';
+    const TYPE_ERROR      = 'e';
+    const TYPE_PERCENT    = 'p';
+    const TYPE_PERCENT_00 = 'pd';
+    const TYPE_DATETIME   = 'dt';
+    const TYPE_DATE       = 'd';
 
     private $format = self::TYPE_STRING;
 
@@ -70,6 +71,7 @@ class Format implements StyleInterface
             self::TYPE_PERCENT,
             self::TYPE_DATETIME,
             self::TYPE_DATE,
+            self::TYPE_PERCENT_00,
         ];
     }
 }
