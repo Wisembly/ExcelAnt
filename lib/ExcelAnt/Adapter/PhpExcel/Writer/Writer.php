@@ -57,6 +57,8 @@ class Writer implements WriterInterface
             }
         }
 
+        $phpExcel->setActiveSheetIndex(0);
+
         return $phpExcel;
     }
 

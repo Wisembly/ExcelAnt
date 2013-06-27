@@ -34,6 +34,9 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $phpExcel = $writer->convert($workbook);
 
         $this->assertInstanceOf('PHPExcel', $phpExcel);
+
+        // test the active sheet is the first
+        $this->assertEquals(0, $phpExcel->getActiveSheet());
     }
 
     public function testWriteASingleCell()
