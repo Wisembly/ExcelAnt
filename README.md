@@ -70,18 +70,10 @@ Class Export
 Now, to export your Workbook, you need to create a Writer :
 
 ```php
-use ExcelAnt\Adapter\PhpExcel\Writer\Worker\StyleWorker,
-    ExcelAnt\Adapter\PhpExcel\Writer\Worker\CellWorker,
-    ExcelAnt\Adapter\PhpExcel\Writer\Worker\LabelWorker,
-    ExcelAnt\Adapter\PhpExcel\Writer\Worker\TableWorker,
+use ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory,
     ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5;
 
-$styleWorker = new StyleWorker();
-$cellWorker = new CellWorker($styleWorker);
-$labelWorker = new LabelWorker($cellWorker);
-$tableWorker = new TableWorker($cellWorker, $labelWorker);
-
-$writer = new Writer(new Excel5('myExport.xls'), $tableWorker, $cellWorker, $styleWorker);
+$writer = (new WriterFactory())->createWriter(new Excel5('myExport.xls');
 ```
 
 Convert your Worbook to create a PHPExcel object and export it :
