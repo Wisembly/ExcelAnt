@@ -42,6 +42,7 @@ Create a simple Table :
 ```php
 use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
     ExcelAnt\Adapter\PhpExcel\Sheet\Sheet,
+    ExcelAnt\Adapter\PhpExcel\Writer\Writer,
     ExcelAnt\Table\Table,
     ExcelAnt\Coordinate\Coordinate;
 
@@ -50,7 +51,7 @@ Class Export
     public function createExport(array $users)
     {
         $workbook = new Workbook();
-        $sheet = new Sheet();
+        $sheet = new Sheet($workbook);
         $table = new Table();
 
         foreach ($users as $user) {
