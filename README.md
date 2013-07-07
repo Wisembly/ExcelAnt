@@ -18,6 +18,10 @@
 ExcelAnt is an Excel manipulation library for PHP 5.4. It currently works on top of [PHPExcel](https://github.com/PHPOffice/PHPExcel).
 If you want to add / use another library, feel free to fork and contribute !
 
+#Version
+
+1.0.0
+
 #Installation
 
 1. Install composer : `curl -s http://getcomposer.org/installer | php`
@@ -28,7 +32,7 @@ If you want to add / use another library, feel free to fork and contribute !
 ```yml
   {
     "require": {
-      "wisembly/excelant": "dev-master",
+      "wisembly/excelant": "*",
     }
   }
 ```
@@ -91,6 +95,7 @@ $writer->write($phpExcel);
 Coming soon...
 
 #Contributing
+
 ExcelAnt is an open source project. If you would like to contribute, fork the repository and submit a pull request.
 
 #Running ExcelAnt Tests
