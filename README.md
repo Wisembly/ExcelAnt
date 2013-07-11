@@ -88,7 +88,7 @@ $writer->write($phpExcel);
 ```
 
 
-![Simple table](/docs/simple-table.png)
+![Simple table](https://raw.github.com/Wisembly/ExcelAnt/master/docs/simple-table.png)
 
 #Documentation
 
