@@ -77,7 +77,7 @@ Now, to export your Workbook, you need to create a Writer :
 use ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory,
     ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5;
 
-$writer = (new WriterFactory())->createWriter(new Excel5('myExport.xls');
+$writer = (new WriterFactory())->createWriter(new Excel5('/tmp/myExport.xls'));
 ```
 
 Convert your Worbook to create a PHPExcel object and export it :
