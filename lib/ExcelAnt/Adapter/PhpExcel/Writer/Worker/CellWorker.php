@@ -54,6 +54,13 @@ class CellWorker
                         return;
                         break;
 
+                    case Format::TYPE_NUMERIC_00:
+                        $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_00);
+                        $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), (float) $value, PHPExcel_Cell_DataType::TYPE_NUMERIC);
+
+                        return;
+                        break;
+
                     case Format::TYPE_PERCENT_00:
                         $phpExcelWorksheet->getStyleByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis())->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE_00);
                         $phpExcelWorksheet->setCellValueExplicitByColumnAndRow($coordinate->getXAxis() - 1, $coordinate->getYAxis(), (float) $value, PHPExcel_Cell_DataType::TYPE_NUMERIC);
