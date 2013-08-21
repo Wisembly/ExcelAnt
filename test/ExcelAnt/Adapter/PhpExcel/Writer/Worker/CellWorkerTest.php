@@ -260,7 +260,7 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $cellWorker = new CellWorker($styleWorker);
         $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
 
-        $this->assertEquals('nd', $localFormatStorage);
+        $this->assertEquals('n', $localFormatStorage);
         $this->assertEquals(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_00, $style);
     }
 
