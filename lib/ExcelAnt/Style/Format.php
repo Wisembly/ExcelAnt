@@ -11,6 +11,7 @@ class Format implements StyleInterface
     const TYPE_STRING     = 's';
     const TYPE_FORMULA    = 'f';
     const TYPE_NUMERIC    = 'n';
+    const TYPE_NUMERIC_00 = 'nd';
     const TYPE_BOOL       = 'b';
     const TYPE_NULL       = 'null';
     const TYPE_INLINE     = 'inlineStr';
@@ -64,6 +65,7 @@ class Format implements StyleInterface
             self::TYPE_STRING,
             self::TYPE_FORMULA,
             self::TYPE_NUMERIC,
+            self::TYPE_NUMERIC_00,
             self::TYPE_BOOL,
             self::TYPE_NULL,
             self::TYPE_INLINE,
