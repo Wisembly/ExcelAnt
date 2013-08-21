@@ -220,6 +220,50 @@ class CellWorkerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(PHPExcel_Style_NumberFormat::FORMAT_PERCENTAGE_00, $style);
     }
 
+    public function testWriteCellWithAFormatStyleNumeric_00AndStyle()
+    {
+        $style = null;
+
+        $phpExcelStyleNumberformat = $this->getPhpExcelStyleNumberFormatMock();
+        $phpExcelStyleNumberformat->expects($this->once())
+            ->method('setFormatCode')
+            ->will($this->returnCallback(function($styleFormat) use (&$style) {
+                        $style = $styleFormat;
+                    }));
+
+        $styleWorker = $this->getStyleWorkerMock();
+        $styleWorker->expects($this->once())
+            ->method('convertStyles')
+            ->will($this->returnValue(['foo']));
+
+        $phpExcelStyle = $this->getPhpExcelStyleMock();
+        $phpExcelStyle->expects($this->once())
+            ->method('applyFromArray');
+
+        $phpExcelStyle->expects($this->once())
+            ->method('getNumberFormat')
+            ->will($this->returnValue($phpExcelStyleNumberformat));
+
+        $phpExcelWorksheet = $this->getPhpExcelWorksheetMock();
+        $phpExcelWorksheet->expects($this->exactly(2))
+            ->method('getStyleByColumnAndRow')
+            ->will($this->returnValue($phpExcelStyle));
+
+        $phpExcelWorksheet->expects($this->once())
+            ->method('setCellValueExplicitByColumnAndRow')
+            ->will($this->returnCallback(function($xAxis, $yAxis, $value, $format) use (&$localFormatStorage) {
+                        $localFormatStorage = $format;
+                    }));
+
+        $cell = (new Cell())->setStyles(new StyleCollection([(new Format())->setFormat(Format::TYPE_NUMERIC_00), new Font()]));
+
+        $cellWorker = new CellWorker($styleWorker);
+        $cellWorker->writeCell($cell, $phpExcelWorksheet, new Coordinate(1, 1));
+
+        $this->assertEquals('n', $localFormatStorage);
+        $this->assertEquals(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_00, $style);
+    }
+
     public function testWriteCellWithAFormatStyleDatetimeAndStyle()
     {
         $style = null;
