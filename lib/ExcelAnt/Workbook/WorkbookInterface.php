@@ -2,8 +2,12 @@
 
 namespace ExcelAnt\Workbook;
 
+use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Sheet\SheetInterface,
     ExcelAnt\Collections\StyleCollection;
+use InvalidArgumentException;
+use PHPExcel;
+use RuntimeException;
 
 interface WorkbookInterface
 {
@@ -24,7 +28,7 @@ interface WorkbookInterface
      *
      * @return Sheet
      */
-    public function getSheet();
+    public function getSheet($index = 0);
 
     /**
      * @return PHPExcel
@@ -151,6 +155,22 @@ interface WorkbookInterface
      * @return mixed
      */
     public function getSubject();
+
+    /**
+     * Set the kewords of the workbook
+     *
+     * @param mixed $keywords
+     *
+     * @return WorkbookInterface
+     */
+    public function setKeywords($keywords);
+
+    /**
+     * Get the kewords of the Workbook
+     *
+     * @return mixed
+     */
+    public function getKeywords();
 
     /**
      * Add style
