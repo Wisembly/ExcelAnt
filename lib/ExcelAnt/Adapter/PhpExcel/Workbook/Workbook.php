@@ -209,6 +209,24 @@ class Workbook implements WorkbookExcelInterface
     /**
      * {@inheritdoc}
      */
+    public function setKeywords($keywords)
+    {
+        $this->phpExcel->getProperties()->setKeywords($keywords);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getKeywords()
+    {
+        return $this->phpExcel->getProperties()->getKeywords();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addStyles(StyleCollection $styles)
     {
         $this->styleCollection = $styles;
