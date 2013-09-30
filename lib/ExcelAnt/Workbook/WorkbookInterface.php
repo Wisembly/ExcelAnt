@@ -27,6 +27,11 @@ interface WorkbookInterface
     public function getSheet();
 
     /**
+     * @return PHPExcel
+     */
+    public function getRawClass();
+
+    /**
      * Get sheetCollection
      *
      * @return array
