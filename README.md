@@ -78,6 +78,9 @@ use ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory,
     ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5;
 
 $writer = (new WriterFactory())->createWriter(new Excel5('/path/to/myExport.xls'));
+//Or to export as Excel 2007 (xlsx)
+$writer = (new WriterFactory())->createWriter(new Excel2007('/path/to/myExport.xls'));
+
 ```
 
 Convert your Worbook to create a PHPExcel object and export it :
