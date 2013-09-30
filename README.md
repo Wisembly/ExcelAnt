@@ -75,11 +75,15 @@ Now, to export your Workbook, you need to create a Writer :
 
 ```php
 use ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory,
-    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5;
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel2007,
+    ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Html;
 
 $writer = (new WriterFactory())->createWriter(new Excel5('/path/to/myExport.xls'));
 //Or to export as Excel 2007 (xlsx)
-$writer = (new WriterFactory())->createWriter(new Excel2007('/path/to/myExport.xls'));
+$writer = (new WriterFactory())->createWriter(new Excel2007('/path/to/myExport.xlsx'));
+//Or to export as Html
+$writer = (new WriterFactory())->createWriter(new Html('/path/to/myExport.html'));
 
 ```
 
