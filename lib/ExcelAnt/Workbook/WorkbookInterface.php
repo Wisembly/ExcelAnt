@@ -2,12 +2,13 @@
 
 namespace ExcelAnt\Workbook;
 
-use ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
 use ExcelAnt\Sheet\SheetInterface,
-    ExcelAnt\Collections\StyleCollection;
-use InvalidArgumentException;
-use PHPExcel;
-use RuntimeException;
+    ExcelAnt\Collections\StyleCollection,
+    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
+
+use \InvalidArgumentException;
+use \PHPExcel;
+use \RuntimeException;
 
 interface WorkbookInterface
 {
@@ -21,14 +22,12 @@ interface WorkbookInterface
     /**
      * Get Sheet
      *
-     * @param  integer $index The index of the sheet we want to get
-     *
      * @throws InvalidArgumentException If the index isn't numeric
      * @throws RuntimeException         If the index doesn't exist
      *
      * @return Sheet
      */
-    public function getSheet($index = 0);
+    public function getSheet();
 
     /**
      * @return PHPExcel
