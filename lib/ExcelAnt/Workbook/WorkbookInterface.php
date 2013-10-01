@@ -81,6 +81,8 @@ interface WorkbookInterface
      * Set the title of the Workbook
      *
      * @param mixed $title The title
+     *
+     * @return WorkbookInterface
      */
     public function setTitle($title);
 
