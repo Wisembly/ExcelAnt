@@ -157,7 +157,7 @@ interface WorkbookInterface
     public function getSubject();
 
     /**
-     * Set the kewords of the workbook
+     * Set the keywords of the workbook
      *
      * @param mixed $keywords
      *
@@ -166,7 +166,7 @@ interface WorkbookInterface
     public function setKeywords($keywords);
 
     /**
-     * Get the kewords of the Workbook
+     * Get the keywords of the Workbook
      *
      * @return mixed
      */
