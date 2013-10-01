@@ -4,7 +4,6 @@ namespace ExcelAnt\Writer;
 
 use ExcelAnt\Workbook\WorkbookInterface,
     ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\PhpExcelWriterInterface;
-use PHPExcel;
 
 interface WriterInterface
 {
@@ -13,7 +12,7 @@ interface WriterInterface
      *
      * @param WorkbookInterface $workbook
      *
-     * @return PHPExcel
+     * @return \PHPExcel
      */
     public function convert(WorkbookInterface $workbook);
 
