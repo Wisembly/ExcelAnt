@@ -6,10 +6,6 @@ use ExcelAnt\Sheet\SheetInterface,
     ExcelAnt\Collections\StyleCollection,
     ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
 
-use \InvalidArgumentException;
-use \PHPExcel;
-use \RuntimeException;
-
 interface WorkbookInterface
 {
     /**
