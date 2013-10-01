@@ -12,7 +12,7 @@ interface WriterInterface
      *
      * @param WorkbookInterface $workbook
      *
-     * @return \PHPExcel
+     * @return PHPExcel
      */
     public function convert(WorkbookInterface $workbook);
 

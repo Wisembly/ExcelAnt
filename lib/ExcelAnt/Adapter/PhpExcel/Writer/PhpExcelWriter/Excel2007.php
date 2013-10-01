@@ -22,7 +22,7 @@ class Excel2007 implements PhpExcelWriterInterface
      */
     public function save(PHPExcel $phpExcel)
     {
-        $writer = (new \PHPExcel_Writer_Excel2007($phpExcel))
+        $writer = (new PHPExcel_Writer_Excel2007($phpExcel))
             ->save($this->path);
     }
 }

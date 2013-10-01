@@ -4,7 +4,8 @@ namespace ExcelAnt\Adapter\PhpExcel\Sheet;
 
 use \PHPExcel_Worksheet;
 
-use ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
+use ExcelAnt\Workbook\WorkbookInterface,
+    ExcelAnt\Adapter\PhpExcel\Workbook\Workbook,
     ExcelAnt\Adapter\PhpExcel\Sheet\SheetExcelInterface,
     ExcelAnt\Table\TableInterface,
     ExcelAnt\Coordinate\Coordinate,
