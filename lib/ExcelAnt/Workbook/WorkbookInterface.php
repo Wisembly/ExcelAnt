@@ -3,8 +3,7 @@
 namespace ExcelAnt\Workbook;
 
 use ExcelAnt\Sheet\SheetInterface,
-    ExcelAnt\Collections\StyleCollection,
-    ExcelAnt\Adapter\PhpExcel\Sheet\Sheet;
+    ExcelAnt\Collections\StyleCollection;
 
 interface WorkbookInterface
 {
@@ -24,11 +23,6 @@ interface WorkbookInterface
      * @return Sheet
      */
     public function getSheet();
-
-    /**
-     * @return PHPExcel
-     */
-    public function getRawClass();
 
     /**
      * Get sheetCollection
