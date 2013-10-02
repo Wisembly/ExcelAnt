@@ -2,8 +2,8 @@
 
 namespace ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter;
 
-use \PHPExcel;
-use \PHPExcel_Writer_Excel2007;
+use \PHPExcel,
+    \PHPExcel_Writer_Excel2007;
 
 class Excel2007 implements PhpExcelWriterInterface
 {
