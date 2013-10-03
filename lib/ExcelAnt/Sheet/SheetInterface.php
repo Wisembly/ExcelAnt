@@ -101,6 +101,24 @@ interface SheetInterface
     public function getDefaultRowHeight();
 
     /**
+     * Set default column width of the sheet
+     *
+     * @param int $width
+     *
+     * @throws InvalidException If width isn't numeric
+     *
+     * @return SheetInterface
+     */
+    public function setDefaultColumnWidth($width);
+
+    /**
+     * Get default column width of the sheet
+     *
+     * @return int
+     */
+    public function getDefaultColumnWidth();
+
+    /**
      * Set the width of a column
      *
      * @param int $width

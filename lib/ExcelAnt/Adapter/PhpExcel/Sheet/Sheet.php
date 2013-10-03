@@ -120,13 +120,30 @@ class Sheet implements SheetExcelInterface
         }
 
         $this->phpExcelWorksheet->getDefaultRowDimension()->setRowHeight($height);
-
         return $this;
     }
 
     public function getDefaultRowHeight()
     {
         return $this->phpExcelWorksheet->getDefaultRowDimension()->getRowHeight();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultColumnWidth($width)
+    {
+        if (false === filter_var($width, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException("Width must be numeric");
+        }
+
+        $this->phpExcelWorksheet->getDefaultColumnDimension()->setWidth($width);
+        return $this;
+    }
+
+    public function getDefaultColumnWidth()
+    {
+        return $this->phpExcelWorksheet->getDefaultColumnDimension()->getWidth();
     }
 
     /**
