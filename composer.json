@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.4.0",
 
-        "phpoffice/phpexcel": "dev-develop"
+        "phpoffice/phpexcel": "~1.7"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
