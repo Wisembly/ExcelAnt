@@ -374,7 +374,7 @@ class Table implements TableInterface
 
             if (null === $value) {
                 $cell = new EmptyCell();
-            } elseif ($value instanceof Cell) {
+            } elseif ($value instanceof CellInterface) {
                 $cell = $value;
             } else {
                 $cell = new Cell($value);
