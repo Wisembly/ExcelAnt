@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Excelant by Wisembly</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Excelant : Simple yet powerful Excel manipulation library for PHP 5.4+" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Excelant</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Excelant</h1>
-        <p>Simple yet powerful Excel manipulation library for PHP 5.4+</p>
 
-        <p class="view"><a href="https://github.com/Wisembly/ExcelAnt">View the Project on GitHub <small>Wisembly/ExcelAnt</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Wisembly/ExcelAnt">View on GitHub</a>
 
+          <h1 id="project_title">Excelant</h1>
+          <h2 id="project_tagline">Simple yet powerful Excel manipulation library for PHP 5.4+</h2>
 
-        <ul>
-          <li><a href="https://github.com/Wisembly/ExcelAnt/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Wisembly/ExcelAnt/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Wisembly/ExcelAnt">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Wisembly/ExcelAnt/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Wisembly/ExcelAnt/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <pre><code>       |     |
         \   /
          \_/
@@ -63,7 +66,7 @@ If you want to add / use another library, feel free to fork and contribute !</p>
 (more info at getcomposer.org)</li>
 <li>Create a <code>composer.json</code> file in your project root :
 (or add only the excelant line in your existing composer file)</li>
-</ol><div class="highlight"><pre>  <span class="p-Indicator">{</span>
+</ol><div class="highlight highlight-yml"><pre>  <span class="p-Indicator">{</span>
     <span class="s">"require"</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span>
       <span class="s">"wisembly/excelant"</span><span class="p-Indicator">:</span> <span class="s">"*"</span><span class="p-Indicator">,</span>
     <span class="p-Indicator">}</span>
@@ -78,7 +81,7 @@ If you want to add / use another library, feel free to fork and contribute !</p>
 
 <p>Create a simple Table :</p>
 
-<div class="highlight"><pre><span class="k">use</span> <span class="nx">ExcelAnt\Adapter\PhpExcel\Workbook\Workbook</span><span class="p">,</span>
+<div class="highlight highlight-php"><pre><span class="k">use</span> <span class="nx">ExcelAnt\Adapter\PhpExcel\Workbook\Workbook</span><span class="p">,</span>
     <span class="nx">ExcelAnt\Adapter\PhpExcel\Sheet\Sheet</span><span class="p">,</span>
     <span class="nx">ExcelAnt\Adapter\PhpExcel\Writer\Writer</span><span class="p">,</span>
     <span class="nx">ExcelAnt\Table\Table</span><span class="p">,</span>
@@ -107,15 +110,15 @@ If you want to add / use another library, feel free to fork and contribute !</p>
 
 <p>Now, to export your Workbook, you need to create a Writer :</p>
 
-<div class="highlight"><pre><span class="k">use</span> <span class="nx">ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory</span><span class="p">,</span>
+<div class="highlight highlight-php"><pre><span class="k">use</span> <span class="nx">ExcelAnt\Adapter\PhpExcel\Writer\WriterFactory</span><span class="p">,</span>
     <span class="nx">ExcelAnt\Adapter\PhpExcel\Writer\PhpExcelWriter\Excel5</span><span class="p">;</span>
 
-<span class="nv">$writer</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">WriterFactory</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">createWriter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Excel5</span><span class="p">(</span><span class="s1">'myExport.xls'</span><span class="p">);</span>
+<span class="nv">$writer</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">WriterFactory</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">createWriter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Excel5</span><span class="p">(</span><span class="s1">'/path/to/myExport.xls'</span><span class="p">));</span>
 </pre></div>
 
 <p>Convert your Worbook to create a PHPExcel object and export it :</p>
 
-<div class="highlight"><pre><span class="nv">$phpExcel</span> <span class="o">=</span> <span class="nv">$writer</span><span class="o">-&gt;</span><span class="na">convert</span><span class="p">(</span><span class="nv">$workbook</span><span class="p">);</span>
+<div class="highlight highlight-php"><pre><span class="nv">$phpExcel</span> <span class="o">=</span> <span class="nv">$writer</span><span class="o">-&gt;</span><span class="na">convert</span><span class="p">(</span><span class="nv">$workbook</span><span class="p">);</span>
 <span class="nv">$writer</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$phpExcel</span><span class="p">);</span>
 </pre></div>
 
@@ -134,12 +137,17 @@ If you want to add / use another library, feel free to fork and contribute !</p>
 <h1>
 <a name="running-excelant-tests" class="anchor" href="#running-excelant-tests"><span class="octicon octicon-link"></span></a>Running ExcelAnt Tests</h1>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Wisembly">Wisembly</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Excelant maintained by <a href="https://github.com/Wisembly">Wisembly</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
